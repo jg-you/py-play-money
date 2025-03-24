@@ -1,35 +1,39 @@
 """
 Handles all API interactions.
 
-Author: JGY <jeangabriel.young@gmail.com>
+Author: JGY <jean.gabriel.young@gmail.com>
 """
 import logging
-from os import getenv
 from importlib.resources import files
+from os import getenv
 from typing import Literal
 
-import yaml
 import requests
+import yaml
 
-from py_play_money.schemas import Market, User, Comment
-
+from py_play_money.schemas import (
+    Comment,
+    FullMarket,
+    GraphTick,
+    Market,
+    PageInfo,
+    User,
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 def get_configs():
-    """
-    Retrieve API configurations.
-    """
+    """Retrieve API configurations."""
     config_file = files("py_play_money").joinpath("configs.yaml")
     with config_file.open("r") as f:
         return yaml.safe_load(f)
 
 
-class Client():
+class Client:
     """
     Client for interacting with the Play Money API.
-    
+
     All requests accept keyword arguments that are passed to the `requests` library.
 
     Examples:
@@ -40,6 +44,7 @@ class Client():
     # Get a user, with timeout
     user = client.users.get(user_id="user123", timeout=5)
     ```
+
     """
 
     def __init__(self):
@@ -69,13 +74,14 @@ class Client():
         """
         Execute a GET request to the API.
 
-        Parameters:
-        - endpoint (str): The API endpoint to call.
-        - **kwargs: Additional keyword arguments to pass to the request.
+        Args:
+          endpoint (str): The API endpoint to call.
+          **kwargs: Additional keyword arguments to pass to the request.
                     Timeout defaults to 10 seconds if not specified.
 
         Returns:
-        - response (requests.Response): The response object from the request.
+          response (requests.Response): The response object from the request.
+
         """
         url = f"{self.base_url}/{endpoint}"
         try:
@@ -85,24 +91,90 @@ class Client():
                 timeout = kwargs.pop("timeout")
             response = requests.get(url, headers=self.headers, timeout=timeout, **kwargs)
             response.raise_for_status()
-            return response.json()['data']
+            return response.json()
         except requests.HTTPError as e:
             logger.error("HTTP error occurred: %s", e)
             raise
 
-    def markets(self, status=):
-        """Page through all markets"""
-        return self.market
+    def comments(self, comment_id: str, **kwargs) -> Comment:
+        """
+        Retrieve a comment by ID.
+
+        Args:
+          comment_id (str): The ID of the comment to retrieve.
+          **kwargs: Additional keyword arguments to pass to the request.
+
+        Returns:
+          Comment: The retrieved Comment object.
+
+        """
+        endpoint = f"comments/{comment_id}"
+        return Comment(**self.execute_get(endpoint, **kwargs)['data'])
+
+    def markets(self,
+                cursor: str | None = None,
+                status=Literal['active', 'closed', 'all'],
+                createdBy: str | None = None,
+                tags: list[str] | None = None,
+                limit: int = 10,
+                sortField: str | None = None,
+                sortDirection: Literal['asc', 'desc'] = 'asc',
+                **kwargs) -> tuple[list[FullMarket], PageInfo]:
+        """
+        Page through all markets.
+
+        Args:
+          cursor (str | None): Pagination cursor, i.e., the market after which to start.
+          status (str): Market status. Can be 'active', 'closed', or 'all'.
+          createdBy (str | None): Filter by user ID of the market creator.
+          tags (list[str] | None): Filter by tags associated with the market.
+          limit (int): Number of markets to return per page.
+          sortField (str | None): Field to sort by.
+          sortDirection (str): Sort direction. Can be 'asc' or 'desc'.
+          **kwargs: Additional keyword arguments to pass to the request.
+
+        Returns:
+          tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
+            print(f"Found {len(markets)} markets")
+            cursor = page_info.endCursor
+            if page_info.hasNextPage is False:
+                break
+        ```
+
+        """
+        if tags is None:
+            tags = []
+        payload = {
+            "cursor": cursor,
+            "status": status,
+            "createdBy": createdBy,
+            "tags": tags,
+            "limit": limit,
+            "sortField": sortField,
+            "sortDirection": sortDirection
+        }
+        response = self.execute_get("markets", params=payload, **kwargs)
+        return (
+            [FullMarket(**market) for market in response['data']],
+            PageInfo(**response['pageInfo'])
+        )
 
     class MarketResource:
         """Regroups all resources related to individual markets."""
+
         def __init__(self, client):
             self.client = client
-            
+
         def get(self, market_id: str, **kwargs) -> Market:
             """Retrieve a market by ID."""
             endpoint = f"markets/{market_id}"
-            return Market(**self.client.execute_get(endpoint, **kwargs))
+            return Market(**self.client.execute_get(endpoint, **kwargs)['data'])
 
         def get_activity(self, market_id: str, **kwargs):
             pass
@@ -119,8 +191,11 @@ class Client():
             data = self.client.execute_get(endpoint, **kwargs)
             return [Comment(**comment) for comment in data]
 
-        def get_graph(self, market_id: str, **kwargs):
-            pass
+        def get_graph(self, market_id: str, **kwargs) -> list[GraphTick]:
+            """Retrieve graph data for a market by ID."""
+            endpoint = f"markets/{market_id}/graph"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [GraphTick(**tick) for tick in data]
 
         def get_positions(self, market_id: str, **kwargs):
             pass
@@ -130,6 +205,7 @@ class Client():
 
     class UserResource:
         """Regroups all resources related to users."""
+
         def __init__(self, client):
             self.client = client
             # Assign resources
@@ -138,12 +214,12 @@ class Client():
         def get(self, user_id: str, **kwargs) -> User:
             """Retrieve user by ID."""
             endpoint = f"users/{user_id}"
-            return User(**self.client.execute_get(endpoint, **kwargs))
+            return User(**self.client.execute_get(endpoint, **kwargs)['data'])
 
         def get_by_username(self, user_name: str, **kwargs) -> User:
             """Retrieve user by username."""
             endpoint = f"users/username/{user_name}"
-            return User(**self.client.execute_get(endpoint, **kwargs))
+            return User(**self.client.execute_get(endpoint, **kwargs)['data'])
 
         def get_balance(self, user_id: str, **kwargs):
             pass
@@ -163,6 +239,7 @@ class Client():
 
         class Me:
             """Represents the authenticated user."""
+
             def __init__(self, client, authenticated: bool = False):
                 self.authenticated = authenticated
                 self.client = client
@@ -172,7 +249,7 @@ class Client():
                 if not self.authenticated:
                     raise ValueError("User is not authenticated.")
                 endpoint = "users/me"
-                return User(**self.client.execute_get(endpoint, **kwargs))
+                return User(**self.client.execute_get(endpoint, **kwargs)['data'])
 
             def get_notifications(self, **kwargs):
                 """Retrieve notifications for the authenticated user."""

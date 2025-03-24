@@ -1,15 +1,17 @@
 """
 Data schemas for the playmoney API.
 
-Author: JGY <jeangabriel.young@gmail.com>
+Author: JGY <jean.gabriel.young@gmail.com>
 """
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator, model_validator, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
+
 
 class Market(BaseModel):
     """Market data."""
+
     # Identifiers
     id: str = Field(description="The unique identifier for the market.")
     question: str = Field(description="Short title for the market.")
@@ -78,16 +80,22 @@ class Market(BaseModel):
         return self
 
 
-class Option(BaseModel):
-    """Option for a market."""
+class LiteOption(BaseModel):
+    """Option with only ID and probability."""
+
     id: str
+    probability: int = Field(ge=0, le=100, description="Probability percentage (0-100).")
+
+
+class Option(LiteOption):
+    """Option for a market."""
+
     name: str
     marketId: str
     color: str
     liquidityProbability: float = Field(ge=0, le=1, description="Liquidity probability (0-1).")
     createdAt: datetime
     updatedAt: datetime
-    probability: int = Field(ge=0, le=100, description="Probability percentage (0-100).")
 
     @field_validator('createdAt', 'updatedAt', mode='before')
     @classmethod
@@ -105,8 +113,10 @@ class Option(BaseModel):
             raise ValueError("Color must be a valid hex code (e.g., '#FFFFFF').")
         return value
 
+
 class MarketResolution(BaseModel):
     """Resolution for a market."""
+
     id: str
     marketId: str
     resolvedById: str
@@ -128,6 +138,7 @@ class MarketResolution(BaseModel):
 
 class User(BaseModel):
     """User profile."""
+
     id: str = Field(description="Unique identifier for the user.")
     username: str
     displayName: str
@@ -155,13 +166,23 @@ class User(BaseModel):
 
 class FullMarket(Market):
     """Full market data including options, users."""
-    options: list[Option] = Field(default=[], repr=False)
-    user: User = Field(repr=False)
-    marketResolution: MarketResolution | None = Field(default=None, repr=False)
 
+    user: User = Field(repr=False)
+    options: list[Option] = Field(default=[], repr=False)
+    marketResolution: MarketResolution | None = Field(default=None, repr=False)
+    resolvedBy: User | None = Field(default=None, repr=False)
+    parentList: str | None = Field(default=None, repr=False)
+
+    @model_validator(mode='after')
+    def validate_resolution(self):
+        """Validate that if the market is resolved, it has a resolution."""
+        if self.marketResolution is None and self.resolvedAt is not None:
+            raise ValueError("Market is resolved but has no market resolution.")
+        return self
 
 class Reaction(BaseModel):
     """Reaction to comments."""
+
     id: str
     emoji: str
     commentId: str
@@ -177,6 +198,7 @@ class Reaction(BaseModel):
 
 class Comment(BaseModel):
     """Comment on a market."""
+
     id: str
     content: str
     createdAt: datetime
@@ -197,3 +219,27 @@ class Comment(BaseModel):
         if isinstance(value, str):
             return datetime.fromisoformat(value.replace('Z', '+00:00'))
         return value
+
+
+class GraphTick(BaseModel):
+    """Tick for graph data."""
+
+    startAt: datetime
+    endAt: datetime
+    options: list[LiteOption]
+
+    @field_validator('startAt', 'endAt', mode='before')
+    @classmethod
+    def parse_date(cls, value):
+        """Parse date strings to datetime objects, before validation."""
+        if isinstance(value, str):
+            return datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return value
+
+
+class PageInfo(BaseModel):
+    """Cursor for pagination."""
+
+    hasNextPage: bool = False
+    endCursor: str | None = Field(default=None)
+    total: int = Field(ge=0)

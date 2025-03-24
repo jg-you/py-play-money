@@ -1,14 +1,26 @@
 """
-py-play-money
+Python SDK for playmoney.dev's API.
 
-A simple python wrapper around the Play Money API.
-
-Author: JGY <jeangabriel.young@gmail.com>
+Author: JGY <jean.gabriel.young@gmail.com>
 """
 from .api import Client
-from .schemas import Market, User, Comment, Reaction
+from .schemas import (
+    Comment,
+    FullMarket,
+    GraphTick,
+    Market,
+    MarketResolution,
+    Option,
+    PageInfo,
+    Reaction,
+    User,
+)
 
 __all__ = [
-    "Market", "User", "Comment", "Reaction",
+    "Market", "FullMarket", "Option", "MarketResolution",
+    "User", 
+    "Comment", "Reaction",
+    "GraphTick",
+    "PageInfo",
     "Client"
 ]
