@@ -3,11 +3,17 @@ Data schemas for the playmoney API.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
+import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
-
+from pydantic import (
+    BaseModel,
+    HttpUrl,
+    Field,
+    field_validator,
+    model_validator
+)
 
 class IsoDatetime(datetime):
     """Custom datetime class for ISO formatted strings."""
@@ -17,18 +23,40 @@ class IsoDatetime(datetime):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v, _):
+    def validate(cls, v: str, _):
         """Validate that the input is a valid ISO datetime string."""
         if isinstance(v, str):
             return datetime.fromisoformat(v.replace("Z", "+00:00"))
         return v
 
 
+class CUID(str):
+    """CUID v1 type for string validation"""
+
+    _pattern = re.compile(r'^c[^\s-]{8,}$')
+
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v: str, _):
+        """Validate that the input is a valid CUID v1 string."""
+        if not isinstance(v, str):
+            raise TypeError("CUID must be a string")
+        if not cls._pattern.match(v):
+            raise ValueError(
+                "Invalid CUID v1 format. "
+                "Must start with 'c' followed by at least 8 non-whitespace characters"
+            )
+        return cls(v)
+
+
 class Market(BaseModel):
     """Market data."""
 
     # Identifiers
-    id: str = Field(description="The unique identifier for the market.")
+    id: CUID = Field(description="The unique identifier for the market.")
     question: str = Field(description="Short title for the market.")
     description: str = Field(description="Detailed description.", repr=False)
     slug: str = Field(description="URL-friendly identifier.", repr=False)
@@ -54,15 +82,15 @@ class Market(BaseModel):
         description="ID of the user who created the market.",
         repr=False
     )
-    ammAccountId: str = Field(
+    ammAccountId: CUID = Field(
         description="ID of the Automated Market Maker associated with the market.",
     repr=False
     )
-    clearingAccountId: str = Field(
+    clearingAccountId: CUID = Field(
         description="ID of the clearing account for the market.",
         repr=False
     )
-    canceledById: str | None = Field(
+    canceledById: CUID | None = Field(
         description="ID of the user who canceled the market.",
         default=None,
         repr=False
@@ -73,7 +101,7 @@ class Market(BaseModel):
     uniqueTradersCount: int = Field(ge=0, repr=False)
     uniquePromotersCount: int = Field(ge=0, repr=False)
     liquidityCount: int = Field(ge=0, repr=True)
-    parentListId: str | None = Field(default=None, repr=False)
+    parentListId: CUID | None = Field(default=None, repr=False)
 
     # Validators
     @model_validator(mode='after')
@@ -87,7 +115,7 @@ class Market(BaseModel):
 class LiteOption(BaseModel):
     """Option with only ID and probability."""
 
-    id: str
+    id: CUID
     probability: int = Field(ge=0, le=100, description="Probability percentage (0-100).")
 
 
@@ -95,7 +123,7 @@ class Option(LiteOption):
     """Option for a market."""
 
     name: str
-    marketId: str
+    marketId: CUID
     color: str
     liquidityProbability: float = Field(ge=0, le=1, description="Liquidity probability (0-1).")
     createdAt: IsoDatetime
@@ -113,10 +141,10 @@ class Option(LiteOption):
 class MarketResolution(BaseModel):
     """Resolution for a market."""
 
-    id: str
-    marketId: str
-    resolvedById: str
-    resolutionId: str
+    id: CUID
+    marketId: CUID
+    resolvedById: CUID
+    resolutionId: CUID
     # Note: Cannot ask for a strict url, isn't validated fully on the frontend
     supportingLink: str | None = Field(default=None, repr=False)
     createdAt: IsoDatetime
@@ -127,7 +155,7 @@ class MarketResolution(BaseModel):
 class User(BaseModel):
     """User profile."""
 
-    id: str = Field(description="Unique identifier for the user.")
+    id: CUID = Field(description="Unique identifier for the user.")
     username: str
     displayName: str
     avatarUrl: HttpUrl | None = Field(default=None, repr=False)
@@ -136,7 +164,7 @@ class User(BaseModel):
     website: HttpUrl | None = Field(default=None, repr=False)
     bio: str | None = Field(default=None, repr=False)
     timezone: str
-    primaryAccountId: str = Field(description="ID of the user's primary account.")
+    primaryAccountId: CUID = Field(description="ID of the user's primary account.")
     role: Literal["USER", "ADMIN"]
     referralCode: str | None = Field(default=None, repr=False)
     referredBy: str | None = Field(default=None, repr=False)
@@ -146,10 +174,10 @@ class User(BaseModel):
 class Account(BaseModel):
     """Account for a user."""
 
-    id: str
+    id: CUID
     type: Literal["USER"]
     internalType: str | None = None
-    userId: str
+    userId: CUID
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
     user: User
@@ -173,9 +201,9 @@ class FullMarket(Market):
 class Reaction(BaseModel):
     """Reaction to comments."""
 
-    id: str
+    id: CUID
     emoji: str
-    commentId: str
+    commentId: CUID
     user: User
 
     @field_validator('emoji', mode='after')
@@ -189,15 +217,15 @@ class Reaction(BaseModel):
 class Comment(BaseModel):
     """Comment on a market."""
 
-    id: str
+    id: CUID
     content: str
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
     edited: bool
-    authorId: str
-    parentId: str | None = Field(default=None)
+    authorId: CUID
+    parentId: CUID | None = Field(default=None)
     hidden: bool
-    entityId: str
+    entityId: CUID
     entityType: Literal["MARKET"]
     author: User
     reactions: list[Reaction] = Field(default=[])
@@ -222,10 +250,10 @@ class PageInfo(BaseModel):
 class Position(BaseModel):
     """Represents a position in the playmoney API."""
 
-    id: str = Field(description="Unique identifier for the position.")
-    accountId: str = Field(description="ID of the account holding the position.")
-    marketId: str = Field(description="ID of the market for the position.")
-    optionId: str = Field(description="ID of the option in the position.")
+    id: CUID = Field(description="Unique identifier for the position.")
+    accountId: CUID = Field(description="ID of the account holding the position.")
+    marketId: CUID = Field(description="ID of the market for the position.")
+    optionId: CUID = Field(description="ID of the option in the position.")
     cost: float = Field(description="Cost of the position.")
     quantity: float = Field(description="Quantity of the position.")
     value: float = Field(description="Current value of the position.", ge=0)
