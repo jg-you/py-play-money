@@ -13,11 +13,11 @@ import yaml
 
 from py_play_money.schemas import (
     Comment,
-    Position,
     FullMarket,
     GraphTick,
     Market,
     PageInfo,
+    Position,
     User,
 )
 
@@ -231,8 +231,11 @@ class Client:
         def get_graph(self, user_id: str, **kwargs):
             pass
 
-        def get_positions(self, user_id: str, **kwargs):
-            pass
+        def get_positions(self, user_id: str, **kwargs) -> list[Position]:
+            """Retrieve positions for a user by ID."""
+            endpoint = f"users/{user_id}/positions"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [Position(**position) for position in data]
 
         def get_stats(self, user_id: str, **kwargs):
             pass

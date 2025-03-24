@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
 
 class IsoDatetime(datetime):
     """Custom datetime class for ISO formatted strings."""
+
     @classmethod
     def __get_validators__(cls):
         yield cls.validate

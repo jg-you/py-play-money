@@ -11,8 +11,8 @@ from .schemas import (
     Market,
     MarketResolution,
     Option,
-    Position,
     PageInfo,
+    Position,
     Reaction,
     User,
 )
