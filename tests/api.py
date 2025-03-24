@@ -16,7 +16,7 @@ def test_api_init():
 def test_api_get_markets():
     """Test the retrieval of markets."""
     client = ppm.Client()
-    market = client.markets.get(market_id=TEST_MARKET_ID)
+    market = client.market.get(market_id=TEST_MARKET_ID)
     assert market is not None
     assert market.id == TEST_MARKET_ID
     assert market.slug == "playmoney-api-python-wrapper-in-january-2025"

@@ -9,6 +9,20 @@ from typing import Literal
 from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
 
 
+class IsoDatetime(datetime):
+    """Custom datetime class for ISO formatted strings."""
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v, _):
+        """Validate that the input is a valid ISO datetime string."""
+        if isinstance(v, str):
+            return datetime.fromisoformat(v.replace("Z", "+00:00"))
+        return v
+
+
 class Market(BaseModel):
     """Market data."""
 
@@ -28,11 +42,11 @@ class Market(BaseModel):
         return f"https://playmoney.dev/questions/{self.id}/{self.slug}"
 
     # Dates
-    createdAt: datetime
-    closeDate: datetime
-    resolvedAt: datetime | None = Field(default=None, repr=False)
-    canceledAt: datetime | None = Field(default=None, repr=False)
-    updatedAt: datetime | None = Field(default=None, repr=False)
+    createdAt: IsoDatetime
+    closeDate: IsoDatetime
+    resolvedAt: IsoDatetime | None = Field(default=None, repr=False)
+    canceledAt: IsoDatetime | None = Field(default=None, repr=False)
+    updatedAt: IsoDatetime | None = Field(default=None, repr=False)
 
     # User IDs
     createdBy: str = Field(
@@ -61,17 +75,6 @@ class Market(BaseModel):
     parentListId: str | None = Field(default=None, repr=False)
 
     # Validators
-    @field_validator(
-        'createdAt', 'closeDate', 'resolvedAt', 'canceledAt', 'updatedAt',
-        mode='before'
-    )
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
-
     @model_validator(mode='after')
     def validate_creation_date(self):
         """Validate that the creation date is not after the close date."""
@@ -94,16 +97,8 @@ class Option(LiteOption):
     marketId: str
     color: str
     liquidityProbability: float = Field(ge=0, le=1, description="Liquidity probability (0-1).")
-    createdAt: datetime
-    updatedAt: datetime
-
-    @field_validator('createdAt', 'updatedAt', mode='before')
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
 
     @field_validator('color', mode='after')
     @classmethod
@@ -123,17 +118,9 @@ class MarketResolution(BaseModel):
     resolutionId: str
     # Note: Cannot ask for a strict url, isn't validated fully on the frontend
     supportingLink: str | None = Field(default=None, repr=False)
-    createdAt: datetime
-    updatedAt: datetime
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
     resolution: Option
-
-    @field_validator('createdAt', 'updatedAt', mode='before')
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
 
 
 class User(BaseModel):
@@ -152,17 +139,19 @@ class User(BaseModel):
     role: Literal["USER", "ADMIN"]
     referralCode: str | None = Field(default=None, repr=False)
     referredBy: str | None = Field(default=None, repr=False)
-    createdAt: datetime
-    updatedAt: datetime
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
 
-    @field_validator('createdAt', 'updatedAt', mode='before')
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
+class Account(BaseModel):
+    """Account for a user."""
 
+    id: str
+    type: Literal["USER"]
+    internalType: str | None = None
+    userId: str
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
+    user: User
 
 class FullMarket(Market):
     """Full market data including options, users."""
@@ -201,8 +190,8 @@ class Comment(BaseModel):
 
     id: str
     content: str
-    createdAt: datetime
-    updatedAt: datetime
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
     edited: bool
     authorId: str
     parentId: str | None = Field(default=None)
@@ -212,29 +201,13 @@ class Comment(BaseModel):
     author: User
     reactions: list[Reaction] = Field(default=[])
 
-    @field_validator('createdAt', 'updatedAt', mode='before')
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
-
 
 class GraphTick(BaseModel):
     """Tick for graph data."""
 
-    startAt: datetime
-    endAt: datetime
+    startAt: IsoDatetime
+    endAt: IsoDatetime
     options: list[LiteOption]
-
-    @field_validator('startAt', 'endAt', mode='before')
-    @classmethod
-    def parse_date(cls, value):
-        """Parse date strings to datetime objects, before validation."""
-        if isinstance(value, str):
-            return datetime.fromisoformat(value.replace('Z', '+00:00'))
-        return value
 
 
 class PageInfo(BaseModel):
@@ -243,3 +216,27 @@ class PageInfo(BaseModel):
     hasNextPage: bool = False
     endCursor: str | None = Field(default=None)
     total: int = Field(ge=0)
+
+
+class Position(BaseModel):
+    """Represents a position in the playmoney API."""
+
+    id: str = Field(description="Unique identifier for the position.")
+    accountId: str = Field(description="ID of the account holding the position.")
+    marketId: str = Field(description="ID of the market for the position.")
+    optionId: str = Field(description="ID of the option in the position.")
+    cost: float = Field(description="Cost of the position.")
+    quantity: float = Field(description="Quantity of the position.")
+    value: float = Field(description="Current value of the position.", ge=0)
+    createdAt: IsoDatetime = Field(description="Timestamp when the position was created.")
+    updatedAt: IsoDatetime = Field(description="Timestamp when the position was last updated.")
+    account: Account
+    market: Market
+    option: Option
+
+    @model_validator(mode='after')
+    def validate_update_date(self):
+        """Validate that the creation date is not after the update date."""
+        if self.createdAt > self.updatedAt:
+            raise ValueError("Creation date cannot be after the update date.")
+        return self

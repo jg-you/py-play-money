@@ -11,13 +11,14 @@ from .schemas import (
     Market,
     MarketResolution,
     Option,
+    Position,
     PageInfo,
     Reaction,
     User,
 )
 
 __all__ = [
-    "Market", "FullMarket", "Option", "MarketResolution",
+    "Market", "FullMarket", "Option", "MarketResolution", "Position",
     "User", 
     "Comment", "Reaction",
     "GraphTick",

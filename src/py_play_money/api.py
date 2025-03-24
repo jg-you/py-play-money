@@ -13,6 +13,7 @@ import yaml
 
 from py_play_money.schemas import (
     Comment,
+    Position,
     FullMarket,
     GraphTick,
     Market,
@@ -197,8 +198,11 @@ class Client:
             data = self.client.execute_get(endpoint, **kwargs)['data']
             return [GraphTick(**tick) for tick in data]
 
-        def get_positions(self, market_id: str, **kwargs):
-            pass
+        def get_positions(self, market_id: str, **kwargs) -> list[Position]:
+            """Retrieve positions for a market by ID."""
+            endpoint = f"markets/{market_id}/positions"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [Position(**position) for position in data]
 
         def get_related(self, market_id: str, **kwargs):
             pass
