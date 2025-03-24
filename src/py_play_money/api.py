@@ -22,7 +22,15 @@ from py_play_money.schemas import (
 )
 
 logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
+formatter = logging.Formatter(
+    fmt="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 logger.setLevel(logging.INFO)
+
 
 def get_configs():
     """Retrieve API configurations."""
@@ -90,7 +98,9 @@ class Client:
                 timeout = 10
             else:
                 timeout = kwargs.pop("timeout")
+            logger.info("Requesting %s. Timeout: %s. Args: %s", url, timeout, kwargs)
             response = requests.get(url, headers=self.headers, timeout=timeout, **kwargs)
+            logger.debug("Response: %s, %s", response.status_code, response.text)
             response.raise_for_status()
             return response.json()
         except requests.HTTPError as e:
@@ -114,7 +124,7 @@ class Client:
 
     def markets(self,
                 cursor: str | None = None,
-                status=Literal['active', 'closed', 'all'],
+                status: Literal['active', 'closed', 'all'] = 'all',
                 createdBy: str | None = None,
                 tags: list[str] | None = None,
                 limit: int = 10,
@@ -205,7 +215,10 @@ class Client:
             return [Position(**position) for position in data]
 
         def get_related(self, market_id: str, **kwargs):
-            pass
+            """Retrieve related markets for a market by ID."""
+            endpoint = f"markets/{market_id}/related"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [FullMarket(**market) for market in data]
 
     class UserResource:
         """Regroups all resources related to users."""

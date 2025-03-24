@@ -10,6 +10,7 @@ from typing import Literal
 from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
 
 
+# ================================== Helpers ==================================
 class IsoDatetime(datetime):
     """Custom datetime class for ISO formatted strings."""
 
@@ -49,7 +50,17 @@ class CUID(str):
         return cls(v)
 
 
-class Market(BaseModel):
+class OptionalFieldMixin(BaseModel):
+    """Base class to remove optional fields from the model."""
+    def __init__(self, **data):
+        super().__init__(**data)
+        for field in self.model_fields:
+            if field not in self.model_fields_set:
+                self.__dict__.pop(field, None)
+
+
+# ================================ API Schemas ================================
+class Market(OptionalFieldMixin):
     """Market data."""
 
     # Identifiers
@@ -97,7 +108,7 @@ class Market(BaseModel):
     commentCount: int = Field(ge=0, repr=False)
     uniqueTradersCount: int = Field(ge=0, repr=False)
     uniquePromotersCount: int = Field(ge=0, repr=False)
-    liquidityCount: int = Field(ge=0, repr=True)
+    liquidityCount: int | None = Field(ge=0, repr=True, default=None)
     parentListId: CUID | None = Field(default=None, repr=False)
 
     # Validators
@@ -113,7 +124,12 @@ class LiteOption(BaseModel):
     """Option with only ID and probability."""
 
     id: CUID
-    probability: int = Field(ge=0, le=100, description="Probability percentage (0-100).")
+    probability: int | None = Field(
+        ge=0,
+        le=100,
+        description="Probability percentage (0-100).",
+        default=None  # for compatibility with older versions
+    )
 
 
 class Option(LiteOption):
@@ -187,6 +203,7 @@ class FullMarket(Market):
     marketResolution: MarketResolution | None = Field(default=None, repr=False)
     resolvedBy: User | None = Field(default=None, repr=False)
     parentList: str | None = Field(default=None, repr=False)
+    sharedTagsCount: int = Field(default=None)
 
     @model_validator(mode='after')
     def validate_resolution(self):
