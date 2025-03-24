@@ -8,10 +8,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator, model_validator, HttpUrl
 
-
 class Market(BaseModel):
-    """Represents a market in the playmoney API."""
-
+    """Market data."""
     # Identifiers
     id: str = Field(description="The unique identifier for the market.")
     question: str = Field(description="Short title for the market.")
@@ -79,8 +77,57 @@ class Market(BaseModel):
             raise ValueError("Creation date cannot be after the close date.")
         return self
 
+
+class Option(BaseModel):
+    """Option for a market."""
+    id: str
+    name: str
+    marketId: str
+    color: str
+    liquidityProbability: float = Field(ge=0, le=1, description="Liquidity probability (0-1).")
+    createdAt: datetime
+    updatedAt: datetime
+    probability: int = Field(ge=0, le=100, description="Probability percentage (0-100).")
+
+    @field_validator('createdAt', 'updatedAt', mode='before')
+    @classmethod
+    def parse_date(cls, value):
+        """Parse date strings to datetime objects, before validation."""
+        if isinstance(value, str):
+            return datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return value
+
+    @field_validator('color', mode='after')
+    @classmethod
+    def validate_color(cls, value):
+        """Validate that the color is a valid hex color code."""
+        if not value.startswith("#") or len(value) != 7:
+            raise ValueError("Color must be a valid hex code (e.g., '#FFFFFF').")
+        return value
+
+class MarketResolution(BaseModel):
+    """Resolution for a market."""
+    id: str
+    marketId: str
+    resolvedById: str
+    resolutionId: str
+    # Note: Cannot ask for a strict url, isn't validated fully on the frontend
+    supportingLink: str | None = Field(default=None, repr=False)
+    createdAt: datetime
+    updatedAt: datetime
+    resolution: Option
+
+    @field_validator('createdAt', 'updatedAt', mode='before')
+    @classmethod
+    def parse_date(cls, value):
+        """Parse date strings to datetime objects, before validation."""
+        if isinstance(value, str):
+            return datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return value
+
+
 class User(BaseModel):
-    """Represents a user in the playmoney API."""
+    """User profile."""
     id: str = Field(description="Unique identifier for the user.")
     username: str
     displayName: str
@@ -96,6 +143,52 @@ class User(BaseModel):
     referredBy: str | None = Field(default=None, repr=False)
     createdAt: datetime
     updatedAt: datetime
+
+    @field_validator('createdAt', 'updatedAt', mode='before')
+    @classmethod
+    def parse_date(cls, value):
+        """Parse date strings to datetime objects, before validation."""
+        if isinstance(value, str):
+            return datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return value
+
+
+class FullMarket(Market):
+    """Full market data including options, users."""
+    options: list[Option] = Field(default=[], repr=False)
+    user: User = Field(repr=False)
+    marketResolution: MarketResolution | None = Field(default=None, repr=False)
+
+
+class Reaction(BaseModel):
+    """Reaction to comments."""
+    id: str
+    emoji: str
+    commentId: str
+    user: User
+
+    @field_validator('emoji', mode='after')
+    @classmethod
+    def validate_emoji(cls, value):
+        """Validate that the emoji is a valid code."""
+        if not value.startswith(":") or not value.endswith(":"):
+            raise ValueError("Emoji must be in the format ':emoji_code:'")
+
+
+class Comment(BaseModel):
+    """Comment on a market."""
+    id: str
+    content: str
+    createdAt: datetime
+    updatedAt: datetime
+    edited: bool
+    authorId: str
+    parentId: str | None = Field(default=None)
+    hidden: bool
+    entityId: str
+    entityType: Literal["MARKET"]
+    author: User
+    reactions: list[Reaction] = Field(default=[])
 
     @field_validator('createdAt', 'updatedAt', mode='before')
     @classmethod
