@@ -7,19 +7,15 @@ import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import (
-    BaseModel,
-    HttpUrl,
-    Field,
-    field_validator,
-    model_validator
-)
+from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
+
 
 class IsoDatetime(datetime):
     """Custom datetime class for ISO formatted strings."""
 
     @classmethod
     def __get_validators__(cls):
+        """Magic method to get validators for the custom datetime class."""
         yield cls.validate
 
     @classmethod
@@ -31,12 +27,13 @@ class IsoDatetime(datetime):
 
 
 class CUID(str):
-    """CUID v1 type for string validation"""
+    """CUID v1 type for string validation."""
 
     _pattern = re.compile(r'^c[^\s-]{8,}$')
 
     @classmethod
     def __get_validators__(cls):
+        """Magic method to get validators for the CUID type."""
         yield cls.validate
 
     @classmethod
@@ -78,7 +75,7 @@ class Market(BaseModel):
     updatedAt: IsoDatetime | None = Field(default=None, repr=False)
 
     # User IDs
-    createdBy: str = Field(
+    createdBy: CUID = Field(
         description="ID of the user who created the market.",
         repr=False
     )
@@ -167,7 +164,7 @@ class User(BaseModel):
     primaryAccountId: CUID = Field(description="ID of the user's primary account.")
     role: Literal["USER", "ADMIN"]
     referralCode: str | None = Field(default=None, repr=False)
-    referredBy: str | None = Field(default=None, repr=False)
+    referredBy: CUID | None = Field(default=None, repr=False)
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
 
