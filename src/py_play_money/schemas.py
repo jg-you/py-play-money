@@ -207,7 +207,7 @@ class FullMarket(Market):
         super().__init__(**data)
         for field in self.model_fields:
             if field not in self.model_fields_set:
-                if field in {"resolvedBy", "parentList", "sharedTagsCount", "options"}:
+                if field in {"resolvedBy", "parentList", "sharedTagsCount", "options", "marketResolution"}:
                     self.__dict__.pop(field, None)
 
     user: User = Field(repr=False)
@@ -217,12 +217,22 @@ class FullMarket(Market):
     parentList: str | None = Field(default=None, repr=False)
     sharedTagsCount: int = Field(default=None)
 
-    @model_validator(mode='after')
-    def validate_resolution(self):
-        """Validate that if the market is resolved, it has a resolution."""
-        if self.marketResolution is None and self.resolvedAt is not None:
-            raise ValueError("Market is resolved but has no market resolution.")
-        return self
+
+
+class MarketList(BaseModel):
+    """List of markets."""
+
+    id: CUID
+    title: str
+    slug: str
+    description: str
+    ownerId: CUID
+    contributionPolicy: Literal["PUBLIC", "DISABLED", "OWNERS_ONLY", "FRIENDS_ONLY"]
+    contributionReview: bool
+    tags: list[str]
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
+
 
 class Reaction(BaseModel):
     """Reaction to comments."""
@@ -253,7 +263,7 @@ class Comment(BaseModel):
     parentId: CUID | None = Field(default=None)
     hidden: bool
     entityId: CUID
-    entityType: Literal["MARKET"]
+    entityType: Literal["MARKET", "LIST"]
     author: User
     reactions: list[Reaction] = Field(default=[])
 

@@ -17,6 +17,7 @@ from py_play_money.schemas import (
     FullMarket,
     GraphTick,
     Market,
+    MarketList,
     PageInfo,
     Position,
     User,
@@ -78,6 +79,7 @@ class Client:
 
         # Assign resources
         self.market = self.MarketResource(self)
+        self.list = self.MarketListResource(self)
         self.user = self.UserResource(self)
 
     def execute_get(self, endpoint: str, **kwargs):
@@ -85,12 +87,12 @@ class Client:
         Execute a GET request to the API.
 
         Args:
-          endpoint (str): The API endpoint to call.
-          **kwargs: Additional keyword arguments to pass to the request.
-                    Timeout defaults to 10 seconds if not specified.
+            endpoint (str): The API endpoint to call.
+            **kwargs: Additional keyword arguments to pass to the request.
+                      Timeout defaults to 10 seconds if not specified.
 
         Returns:
-          response (requests.Response): The response object from the request.
+            response (requests.Response): The response object from the request.
 
         """
         url = f"{self.base_url}/{endpoint}"
@@ -108,16 +110,22 @@ class Client:
             logger.error("HTTP error occurred: %s", e)
             raise
 
+    def activity(self, **kwargs) -> list[Activity]:
+        """Retrieve activity for the whole website."""
+        endpoint = "activity"
+        data = self.execute_get(endpoint, **kwargs)['data']
+        return [Activity(**d) for d in data]
+
     def comments(self, comment_id: str, **kwargs) -> Comment:
         """
         Retrieve a comment by ID.
 
         Args:
-          comment_id (str): The ID of the comment to retrieve.
-          **kwargs: Additional keyword arguments to pass to the request.
+            comment_id (str): The ID of the comment to retrieve.
+            **kwargs: Additional keyword arguments to pass to the request.
 
         Returns:
-          Comment: The retrieved Comment object.
+            Comment: The retrieved Comment object.
 
         """
         endpoint = f"comments/{comment_id}"
@@ -203,7 +211,7 @@ class Client:
         def get_comments(self, market_id: str, **kwargs) -> list[Comment]:
             """Retrieve comments for a market by ID."""
             endpoint = f"markets/{market_id}/comments"
-            data = self.client.execute_get(endpoint, **kwargs)
+            data = self.client.execute_get(endpoint, **kwargs)['data']
             return [Comment(**comment) for comment in data]
 
         def get_graph(self, market_id: str, **kwargs) -> list[GraphTick]:
@@ -223,6 +231,34 @@ class Client:
             endpoint = f"markets/{market_id}/related"
             data = self.client.execute_get(endpoint, **kwargs)['data']
             return [FullMarket(**market) for market in data]
+
+
+    class MarketListResource:
+        """Regroups all resources related to lists of markets."""
+
+        def __init__(self, client):
+            self.client = client
+
+        def get(self, list_id: str, **kwargs) -> MarketList:
+            """Retrieve a list by ID."""
+            endpoint = f"lists/{list_id}"
+            return MarketList(**self.client.execute_get(endpoint, **kwargs)['data'])
+
+        def get_balance(self, list_id: str, **kwargs):
+            pass
+
+        def get_comments(self, list_id: str, **kwargs) -> list[Comment]:
+            """Retrieve comments for a list by ID."""
+            endpoint = f"lists/{list_id}/comments"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [Comment(**comment) for comment in data]
+
+        def get_graph(self, list_id: str, **kwargs) -> list[GraphTick]:
+            """Retrieve graph data for a list by ID."""
+            endpoint = f"lists/{list_id}/graph"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [GraphTick(**tick) for tick in data]
+
 
     class UserResource:
         """Regroups all resources related to users."""
