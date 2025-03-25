@@ -4,12 +4,9 @@ Handles all API interactions.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 import logging
-from importlib.resources import files
-from os import getenv
 from typing import Literal
 
 import requests
-import yaml
 
 from py_play_money.schemas import (
     Activity,
@@ -34,41 +31,45 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 
-def get_configs():
-    """Retrieve API configurations."""
-    config_file = files("py_play_money").joinpath("configs.yaml")
-    with config_file.open("r") as f:
-        return yaml.safe_load(f)
-
-
 class Client:
     """
     Client for interacting with the Play Money API.
 
     All requests accept keyword arguments that are passed to the `requests` library.
 
+    Args:
+        api_key (str | None): The API key to use for authenticated requests.
+        base_url (str): The base URL of the API. 
+            Defaults to the API of the main hosted instance of PlayMoney.dev. 
+        version (str): The version of the API to use. Supported: 'v1'.
+
     Examples:
-    ```python
-    client = Client()
-    # Get a market
-    market = client.markets.get(market_id="cm5ifmwfo001g24d2r7fzu34u")
-    # Get a user, with timeout
-    user = client.users.get(user_id="user123", timeout=5)
+        ```python
+        client = Client()
+        # Get a market
+        market = client.markets.get(market_id="cm5ifmwfo001g24d2r7fzu34u")
+        # Get a user, with timeout
+        user = client.users.get(user_id="user123", timeout=5)
     ```
 
     """
 
-    def __init__(self):
+    def __init__(
+            self,
+            api_key: str | None = None,
+            base_url = "https://api.playmoney.dev",
+            version = Literal["v1"]) -> None:
         # Load configs
-        self.configs = get_configs()
-        self.api_version = self.configs['api_version']
-        self.base_url = self.configs['base_url'] + f"/{self.api_version}"
-        self.api_key = getenv('PLAYMONEY_API_KEY', None)
+        self.api_version = version
+        self.base_url = base_url + f"/{self.api_version}"
+        self.api_key = api_key
         if self.api_key is None:
+            self.authenticated = False
             logger.warning(
-                "PLAYMONEY_API_KEY not found in environment, "
-                "won't be able to execute POST requests."
+                "No key provided, won't be able to execute POST requests."
             )
+        else:
+            self.authenticated = True
 
         # Set up headers
         self.headers = {
