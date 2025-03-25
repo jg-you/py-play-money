@@ -60,7 +60,7 @@ class OptionalFieldMixin(BaseModel):
 
 
 # ================================ API Schemas ================================
-class Market(OptionalFieldMixin):
+class Market(BaseModel):
     """Market data."""
 
     # Identifiers
@@ -151,20 +151,6 @@ class Option(LiteOption):
         return value
 
 
-class MarketResolution(BaseModel):
-    """Resolution for a market."""
-
-    id: CUID
-    marketId: CUID
-    resolvedById: CUID
-    resolutionId: CUID
-    # Note: Cannot ask for a strict url, isn't validated fully on the frontend
-    supportingLink: str | None = Field(default=None, repr=False)
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
-    resolution: Option
-
-
 class User(BaseModel):
     """User profile."""
 
@@ -184,6 +170,24 @@ class User(BaseModel):
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
 
+
+class MarketResolution(BaseModel):
+    """Resolution for a market."""
+
+    id: CUID
+    marketId: CUID
+    resolvedById: CUID
+    resolutionId: CUID
+    # Note: Cannot ask for a strict url, isn't validated fully on the frontend
+    supportingLink: str | None = Field(default=None, repr=False)
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
+    resolution: Option
+    resolvedBy: User
+    market: Market
+
+
+
 class Account(BaseModel):
     """Account for a user."""
 
@@ -197,6 +201,14 @@ class Account(BaseModel):
 
 class FullMarket(Market):
     """Full market data including options, users."""
+
+    def __init__(self, **data):
+        """Selectively remove optional fields for some use cases of the model."""
+        super().__init__(**data)
+        for field in self.model_fields:
+            if field not in self.model_fields_set:
+                if field in {"resolvedBy", "parentList", "sharedTagsCount", "options"}:
+                    self.__dict__.pop(field, None)
 
     user: User = Field(repr=False)
     options: list[Option] = Field(default=[], repr=False)
@@ -217,6 +229,7 @@ class Reaction(BaseModel):
 
     id: CUID
     emoji: str
+    userId: CUID
     commentId: CUID
     user: User
 
@@ -262,7 +275,7 @@ class PageInfo(BaseModel):
 
 
 class Position(BaseModel):
-    """Represents a position in the playmoney API."""
+    """Position on a market."""
 
     id: CUID = Field(description="Unique identifier for the position.")
     accountId: CUID = Field(description="ID of the account holding the position.")
@@ -283,3 +296,49 @@ class Position(BaseModel):
         if self.createdAt > self.updatedAt:
             raise ValueError("Creation date cannot be after the update date.")
         return self
+
+
+class TransactionEntry(BaseModel):
+    """Ledger entry for a transaction."""
+    id: CUID
+    amount: float
+    assetType: Literal["MARKET_OPTION", "CURRENCY"]
+    assetId: Literal["PRIMARY"] | CUID
+    fromAccountId: CUID
+    toAccountId: CUID
+    transactionId: CUID
+    createdAt: IsoDatetime
+
+
+class Transaction(BaseModel):
+    """Transaction."""
+    id: CUID
+    type: Literal["LIQUIDITY_DEPOSIT", "TRADE_SELL", "TRADE_BUY"]
+    initiatorId: CUID
+    isReverse: bool | None = Field(default=None)
+    reverseOfId: CUID | None = Field(default=None)
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
+    batchId: CUID | None = Field(default=None)
+    marketId: CUID
+    entries: list[TransactionEntry]
+    market: Market
+    initiator: User
+    options: list[Option] = Field(default=[])
+
+
+class Activity(OptionalFieldMixin):
+    """Activity data."""
+    type: Literal[
+        "COMMENT",
+        "TRADE_TRANSACTION", "LIQUIDITY_TRANSACTION",
+        "MARKET_CREATED", "MARKET_RESOLVED"
+    ]
+    timestampAt: IsoDatetime
+
+    # Optional fields, will be removed by mixin if not present
+    comment: Comment | None = None
+    transactions: list[Transaction] | None = None
+    option: Option | None = None
+    market: FullMarket | None = None
+    marketResolution: MarketResolution | None = None

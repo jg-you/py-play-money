@@ -5,6 +5,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from .api import Client
 from .schemas import (
+    Activity,
     Comment,
     FullMarket,
     GraphTick,
@@ -19,8 +20,8 @@ from .schemas import (
 
 __all__ = [
     "Market", "FullMarket", "Option", "MarketResolution", "Position",
-    "User", 
-    "Comment", "Reaction",
+    "User",
+    "Activity", "Comment", "Reaction",
     "GraphTick",
     "PageInfo",
     "Client"

@@ -12,6 +12,7 @@ import requests
 import yaml
 
 from py_play_money.schemas import (
+    Activity,
     Comment,
     FullMarket,
     GraphTick,
@@ -188,7 +189,10 @@ class Client:
             return Market(**self.client.execute_get(endpoint, **kwargs)['data'])
 
         def get_activity(self, market_id: str, **kwargs):
-            pass
+            """Retrieve activity for a market by ID."""
+            endpoint = f"markets/{market_id}/activity"
+            data = self.client.execute_get(endpoint, **kwargs)['data']
+            return [Activity(**d) for d in data]
 
         def get_balance(self, market_id: str, **kwargs):
             pass
