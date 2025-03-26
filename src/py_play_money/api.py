@@ -8,6 +8,11 @@ from typing import Literal
 
 import requests
 
+from py_play_money.adapters import (
+    activity_list_adapter,
+    comment_list_adapter,
+    position_list_adapter,
+)
 from py_play_money.schemas import (
     Activity,
     Comment,
@@ -38,19 +43,20 @@ class Client:
     All requests accept keyword arguments that are passed to the `requests` library.
 
     Args:
-        api_key (str | None): The API key to use for authenticated requests.
-        base_url (str): The base URL of the API. 
+        api_key (str | None): API key to use for authenticated requests.
+        base_url (str): Base URL of the API. 
             Defaults to the API of the main hosted instance of PlayMoney.dev. 
-        version (str): The version of the API to use. Supported: 'v1'.
+        version (str): Version of the API to use. Supported: 'v1'.
 
     Examples:
         ```python
+        from py_play_money import Client
         client = Client()
         # Get a market
         market = client.markets.get(market_id="cm5ifmwfo001g24d2r7fzu34u")
         # Get a user, with timeout
         user = client.users.get(user_id="user123", timeout=5)
-    ```
+        ```
 
     """
 
@@ -58,10 +64,11 @@ class Client:
             self,
             api_key: str | None = None,
             base_url = "https://api.playmoney.dev",
-            version = Literal["v1"]) -> None:
+            version: Literal["v1"] = "v1"
+        ) -> None:
+
         # Load configs
-        self.api_version = version
-        self.base_url = base_url + f"/{self.api_version}"
+        self.base_url = base_url + f"/{version}"
         self.api_key = api_key
         if self.api_key is None:
             self.authenticated = False
@@ -145,28 +152,28 @@ class Client:
         Page through all markets.
 
         Args:
-          cursor (str | None): Pagination cursor, i.e., the market after which to start.
-          status (str): Market status. Can be 'active', 'closed', or 'all'.
-          createdBy (str | None): Filter by user ID of the market creator.
-          tags (list[str] | None): Filter by tags associated with the market.
-          limit (int): Number of markets to return per page.
-          sortField (str | None): Field to sort by.
-          sortDirection (str): Sort direction. Can be 'asc' or 'desc'.
-          **kwargs: Additional keyword arguments to pass to the request.
+            cursor (str | None): Pagination cursor, i.e., the market after which to start.
+            status (str): Market status. Can be 'active', 'closed', or 'all'.
+            createdBy (str | None): Filter by user ID of the market creator.
+            tags (list[str] | None): Filter by tags associated with the market.
+            limit (int): Number of markets to return per page.
+            sortField (str | None): Field to sort by.
+            sortDirection (str): Sort direction. Can be 'asc' or 'desc'.
+            **kwargs: Additional keyword arguments to pass to the request.
 
         Returns:
-          tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+            tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
 
         Example:
-        ```python
-        cursor = None
-        while True:
-            markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
-            print(f"Found {len(markets)} markets")
-            cursor = page_info.endCursor
-            if page_info.hasNextPage is False:
-                break
-        ```
+            ```python
+            cursor = None
+            while True:
+                markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
+                print(f"Found {len(markets)} markets")
+                cursor = page_info.endCursor
+                if page_info.hasNextPage is False:
+                    break
+            ```
 
         """
         if tags is None:
@@ -197,11 +204,11 @@ class Client:
             endpoint = f"markets/{market_id}"
             return Market(**self.client.execute_get(endpoint, **kwargs)['data'])
 
-        def get_activity(self, market_id: str, **kwargs):
+        def get_activity(self, market_id: str, **kwargs) -> list[Activity]:
             """Retrieve activity for a market by ID."""
             endpoint = f"markets/{market_id}/activity"
             data = self.client.execute_get(endpoint, **kwargs)['data']
-            return [Activity(**d) for d in data]
+            return activity_list_adapter.validate_python(data)
 
         def get_balance(self, market_id: str, **kwargs):
             pass
@@ -212,8 +219,9 @@ class Client:
         def get_comments(self, market_id: str, **kwargs) -> list[Comment]:
             """Retrieve comments for a market by ID."""
             endpoint = f"markets/{market_id}/comments"
-            data = self.client.execute_get(endpoint, **kwargs)['data']
-            return [Comment(**comment) for comment in data]
+            return comment_list_adapter.validate_python(
+                self.client.execute_get(endpoint, **kwargs)['data']
+                )
 
         def get_graph(self, market_id: str, **kwargs) -> list[GraphTick]:
             """Retrieve graph data for a market by ID."""
@@ -224,8 +232,9 @@ class Client:
         def get_positions(self, market_id: str, **kwargs) -> list[Position]:
             """Retrieve positions for a market by ID."""
             endpoint = f"markets/{market_id}/positions"
-            data = self.client.execute_get(endpoint, **kwargs)['data']
-            return [Position(**position) for position in data]
+            return position_list_adapter.validate_python(
+                self.client.execute_get(endpoint, **kwargs)['data']
+                )
 
         def get_related(self, market_id: str, **kwargs):
             """Retrieve related markets for a market by ID."""

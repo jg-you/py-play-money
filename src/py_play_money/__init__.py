@@ -3,6 +3,7 @@ Python SDK for playmoney.dev's API.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
+from . import adapters
 from .api import Client
 from .schemas import (
     Activity,

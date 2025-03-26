@@ -7,7 +7,7 @@ import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 # ================================== Helpers ==================================
@@ -52,12 +52,80 @@ class CUID(str):
 
 class OptionalFieldMixin(BaseModel):
     """Base class to remove optional fields from the model."""
+
     def __init__(self, **data):
         super().__init__(**data)
         for field in self.model_fields:
             if field not in self.model_fields_set:
                 self.__dict__.pop(field, None)
 
+# ================================ Enums ================================
+
+AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
+
+ActivityType = Literal[
+    "COMMENT", 
+    "TRADE_TRANSACTION",
+    "LIQUIDITY_TRANSACTION",
+    "MARKET_CREATED",
+    "MARKET_RESOLVED"
+]
+
+AssetType = Literal["MARKET_OPTION", "CURRENCY"]
+
+CommentEntityType = Literal["MARKET", "COMMENT"]
+
+ContributionPolicyType = Literal[
+    "PUBLIC",
+    "DISABLED",
+    "OWNERS_ONLY",
+    "FRIENDS_ONLY"
+]
+    
+NotificationType = Literal [
+    "MARKET_RESOLVED",
+    "MARKET_CANCELED",
+    "MARKET_TRADE",
+    "MARKET_LIQUIDITY_ADDED",
+    "MARKET_COMMENT",
+
+    "LIST_COMMENT",
+    "LIST_MARKET_ADDED",
+
+    "COMMENT_REPLY",
+    "COMMENT_MENTION",
+    "COMMENT_REACTION",
+
+    "REFERRER_BONUS",
+]
+
+TransactionType = Literal[
+    "TRADE_BUY",
+    "TRADE_SELL",
+    "TRADE_WIN",
+    "TRADE_SELL",
+
+    "CREATOR_TRADER_BONUS",
+
+    "LIQUIDITY_INITIALIZE",
+    "LIQUIDITY_DEPOSIT",
+    "LIQUIDITY_WITHDRAWAL",
+    "LIQUIDITY_RETURNED",
+    "LIQUIDITY_VOLUME_BONUS",
+
+    "DAILY_TRADE_BONUS",
+    "DAILY_MARKET_BONUS",
+    "DAILY_COMMENT_BONUS",
+    "DAILY_LIQUIDITY_BONUS",
+
+    "HOUSE_GIFT",
+    "HOUSE_SIGNUP_BONUS",
+
+    "REFERRER_BONUS",
+    "REFERREE_BONUS",
+]
+
+UserRoleType = Literal["USER", "ADMIN"]
 
 # ================================ API Schemas ================================
 class Market(BaseModel):
@@ -157,14 +225,14 @@ class User(BaseModel):
     id: CUID = Field(description="Unique identifier for the user.")
     username: str
     displayName: str
-    avatarUrl: HttpUrl | None = Field(default=None, repr=False)
-    twitterHandle: HttpUrl | None = Field(default=None, repr=False)
-    discordHandle: HttpUrl | None = Field(default=None, repr=False)
-    website: HttpUrl | None = Field(default=None, repr=False)
+    avatarUrl: str | None = Field(default=None, repr=False)
+    twitterHandle: str | None = Field(default=None, repr=False)
+    discordHandle: str | None = Field(default=None, repr=False)
+    website: str | None = Field(default=None, repr=False)
     bio: str | None = Field(default=None, repr=False)
     timezone: str
     primaryAccountId: CUID = Field(description="ID of the user's primary account.")
-    role: Literal["USER", "ADMIN"]
+    role: UserRoleType
     referralCode: str | None = Field(default=None, repr=False)
     referredBy: CUID | None = Field(default=None, repr=False)
     createdAt: IsoDatetime
@@ -178,8 +246,7 @@ class MarketResolution(BaseModel):
     marketId: CUID
     resolvedById: CUID
     resolutionId: CUID
-    # Note: Cannot ask for a strict url, isn't validated fully on the frontend
-    supportingLink: str | None = Field(default=None, repr=False)
+    supportingLink: str | None = Field(default=None, repr=True)
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
     resolution: Option
@@ -192,7 +259,7 @@ class Account(BaseModel):
     """Account for a user."""
 
     id: CUID
-    type: Literal["USER"]
+    type: AccountType
     internalType: str | None = None
     userId: CUID
     createdAt: IsoDatetime
@@ -203,7 +270,7 @@ class FullMarket(Market):
     """Full market data including options, users."""
 
     def __init__(self, **data):
-        """Selectively remove optional fields for some use cases of the model."""
+        """Remove optional fields for some use cases of the model."""
         super().__init__(**data)
         for field in self.model_fields:
             if field not in self.model_fields_set:
@@ -227,7 +294,7 @@ class MarketList(BaseModel):
     slug: str
     description: str
     ownerId: CUID
-    contributionPolicy: Literal["PUBLIC", "DISABLED", "OWNERS_ONLY", "FRIENDS_ONLY"]
+    contributionPolicy: ContributionPolicyType
     contributionReview: bool
     tags: list[str]
     createdAt: IsoDatetime
@@ -263,7 +330,7 @@ class Comment(BaseModel):
     parentId: CUID | None = Field(default=None)
     hidden: bool
     entityId: CUID
-    entityType: Literal["MARKET", "LIST"]
+    entityType: CommentEntityType
     author: User
     reactions: list[Reaction] = Field(default=[])
 
@@ -310,9 +377,10 @@ class Position(BaseModel):
 
 class TransactionEntry(BaseModel):
     """Ledger entry for a transaction."""
+
     id: CUID
     amount: float
-    assetType: Literal["MARKET_OPTION", "CURRENCY"]
+    assetType: AssetType
     assetId: Literal["PRIMARY"] | CUID
     fromAccountId: CUID
     toAccountId: CUID
@@ -322,8 +390,9 @@ class TransactionEntry(BaseModel):
 
 class Transaction(BaseModel):
     """Transaction."""
+
     id: CUID
-    type: Literal["LIQUIDITY_DEPOSIT", "TRADE_SELL", "TRADE_BUY"]
+    type: TransactionType
     initiatorId: CUID
     isReverse: bool | None = Field(default=None)
     reverseOfId: CUID | None = Field(default=None)
@@ -339,11 +408,8 @@ class Transaction(BaseModel):
 
 class Activity(OptionalFieldMixin):
     """Activity data."""
-    type: Literal[
-        "COMMENT",
-        "TRADE_TRANSACTION", "LIQUIDITY_TRANSACTION",
-        "MARKET_CREATED", "MARKET_RESOLVED"
-    ]
+
+    type: ActivityType
     timestampAt: IsoDatetime
 
     # Optional fields, will be removed by mixin if not present
