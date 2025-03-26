@@ -59,7 +59,7 @@ class OptionalFieldMixin(BaseModel):
             if field not in self.model_fields_set:
                 self.__dict__.pop(field, None)
 
-# ================================ Enums ================================
+# ================================ Literals ================================
 
 AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
 
@@ -134,12 +134,11 @@ class Market(BaseModel):
     # Identifiers
     id: CUID = Field(description="The unique identifier for the market.")
     question: str = Field(description="Short title for the market.")
-    description: str = Field(description="Detailed description.", repr=False)
-    slug: str = Field(description="URL-friendly identifier.", repr=False)
+    description: str = Field(description="Detailed description.")
+    slug: str = Field(description="URL-friendly identifier.")
     tags: list[str] = Field(
         default = [],
-        description="List of tags associated with the market.",
-        repr=False
+        description="List of tags associated with the market."
     )
     @property
     def url(self) -> str:
@@ -149,35 +148,31 @@ class Market(BaseModel):
     # Dates
     createdAt: IsoDatetime
     closeDate: IsoDatetime
-    resolvedAt: IsoDatetime | None = Field(default=None, repr=False)
-    canceledAt: IsoDatetime | None = Field(default=None, repr=False)
-    updatedAt: IsoDatetime | None = Field(default=None, repr=False)
+    resolvedAt: IsoDatetime | None = Field(default=None)
+    canceledAt: IsoDatetime | None = Field(default=None)
+    updatedAt: IsoDatetime | None = Field(default=None)
 
     # User IDs
     createdBy: CUID = Field(
-        description="ID of the user who created the market.",
-        repr=False
+        description="ID of the user who created the market."
     )
     ammAccountId: CUID = Field(
-        description="ID of the Automated Market Maker associated with the market.",
-    repr=False
+        description="ID of the Automated Market Maker associated with the market."
     )
     clearingAccountId: CUID = Field(
-        description="ID of the clearing account for the market.",
-        repr=False
+        description="ID of the clearing account for the market."
     )
     canceledById: CUID | None = Field(
         description="ID of the user who canceled the market.",
-        default=None,
-        repr=False
+        default=None
     )
 
     # Activity
-    commentCount: int = Field(ge=0, repr=False)
-    uniqueTradersCount: int = Field(ge=0, repr=False)
-    uniquePromotersCount: int = Field(ge=0, repr=False)
-    liquidityCount: int | None = Field(ge=0, repr=True, default=None)
-    parentListId: CUID | None = Field(default=None, repr=False)
+    commentCount: int = Field(ge=0)
+    uniqueTradersCount: int = Field(ge=0)
+    uniquePromotersCount: int = Field(ge=0)
+    liquidityCount: int | None = Field(ge=0, default=None)
+    parentListId: CUID | None = Field(default=None)
 
     # Validators
     @model_validator(mode='after')
@@ -225,16 +220,16 @@ class User(BaseModel):
     id: CUID = Field(description="Unique identifier for the user.")
     username: str
     displayName: str
-    avatarUrl: str | None = Field(default=None, repr=False)
-    twitterHandle: str | None = Field(default=None, repr=False)
-    discordHandle: str | None = Field(default=None, repr=False)
-    website: str | None = Field(default=None, repr=False)
-    bio: str | None = Field(default=None, repr=False)
+    avatarUrl: str | None = Field(default=None)
+    twitterHandle: str | None = Field(default=None)
+    discordHandle: str | None = Field(default=None)
+    website: str | None = Field(default=None)
+    bio: str | None = Field(default=None)
     timezone: str
     primaryAccountId: CUID = Field(description="ID of the user's primary account.")
     role: UserRoleType
-    referralCode: str | None = Field(default=None, repr=False)
-    referredBy: CUID | None = Field(default=None, repr=False)
+    referralCode: str | None = Field(default=None)
+    referredBy: CUID | None = Field(default=None)
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
 
@@ -246,7 +241,7 @@ class MarketResolution(BaseModel):
     marketId: CUID
     resolvedById: CUID
     resolutionId: CUID
-    supportingLink: str | None = Field(default=None, repr=True)
+    supportingLink: str | None = Field(default=None)
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
     resolution: Option
@@ -277,11 +272,11 @@ class FullMarket(Market):
                 if field in {"resolvedBy", "parentList", "sharedTagsCount", "options", "marketResolution"}:
                     self.__dict__.pop(field, None)
 
-    user: User = Field(repr=False)
-    options: list[Option] = Field(default=[], repr=False)
-    marketResolution: MarketResolution | None = Field(default=None, repr=False)
-    resolvedBy: User | None = Field(default=None, repr=False)
-    parentList: str | None = Field(default=None, repr=False)
+    user: User
+    options: list[Option] = Field(default=[])
+    marketResolution: MarketResolution | None = Field(default=None)
+    resolvedBy: User | None = Field(default=None)
+    parentList: str | None = Field(default=None)
     sharedTagsCount: int = Field(default=None)
 
 
