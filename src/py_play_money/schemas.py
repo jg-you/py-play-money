@@ -132,18 +132,13 @@ class Market(BaseModel):
     """Market data."""
 
     # Identifiers
-    id: CUID = Field(description="The unique identifier for the market.")
-    question: str = Field(description="Short title for the market.")
-    description: str = Field(description="Detailed description.")
-    slug: str = Field(description="URL-friendly identifier.")
+    id: CUID
+    question: str
+    description: str
+    slug: str
     tags: list[str] = Field(
-        default = [],
-        description="List of tags associated with the market."
+        default = []
     )
-    @property
-    def url(self) -> str:
-        """Generate the URL for the market."""
-        return f"https://playmoney.dev/questions/{self.id}/{self.slug}"
 
     # Dates
     createdAt: IsoDatetime
@@ -153,26 +148,17 @@ class Market(BaseModel):
     updatedAt: IsoDatetime | None = Field(default=None)
 
     # User IDs
-    createdBy: CUID = Field(
-        description="ID of the user who created the market."
-    )
-    ammAccountId: CUID = Field(
-        description="ID of the Automated Market Maker associated with the market."
-    )
-    clearingAccountId: CUID = Field(
-        description="ID of the clearing account for the market."
-    )
-    canceledById: CUID | None = Field(
-        description="ID of the user who canceled the market.",
-        default=None
-    )
+    createdBy: CUID
+    ammAccountId: CUID
+    clearingAccountId: CUID
+    canceledById: CUID | None = None
 
     # Activity
     commentCount: int = Field(ge=0)
     uniqueTradersCount: int = Field(ge=0)
     uniquePromotersCount: int = Field(ge=0)
     liquidityCount: int | None = Field(ge=0, default=None)
-    parentListId: CUID | None = Field(default=None)
+    parentListId: CUID | None = None
 
     # Validators
     @model_validator(mode='after')
@@ -201,7 +187,7 @@ class Option(LiteOption):
     name: str
     marketId: CUID
     color: str
-    liquidityProbability: float = Field(ge=0, le=1, description="Liquidity probability (0-1).")
+    liquidityProbability: float = Field(ge=0, le=1)
     createdAt: IsoDatetime
     updatedAt: IsoDatetime
 
@@ -217,7 +203,7 @@ class Option(LiteOption):
 class User(BaseModel):
     """User profile."""
 
-    id: CUID = Field(description="Unique identifier for the user.")
+    id: CUID
     username: str
     displayName: str
     avatarUrl: str | None = Field(default=None)
@@ -226,7 +212,7 @@ class User(BaseModel):
     website: str | None = Field(default=None)
     bio: str | None = Field(default=None)
     timezone: str
-    primaryAccountId: CUID = Field(description="ID of the user's primary account.")
+    primaryAccountId: CUID
     role: UserRoleType
     referralCode: str | None = Field(default=None)
     referredBy: CUID | None = Field(default=None)
@@ -349,15 +335,15 @@ class PageInfo(BaseModel):
 class Position(BaseModel):
     """Position on a market."""
 
-    id: CUID = Field(description="Unique identifier for the position.")
-    accountId: CUID = Field(description="ID of the account holding the position.")
-    marketId: CUID = Field(description="ID of the market for the position.")
-    optionId: CUID = Field(description="ID of the option in the position.")
-    cost: float = Field(description="Cost of the position.")
-    quantity: float = Field(description="Quantity of the position.")
-    value: float = Field(description="Current value of the position.", ge=0)
-    createdAt: IsoDatetime = Field(description="Timestamp when the position was created.")
-    updatedAt: IsoDatetime = Field(description="Timestamp when the position was last updated.")
+    id: CUID
+    accountId: CUID
+    marketId: CUID
+    optionId: CUID
+    cost: float
+    quantity: float
+    value: float = Field(ge=0)
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime
     account: Account
     market: Market
     option: Option
