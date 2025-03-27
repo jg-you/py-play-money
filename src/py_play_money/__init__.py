@@ -3,13 +3,11 @@ Python SDK for playmoney.dev's API.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
-# Schemas
-# Other functionalities
-from py_play_money.adapters import adapters
-from py_play_money.api import Client
-from py_play_money.schemas.activity import Activity, ActivityType, NotificationType
+from py_play_money._version import __version__
+from py_play_money.api2 import PMClient
+from py_play_money.schemas.activity import ActivityType, Notification, NotificationType
 from py_play_money.schemas.base_types import CUID, IsoDatetime
-from py_play_money.schemas.comments import Comment, CommentEntityType, Reaction
+from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
 from py_play_money.schemas.finance import (
     AssetType,
     Position,
@@ -19,34 +17,15 @@ from py_play_money.schemas.finance import (
 )
 from py_play_money.schemas.market import (
     ContributionPolicyType,
-    FullMarket,
-    LiteOption,
     Market,
     MarketList,
+    MarketOption,
+    MarketOptionPosition,
     MarketResolution,
-    Option,
 )
 from py_play_money.schemas.user import Account, AccountType, User, UserRoleType
 from py_play_money.schemas.utils import GraphTick, PageInfo
 
 __all__ = [
-    # Types
-    'IsoDatetime', 'CUID',
-    'AccountType', 'ActivityType', 'AssetType', 'CommentEntityType',
-    'ContributionPolicyType', 'NotificationType', 'TransactionType', 'UserRoleType',
-
-    # Market models
-    'Market', 'FullMarket', 'Option', 'LiteOption', 'MarketResolution', 'MarketList',
-
-    # User models
-    'User', 'Account',
-
-    # Finance models
-    'Position', 'Transaction', 'TransactionEntry',
-
-    # Social models
-    'Comment', 'Reaction', 'Activity',
-
-    # Utility models
-    'GraphTick', 'PageInfo'
+    'PMClient',
 ]

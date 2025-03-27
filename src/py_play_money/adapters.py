@@ -6,11 +6,11 @@ Author: JGY <jean.gabriel.young@gmail.com>
 
 from pydantic import TypeAdapter
 
-from py_play_money.schemas import Activity, Comment, Market, Option, Position, User
+# from py_play_money.schemas import Activity, Comment, Market, Option, Position, User
 
-activity_list_adapter = TypeAdapter(list[Activity])
-market_list_adapter = TypeAdapter(list[Market])
-option_list_adapter = TypeAdapter(list[Option])
-comment_list_adapter = TypeAdapter(list[Comment])
-position_list_adapter = TypeAdapter(list[Position])
-user_list_adapter = TypeAdapter(list[User])
+# activity_list_adapter = TypeAdapter(list[Activity])
+# market_list_adapter = TypeAdapter(list[Market])
+# option_list_adapter = TypeAdapter(list[Option])
+# comment_list_adapter = TypeAdapter(list[Comment])
+# position_list_adapter = TypeAdapter(list[Position])
+# user_list_adapter = TypeAdapter(list[User])

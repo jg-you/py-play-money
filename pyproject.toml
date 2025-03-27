@@ -25,6 +25,6 @@ build-backend = "hatchling.build"
 
 [tool.ruff]
 line-length = 100
-lint.select = ["C", "E", "F", "B", "I", "N", "UP", "D", "T20", "W293"]
+lint.select = ["C", "E", "F", "B", "I", "N", "UP", "PERF", "PL", "D", "T20", "W"]
 lint.ignore = ["D203", "D212", "N803", "N815", "D107"]
 # We ignore N803 and N815 to stick to the same naming convention as the API

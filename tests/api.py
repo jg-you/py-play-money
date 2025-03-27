@@ -3,20 +3,22 @@ Tests for the API client.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
-import py_play_money as ppm
+from py_play_money import PMClient
 
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 
 def test_api_init():
     """Test the initialization of the API client."""
-    client = ppm.Client()
+    client = PMClient()
     assert client.base_url is not None
 
 
 def test_api_get_markets():
     """Test the retrieval of markets."""
-    client = ppm.Client()
-    market = client.market.get(market_id=TEST_MARKET_ID)
+    client = PMClient()
+    market = client.market(market_id=TEST_MARKET_ID)
+
+    market = client.market(market_id=TEST_MARKET_ID).get()
     assert market is not None
     assert market.id == TEST_MARKET_ID
     assert market.slug == "playmoney-api-python-wrapper-in-january-2025"

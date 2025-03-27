@@ -5,21 +5,35 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import field_validator
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime
-from py_play_money.schemas.user import User
+from py_play_money.schemas.base_types import CUID, IsoDatetime, CamelCaseModel, DateModel
 
 CommentEntityType = Literal["MARKET", "COMMENT"]
 
-class Reaction(BaseModel):
+
+class Comment(DateModel):
+    """Comment on a market."""
+
+    entity_type: CommentEntityType
+    id: CUID
+    content: str
+    edited: bool = False
+    author_id: CUID
+    parent_id: CUID | None = None
+    hidden: bool = False
+    entity_id: CUID
+    createdAt: IsoDatetime
+    updatedAt: IsoDatetime | None = None
+
+
+class CommentReaction(CamelCaseModel):
     """Reaction to comments."""
 
     id: CUID
     emoji: str
-    userId: CUID
-    commentId: CUID
-    user: User
+    user_id: CUID
+    comment_id: CUID
 
     @field_validator('emoji', mode='after')
     @classmethod
@@ -27,20 +41,3 @@ class Reaction(BaseModel):
         """Validate that the emoji is a valid code."""
         if not value.startswith(":") or not value.endswith(":"):
             raise ValueError("Emoji must be in the format ':emoji_code:'")
-
-
-class Comment(BaseModel):
-    """Comment on a market."""
-
-    id: CUID
-    content: str
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
-    edited: bool
-    authorId: CUID
-    parentId: CUID | None = Field(default=None)
-    hidden: bool
-    entityId: CUID
-    entityType: CommentEntityType
-    author: User
-    reactions: list[Reaction] = Field(default=[])

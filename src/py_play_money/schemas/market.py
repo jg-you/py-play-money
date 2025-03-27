@@ -3,12 +3,12 @@ Market-related schemas.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
+import re
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import Field, field_validator
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime
-from py_play_money.schemas.user import User
+from py_play_money.schemas.base_types import CUID, IsoDatetime, DateModel
 
 ContributionPolicyType = Literal[
     "PUBLIC",
@@ -18,7 +18,7 @@ ContributionPolicyType = Literal[
 ]
 
 
-class Market(BaseModel):
+class Market(DateModel):
     """Market data."""
 
     # Identifiers
@@ -26,114 +26,92 @@ class Market(BaseModel):
     question: str
     description: str
     slug: str
-    tags: list[str] = Field(
-        default=[]
-    )
+    parentList_id: CUID | None = None
+    tags: list[str] = []
 
     # Dates
-    createdAt: IsoDatetime
-    closeDate: IsoDatetime
-    resolvedAt: IsoDatetime | None = Field(default=None)
-    canceledAt: IsoDatetime | None = Field(default=None)
-    updatedAt: IsoDatetime | None = Field(default=None)
+    created_at: IsoDatetime
+    closeDate: IsoDatetime | None = None
+    resolved_at: IsoDatetime | None = None
+    canceled_at: IsoDatetime | None = None
+    updated_at: IsoDatetime | None = None
 
     # User IDs
-    createdBy: CUID
-    ammAccountId: CUID
-    clearingAccountId: CUID
-    canceledById: CUID | None = None
+    created_by: CUID
+    amm_account_id: CUID
+    clearing_account_id: CUID
+    canceled_by_id: CUID | None = None
 
     # Activity
     commentCount: int = Field(ge=0)
     uniqueTradersCount: int = Field(ge=0)
     uniquePromotersCount: int = Field(ge=0)
     liquidityCount: int | None = Field(ge=0, default=None)
-    parentListId: CUID | None = None
-
-    # Validators
-    @model_validator(mode='after')
-    def validate_creation_date(self):
-        """Validate that the creation date is not after the close date."""
-        if self.createdAt > self.closeDate:
-            raise ValueError("Creation date cannot be after the close date.")
-        return self
 
 
-class LiteOption(BaseModel):
-    """Option with only ID and probability."""
-
-    id: CUID
-    probability: int | None = Field(
-        ge=0,
-        le=100,
-        description="Probability percentage (0-100).",
-        default=None  # for compatibility with older versions
-    )
-
-
-class Option(LiteOption):
-    """Option for a market."""
-
-    name: str
-    marketId: CUID
-    color: str
-    liquidityProbability: float = Field(ge=0, le=1)
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
-
-    @field_validator('color', mode='after')
-    @classmethod
-    def validate_color(cls, value):
-        """Validate that the color is a valid hex color code."""
-        if not value.startswith("#") or len(value) != 7:
-            raise ValueError("Color must be a valid hex code (e.g., '#FFFFFF').")
-        return value
-
-
-class MarketResolution(BaseModel):
-    """Resolution for a market."""
-
-    id: CUID
-    marketId: CUID
-    resolvedById: CUID
-    resolutionId: CUID
-    supportingLink: str | None = Field(default=None)
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
-    resolution: Option
-    resolvedBy: User
-    market: Market
-
-
-class FullMarket(Market):
-    """Full market data including options, users."""
-
-    def __init__(self, **data):
-        """Remove optional fields for some use cases of the model."""
-        super().__init__(**data)
-        for field in self.model_fields:
-            if field not in self.model_fields_set:
-                if field in {"resolvedBy", "parentList", "sharedTagsCount", "options", "marketResolution"}:
-                    self.__dict__.pop(field, None)
-
-    user: User
-    options: list[Option] = Field(default=[])
-    marketResolution: MarketResolution | None = Field(default=None)
-    resolvedBy: User | None = Field(default=None)
-    parentList: str | None = Field(default=None)
-    sharedTagsCount: int = Field(default=None)
-
-
-class MarketList(BaseModel):
+# Note: This is renamed from `List` to `MarketList` to avoid conflicts with the `List` type.
+class MarketList(DateModel):
     """List of markets."""
 
     id: CUID
     title: str
     slug: str
-    description: str
-    ownerId: CUID
-    contributionPolicy: ContributionPolicyType
-    contributionReview: bool
-    tags: list[str]
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
+    description: str | None = None
+    owner_id: CUID
+    contribution_policy: ContributionPolicyType
+    contribution_review: bool | None = None
+    tags: list[str] = []
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
+
+
+class MarketResolution(DateModel):
+    """Resolution for a market."""
+
+    id: CUID
+    market_id: CUID
+    resolved_by_id: CUID
+    resolution_id: CUID
+    supportingLink: str | None = None
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
+
+
+class MarketOption(DateModel):
+    """Option for a market."""
+
+    id: CUID
+    name: str
+    market_id: CUID
+    color: str
+    liquidity_probability: float = Field(ge=0, le=1)
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
+    probability: int | None = Field(
+        ge=0,
+        le=100,
+        description="Probability percentage (0-100).",
+        default=None
+    )
+
+    @field_validator('color', mode='after')
+    @classmethod
+    def validate_color(cls, value):
+        """Validate that the color is a valid hex color code."""
+        if not re.match(r'^#[0-9A-Fa-f]{6}$', value):
+            raise ValueError("Color must be a valid hex code (e.g., '#FFFFFF').")
+        return value
+
+
+class MarketOptionPosition(DateModel):
+    """Position on a market."""
+
+    id: CUID
+    account_id: CUID
+    market_id: CUID
+    option_id: CUID
+    cost: float
+    quantity: float
+    value: float = Field(ge=0)
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None

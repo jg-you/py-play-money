@@ -5,45 +5,40 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
-from pydantic import BaseModel, Field
-
-from .base_types import CUID, IsoDatetime
+from py_play_money.schemas.base_types import CUID, IsoDatetime, DateModel
 
 AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
 
 UserRoleType = Literal["USER", "ADMIN"]
 
 
-class User(BaseModel):
+class User(DateModel):
     """User profile."""
 
+    role: UserRoleType
     id: CUID
     username: str
-    displayName: str
-    avatarUrl: str | None = Field(default=None)
-    twitterHandle: str | None = Field(default=None)
-    discordHandle: str | None = Field(default=None)
-    website: str | None = Field(default=None)
-    bio: str | None = Field(default=None)
+    display_name: str
+    avatar_url: str | None
+    twitter_handle: str | None
+    discord_handle: str | None
+    website: str | None
+    bio: str | None
     timezone: str
-    primaryAccountId: CUID
-    role: UserRoleType
-    referralCode: str | None = Field(default=None)
-    referredBy: CUID | None = Field(default=None)
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
+    primary_account_id: CUID
+    referral_code: str | None
+    referred_by: CUID | None
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
 
 
-
-class Account(BaseModel):
+class Account(DateModel):
     """Account for a user."""
 
     type: AccountType
     id: CUID
-    internalType: str | None = None
-    userId: CUID | None = None
-    marketId: CUID | None = None
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime
-    # user: User | None = None
-    # market: Market | None = None
+    internal_type: str | None = None
+    user_id: CUID | None = None
+    market_id: CUID | None = None
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
