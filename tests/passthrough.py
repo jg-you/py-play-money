@@ -60,8 +60,8 @@ class ApiPassthroughTester:
         else:
             self.compare_api_model(api_data, resource.model_dump(by_alias=True))
 
-@pytest.fixture
-def api_tester(vcr_record, compare_api_model, client):
+@pytest.fixture(name="api_tester")
+def api_tester_fixture(vcr_record, compare_api_model, client):
     """Fixture providing an ApiPassthroughTester instance."""
     return ApiPassthroughTester(
         vcr_record=vcr_record,
