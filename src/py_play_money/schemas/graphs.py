@@ -45,5 +45,5 @@ class UserGraphTick(CamelCaseModel):
         return self
 
 # Type adapters for serialization
-market_graph_tick_list_adapter = TypeAdapter(list[MarketGraphTick])
-user_graph_tick_list_adapter = TypeAdapter(list[UserGraphTick])
+market_graph_ticks_adapter = TypeAdapter(list[MarketGraphTick])
+user_graph_ticks_adapter = TypeAdapter(list[UserGraphTick])

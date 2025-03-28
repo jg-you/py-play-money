@@ -5,6 +5,8 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
+from pydantic import TypeAdapter
+
 from py_play_money.schemas.base_types import (
     CUID,
     CamelCaseModel,
@@ -78,6 +80,7 @@ class Subtotals(ConstantsTypeModel):
     liquidity_returned: float = 0.0
     liquidity_volume_bonus: float = 0.0
     trade_buy: float = 0.0
+    trade_loss: float = 0.0
     trade_win: float = 0.0
     trade_sell: float = 0.0
 
@@ -105,3 +108,20 @@ class UserBalance(DateModel):
     #             f"{self.total} != {total_subtotals}"
     #         )
     #     return self
+
+class MarketBalance(DateModel):
+    """Balances for a market's AMM."""
+
+    id: CUID
+    account_id: CUID
+    asset_type: Literal["MARKET_OPTION"]
+    asset_id: CUID
+    total: float
+    subtotals: Subtotals
+    market_id: CUID
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
+
+
+# Type adapters for serialization
+market_balances_adapter = TypeAdapter(list[MarketBalance])

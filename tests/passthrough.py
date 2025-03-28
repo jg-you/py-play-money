@@ -115,8 +115,19 @@ def test_market(api_tester):
         client_method="market"
     )
 
+def test_market_balance(api_tester):
+    """Test the retrieval of the AMM balance for a specific market."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_balance_passthrough.yaml",
+        client_method="market",
+        nested_method="balance",
+        api_transform=lambda data: data['amm']
+    )
+
 def test_market_balances(api_tester):
-    """Test the retrieval of the comments in a specific market."""
+    """Test the retrieval of the final balances for a specific market."""
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,
@@ -127,7 +138,7 @@ def test_market_balances(api_tester):
     )
 
 def test_market_comment(api_tester):
-    """Test the retrieval of the comments in a specific market."""
+    """Test the retrieval of the comments on a specific market."""
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,

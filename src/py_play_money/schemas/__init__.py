@@ -8,16 +8,18 @@ from py_play_money.schemas.base_types import CUID, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
 from py_play_money.schemas.finance import (
     AssetType,
+    MarketBalance,
     Transaction,
     TransactionEntry,
     TransactionType,
     UserBalance,
+    market_balances_adapter
 )
 from py_play_money.schemas.graphs import (
     MarketGraphTick,
     UserGraphTick,
-    market_graph_tick_list_adapter,
-    user_graph_tick_list_adapter,
+    market_graph_ticks_adapter,
+    user_graph_ticks_adapter,
 )
 from py_play_money.schemas.market import (
     ContributionPolicyType,

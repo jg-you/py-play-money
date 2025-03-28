@@ -39,11 +39,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return activity_list_adapter.validate_python(resp['data'])
 
-    def balance(self, **kwargs):
+    def balance(self, **kwargs) -> list[MarketBalance]:
         """Fetch market balance."""
         endpoint = f"markets/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return market_balances_adapter.validate_python(resp['data']['amm'])
 
     def balances(self, **kwargs) -> list[UserBalance]:
         """Fetch final market balances."""
@@ -61,7 +61,7 @@ class MarketWrapper(Market):
         """Fetch market graphs."""
         endpoint = f"markets/{self.id}/graph"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return market_graph_tick_list_adapter.validate_python(resp['data'])
+        return market_graph_ticks_adapter.validate_python(resp['data'])
 
     def positions(self, **kwargs) -> list[MarketOptionPositionView]:
         """Fetch market positions."""
