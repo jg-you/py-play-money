@@ -29,25 +29,42 @@ def vcr_record():
 
 @pytest.fixture
 def compare_api_model():
-    """
-    Fixture that returns a function to compare API response data with a model dump.
+    """Fixture that returns a function to compare API response data with a model dump."""
 
-    Handles camelCase to snake_case conversion and special cases like datetime fields.
-    """
-    def _normalize_datetime(dt_value):
-        """Convert different datetime representations to comparable strings."""
+    def _normalize_datetime(dt_value: Any) -> Any:
+        """
+        Convert different datetime representations to comparable strings, always returning
+        ISO 8601 with millisecond precision and a trailing 'Z' for UTC. If not a valid date,
+        return as-is.
+        """
         if dt_value is None:
             return None
+        if isinstance(dt_value, datetime):
+            return dt_value.isoformat(timespec="milliseconds").replace("+00:00", "Z")
         if isinstance(dt_value, str):
             try:
                 dt_obj = datetime.fromisoformat(dt_value.replace("Z", "+00:00"))
+                return dt_obj.isoformat(timespec="milliseconds").replace("+00:00", "Z")
             except ValueError:
                 return dt_value
-        elif isinstance(dt_value, datetime):
-            dt_obj = dt_value
-        else:
-            return dt_value
-        return dt_obj.isoformat(timespec="milliseconds").replace("+00:00", "Z")
+        return dt_value
+
+    def _normalize_data(obj: Any, dt_fields: set[str]) -> Any:
+        """
+        Recursively walk dicts/lists, normalizing values if their keys match
+        known datetime fields. Everything else is returned as-is.
+        """
+        if isinstance(obj, dict):
+            normalized = {}
+            for k, v in obj.items():
+                if k in dt_fields or k.endswith("At") or k.endswith("Date"):
+                    normalized[k] = _normalize_datetime(v)
+                else:
+                    normalized[k] = _normalize_data(v, dt_fields)
+            return normalized
+        elif isinstance(obj, list):
+            return [_normalize_data(i, dt_fields) for i in obj]
+        return obj
 
     def _compare(
         api_data: dict[str, Any],
@@ -59,35 +76,39 @@ def compare_api_model():
         Compare API response data with a model dump.
 
         Args:
-            api_data: The raw API response data (camelCase keys)
-            model_dict: The model dump (with snake_case keys translated to camelCase)
-            ignore_fields: List of fields to ignore in the comparison
-            datetime_fields: List of fields that should be treated as datetimes
+            api_data (dict): The raw API response data (camelCase keys).
+            model_dict (dict): The model dump (camelCase).
+            ignore_fields (list): Top-level fields to ignore in the comparison.
+            datetime_fields (list): Fields to treat as datetimes (in addition to those ending in 'At'/'Date').
 
+        Raises:
+            AssertionError: If any fields mismatch or if extra/missing fields are found.
         """
         ignore_fields = ignore_fields or []
-        if datetime_fields is None:
-            datetime_fields = [k for k in api_data if k.endswith("At") or k.endswith("Date")]
+        dt_fields = set(datetime_fields or [])
 
-        api_filtered = {k: v for k, v in api_data.items() if k not in ignore_fields}
-        model_filtered = {k: v for k, v in model_dict.items() if k not in ignore_fields}
+        # Normalize recursively
+        norm_api_data = _normalize_data(api_data, dt_fields)
+        norm_model_data = _normalize_data(model_dict, dt_fields)
 
-        for key, value in api_filtered.items():
-            assert key in model_filtered, f"Field '{key}' missing from model"
-            if key in datetime_fields and value is not None:
-                norm_api = _normalize_datetime(value)
-                norm_model = _normalize_datetime(model_filtered[key])
-                assert norm_api == norm_model, (
-                    f"Field '{key}' datetime mismatch: API: {value}, Model: {model_filtered[key]}"
-                )
-            else:
-                assert model_filtered[key] == value, (
-                    f"Field '{key}' incorrect: expected {value}, got {model_filtered[key]}"
-                )
+        # Remove ignored top-level keys
+        for field in ignore_fields:
+            norm_api_data.pop(field, None)
+            norm_model_data.pop(field, None)
 
-        extra_keys = set(model_filtered) - set(api_filtered)
+        # Compare values
+        for key, value in norm_api_data.items():
+            assert key in norm_model_data, f"Field '{key}' missing from model"
+            assert norm_model_data[key] == value, (
+                f"Field '{key}' mismatch:\n  API:   {value}\n  Model: {norm_model_data[key]}"
+            )
+
+        # Check for extra fields in the model
+        extra_keys = set(norm_model_data) - set(norm_api_data)
         assert not extra_keys, f"Model has extra fields: {extra_keys}"
-        missing_keys = set(api_filtered) - set(model_filtered)
+
+        # Check for missing fields in the model
+        missing_keys = set(norm_api_data) - set(norm_model_data)
         assert not missing_keys, f"Model is missing fields: {missing_keys}"
 
     return _compare
