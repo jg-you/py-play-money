@@ -71,6 +71,13 @@ class CamelCaseModel(BaseModel):
         )
     }
 
+class ConstantsTypeModel(BaseModel):
+    """Base model that converts between snake_case (Python) and CONSTANT_CASE (API)."""
+
+    model_config = {
+        "populate_by_alias": True,
+        "alias_generator": lambda field_name: field_name.upper()
+    }
 
 class DateModel(CamelCaseModel):
     """Base model for entities with created_at / updated_at pairs."""

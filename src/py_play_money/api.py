@@ -85,11 +85,11 @@ class UserWrapper(User):
         super().__init__(**user_data.model_dump(by_alias=True))
         self._client = client
 
-    def balance(self, **kwargs):
+    def balance(self, **kwargs) -> UserBalance:
         """Fetch user balance."""
         endpoint = f"users/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return UserBalance(**resp['data']['balance'])
 
     def graph(self, **kwargs):
         """Fetch user graphs."""

@@ -5,9 +5,11 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
-from pydantic import Json
+from pydantic import model_validator
 
-from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
+from py_play_money.schemas.base_types import (
+    CUID, CamelCaseModel, ConstantsTypeModel, DateModel, IsoDatetime
+)
 
 AssetType = Literal["MARKET_OPTION", "CURRENCY"]
 
@@ -60,15 +62,40 @@ class TransactionEntry(CamelCaseModel):
     created_at: IsoDatetime
 
 
-class Balance(DateModel):
-    """Account balance."""
+class Subtotals(ConstantsTypeModel):
+    """Balance subtotals."""
 
-    asset_type: AssetType
+    trade_buy: float = 0.0
+    trade_win: float = 0.0
+    trade_sell: float = 0.0
+    daily_trade_bonus: float = 0.0
+    daily_market_bonus: float = 0.0
+    daily_comment_bonus: float = 0.0
+    daily_liquidity_bonus: float = 0.0
+    house_signup_bonus: float = 0.0
+    liquidity_deposit: float = 0.0
+    liquidity_initialize: float = 0.0
+    liquidity_returned: float = 0.0
+    liquidity_volume_bonus: float = 0.0
+    creator_trader_bonus: float = 0.0
+
+
+class UserBalance(DateModel):
+    """Balance for a user's account."""
+
     id: CUID
     account_id: CUID
-    asset_id: Literal["PRIMARY"] | CUID
+    asset_type: Literal["CURRENCY"]
+    asset_id: Literal["PRIMARY"]
     total: float
-    subtotals: Json
-    market_id: CUID | None = None
+    subtotals: Subtotals
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
+
+    @model_validator(mode='before')
+    @classmethod
+    def process_input_data(cls, data):
+        """Remove market_id from user balance data."""
+        if isinstance(data, dict) and 'marketId' not in data:
+            data.pop('market_id', None)
+        return data

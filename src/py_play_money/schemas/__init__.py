@@ -11,6 +11,7 @@ from py_play_money.schemas.finance import (
     Transaction,
     TransactionEntry,
     TransactionType,
+    UserBalance
 )
 from py_play_money.schemas.graphs import (
     MarketGraphTick,

@@ -29,7 +29,7 @@ class ApiPassthroughTester:
         self.client = client
         self.baseurl = BASEURL
 
-    def test(self, endpoint, item_id, cassette, client_method, nested_method=None):
+    def test(self, endpoint, item_id, cassette, client_method, nested_method=None, api_transform=None):
         """
         Apply a generic passthrough test.
 
@@ -40,7 +40,7 @@ class ApiPassthroughTester:
             client_method (str): Client method name to get resource associated with endpoint
             nested_method (str, optional): Nested method name for sub-resources (e.g., "comments"
                 to test markets/[ID]/comments.)
-
+            api_transform (callable, optional): Function to transform API data before comparison.
         """
         with self.vcr.use_cassette(cassette):
             resource = getattr(self.client, client_method)(item_id)
@@ -52,6 +52,8 @@ class ApiPassthroughTester:
             resp = requests.get(f"{self.baseurl}/{endpoint}/{item_id}", timeout=10)
 
         api_data = resp.json()['data']
+        if api_transform is not None:
+            api_data = api_transform(api_data)
 
         if isinstance(resource, list):
             assert len(resource) == len(api_data), "Number of items doesn't match"
@@ -79,8 +81,9 @@ def test_comment(api_tester):
         client_method="comment"
     )
 
+# == users/ endpoints ==
 def test_user(api_tester):
-    """Test the retrieval of users."""
+    """Test the retrieval of an individual user."""
     api_tester.test(
         endpoint="users",
         item_id=TEST_USER_ID,
@@ -88,6 +91,18 @@ def test_user(api_tester):
         client_method="user"
     )
 
+def test_user_balance(api_tester):
+    """Test the retrieval of a user's balance."""
+    api_tester.test(
+        endpoint="users",
+        item_id=TEST_USER_ID,
+        cassette="user_balance_passthrough.yaml",
+        client_method="user",
+        nested_method="balance",
+        api_transform=lambda data: {
+            k: v for k, v in data['balance'].items() if k != 'marketId'
+        }
+    )
 
 # == markets/ endpoints ==
 def test_market(api_tester):
