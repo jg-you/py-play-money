@@ -51,11 +51,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return resp['data']
 
-    def comments(self, **kwargs):
+    def comments(self, **kwargs) -> list[CommentView]:
         """Fetch market comments."""
         endpoint = f"markets/{self.id}/comments"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return comment_list_adapter.validate_python(resp['data'])
 
     def graph(self, **kwargs):
         """Fetch market graphs."""

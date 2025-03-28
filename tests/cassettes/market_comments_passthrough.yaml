@@ -1,0 +1,190 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u
+  response:
+    body:
+      string: '{"data":{"id":"cm5ifmwfo001g24d2r7fzu34u","question":"Playmoney API
+        python wrapper in January 2025?","description":"<p>I plan to create a manifoldpy-style
+        wrapper for playmoney.</p><p>Resolves to YES if all basic API actions can
+        be performed using publicly available code at the end of the month.</p>","slug":"playmoney-api-python-wrapper-in-january-2025","closeDate":"2025-02-03T23:50:54.104Z","resolvedAt":"2025-02-03T23:50:54.104Z","canceledAt":null,"canceledById":null,"createdBy":"clzrooq660000a2uznm33y25b","tags":["programming","api","python","playmoney","software-development"],"ammAccountId":"cm5ifmwfo001j24d2s5b1c7t3","clearingAccountId":"cm5ifmwfo001k24d2kb21lr27","createdAt":"2025-01-04T17:02:55.669Z","updatedAt":"2025-02-03T23:50:54.104Z","commentCount":4,"uniqueTradersCount":5,"uniquePromotersCount":100,"liquidityCount":1816,"parentListId":null}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 04:14:47 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::gwgtp-1743135287233-1570cb2846f9
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/comments
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm5j3371q008elbahtrgixruy\",\"content\":\"<p>i
+        bought yes and the price went down??? is that supposed to happen</p>\",\"createdAt\":\"2025-01-05T03:59:27.086Z\",\"updatedAt\":\"2025-01-05T03:59:27.086Z\",\"edited\":false,\"authorId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"},\"reactions\":[{\"id\":\"cm5jwu6kf0001110nhcg2lbgi\",\"emoji\":\":smiling_face_with_tear:\",\"userId\":\"clzrooq660000a2uznm33y25b\",\"commentId\":\"cm5j3371q008elbahtrgixruy\",\"user\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"}}]},{\"id\":\"cm5k66wuw0001vm3cvue4luv4\",\"content\":\"<p>From
+        the Discord: it looks like they received the right amount of shares (the positions
+        tab shows 117), so the math itself isn\u2019t wrong, but I wonder what made
+        it feel like it was wrong. Will look into it more. Oh, I think it\u2019s because
+        unique trader liquidity was added and right now it drifts the prices back
+        to 50% since we haven\u2019t fully implemented liquidity using dynamic p</p>\",\"createdAt\":\"2025-01-05T22:14:05.528Z\",\"updatedAt\":\"2025-01-05T22:14:05.528Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm5rb0s4e0001argu95yjd5rp\",\"content\":\"<p>that
+        makes sense!</p>\",\"createdAt\":\"2025-01-10T22:03:40.767Z\",\"updatedAt\":\"2025-01-10T22:03:40.767Z\",\"edited\":false,\"authorId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"parentId\":\"cm5k66wuw0001vm3cvue4luv4\",\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"},\"reactions\":[]},{\"id\":\"cm5re7mgt0001hps8ancay81y\",\"content\":\"<p>FYI
+        I wanted to do some of the work this week but didn't soo I sold a bit of my
+        YES position haha</p>\",\"createdAt\":\"2025-01-10T23:32:58.878Z\",\"updatedAt\":\"2025-01-10T23:32:58.878Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]}]}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 04:14:47 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/comments
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::jj8t8-1743135287624-db45922e8fd6
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/comments
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm5j3371q008elbahtrgixruy\",\"content\":\"<p>i
+        bought yes and the price went down??? is that supposed to happen</p>\",\"createdAt\":\"2025-01-05T03:59:27.086Z\",\"updatedAt\":\"2025-01-05T03:59:27.086Z\",\"edited\":false,\"authorId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"},\"reactions\":[{\"id\":\"cm5jwu6kf0001110nhcg2lbgi\",\"emoji\":\":smiling_face_with_tear:\",\"userId\":\"clzrooq660000a2uznm33y25b\",\"commentId\":\"cm5j3371q008elbahtrgixruy\",\"user\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"}}]},{\"id\":\"cm5k66wuw0001vm3cvue4luv4\",\"content\":\"<p>From
+        the Discord: it looks like they received the right amount of shares (the positions
+        tab shows 117), so the math itself isn\u2019t wrong, but I wonder what made
+        it feel like it was wrong. Will look into it more. Oh, I think it\u2019s because
+        unique trader liquidity was added and right now it drifts the prices back
+        to 50% since we haven\u2019t fully implemented liquidity using dynamic p</p>\",\"createdAt\":\"2025-01-05T22:14:05.528Z\",\"updatedAt\":\"2025-01-05T22:14:05.528Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm5rb0s4e0001argu95yjd5rp\",\"content\":\"<p>that
+        makes sense!</p>\",\"createdAt\":\"2025-01-10T22:03:40.767Z\",\"updatedAt\":\"2025-01-10T22:03:40.767Z\",\"edited\":false,\"authorId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"parentId\":\"cm5k66wuw0001vm3cvue4luv4\",\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"},\"reactions\":[]},{\"id\":\"cm5re7mgt0001hps8ancay81y\",\"content\":\"<p>FYI
+        I wanted to do some of the work this week but didn't soo I sold a bit of my
+        YES position haha</p>\",\"createdAt\":\"2025-01-10T23:32:58.878Z\",\"updatedAt\":\"2025-01-10T23:32:58.878Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"MARKET\",\"entityId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]}]}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 04:14:48 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/comments
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::vhg95-1743135287971-f225e181ea70
+    status:
+      code: 200
+      message: OK
+version: 1
