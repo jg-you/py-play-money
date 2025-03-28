@@ -155,7 +155,7 @@ class MarketView(Market):
         return self
 
 # Type adapters for serialization
-comment_list_adapter = TypeAdapter(list[CommentView])
-market_option_position_list_adapter = TypeAdapter(list[MarketOptionPositionView])
-marketview_list_adapter = TypeAdapter(list[MarketView])
+comments_adapter = TypeAdapter(list[CommentView])
+market_option_positions_adapter = TypeAdapter(list[MarketOptionPositionView])
+market_views_adapter = TypeAdapter(list[MarketView])
 user_balances_adapter = TypeAdapter(list[UserBalanceView])

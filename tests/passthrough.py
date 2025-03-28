@@ -156,7 +156,7 @@ def test_market_positions(api_tester):
             new_data.append(d)
             new_data[-1]['account']['userPrimary'] = d['account'].pop('user')
         return new_data
-    
+
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,

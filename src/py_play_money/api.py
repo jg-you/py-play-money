@@ -55,7 +55,7 @@ class MarketWrapper(Market):
         """Fetch market comments."""
         endpoint = f"markets/{self.id}/comments"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return comment_list_adapter.validate_python(resp['data'])
+        return comments_adapter.validate_python(resp['data'])
 
     def graph(self, **kwargs) -> list[MarketGraphTick]:
         """Fetch market graphs."""
@@ -67,13 +67,13 @@ class MarketWrapper(Market):
         """Fetch market positions."""
         endpoint = f"markets/{self.id}/positions"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return market_option_position_list_adapter.validate_python(resp['data'])
+        return market_option_positions_adapter.validate_python(resp['data'])
 
     def related(self, **kwargs) -> list[MarketView]:
         """Fetch related markets."""
         endpoint = f"markets/{self.id}/related"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return marketview_list_adapter.validate_python(resp['data'])
+        return market_views_adapter.validate_python(resp['data'])
 
 
 class UserWrapper(User):

@@ -34,8 +34,8 @@ from py_play_money.schemas.views import (
     MarketOptionPositionView,
     MarketView,
     UserBalanceView,
-    comment_list_adapter,
-    market_option_position_list_adapter,
-    marketview_list_adapter,
-    user_balances_adapter
+    comments_adapter,
+    market_option_positions_adapter,
+    market_views_adapter,
+    user_balances_adapter,
 )

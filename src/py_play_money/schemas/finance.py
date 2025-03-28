@@ -4,9 +4,6 @@ All finance-related schemas.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
-from typing_extensions import Self
-
-from pydantic import model_validator
 
 from py_play_money.schemas.base_types import (
     CUID,
@@ -108,17 +105,3 @@ class UserBalance(DateModel):
     #             f"{self.total} != {total_subtotals}"
     #         )
     #     return self
-
-
-# class MarketBalances(DateModel):
-#     """Final balances for a market."""
-
-#     id: CUID
-#     account_id: CUID
-#     asset_type: Literal["CURRENCY"]
-#     asset_id: Literal["PRIMARY"]
-#     total: float
-#     subtotals: Subtotals
-#     market_id: CUID
-#     created_at: IsoDatetime
-#     updated_at: IsoDatetime | None = None
