@@ -92,10 +92,11 @@ class UserWrapper(User):
         resp = self._client.execute_get(endpoint, **kwargs)
         return UserBalance(**resp['data']['balance'])
 
-    def graph(self, **kwargs):
+    def graph(self, **kwargs) -> list[UserGraphTick]:
         """Fetch user graphs."""
-        resp = self._client.execute_get(f"users/{self.id}/graph", **kwargs)
-        return resp['data']
+        endpoint = f"users/{self.id}/graph"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return user_graph_ticks_adapter.validate_python(resp['data'])
 
     def positions(self, **kwargs):
         """Fetch current user positions."""

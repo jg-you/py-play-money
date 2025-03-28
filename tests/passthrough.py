@@ -107,6 +107,16 @@ def test_user_balance(api_tester):
         api_transform=lambda data: data['balance']
     )
 
+def test_user_graph(api_tester):
+    """Test the retrieval of a user's graph."""
+    api_tester.test(
+        cassette="user_graph_passthrough.yaml",
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
+        nested_method="graph",
+    )
+
 # == markets/ endpoints ==
 
 def test_markets(vcr_record, compare_api_model, client):
@@ -131,8 +141,6 @@ def test_markets(vcr_record, compare_api_model, client):
         )
         api_data = resp.json()['data']
         api_page_info = resp.json()['pageInfo']
-        print(page_info)
-        print(api_page_info)
         assert len(markets) == len(api_data), "Number of items doesn't match"
         for i, item in enumerate(markets):
             compare_api_model(api_data[i], item.model_dump(by_alias=True))

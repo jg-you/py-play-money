@@ -14,6 +14,5 @@ List of API quirks I worked around
   data.balances instead of data
 * Subtotals:
   In general, subtotals have a random assortment of items. I decided to include them all
-  and set unused one to zero
-
-  I'm also noting that user subtotals don't add up to the total.
+  and set unused one to zero.
+  I'm also noting that user subtotals don't add up to the total
