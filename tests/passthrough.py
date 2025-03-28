@@ -9,7 +9,7 @@ BASEURL = "https://api.playmoney.dev/v1"
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 TEST_USER_ID = "clzrooq660000a2uznm33y25b"
 
-def perform_test(vcr_record, compare_api_model, client, endpoint, item_id, cassette, method_name): # noqa: PLR0913, R0913, R0917, CO301
+def perform_test(vcr_record, compare_api_model, client, endpoint, item_id, cassette, method_name): # noqa: PLR0913
     """Apply a generic passthrough test."""
     with vcr_record.use_cassette(cassette):
         item = getattr(client, method_name)(item_id)
