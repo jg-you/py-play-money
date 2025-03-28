@@ -1,5 +1,5 @@
 """
-Tests for the API client.
+Tests every end point of client.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
@@ -18,7 +18,6 @@ def test_init():
     """Test the initialization of the API client."""
     client = PMClient()
     assert client.base_url is not None
-
 
 def test_market(vcr_record):
     """Test the retrieval of markets."""
@@ -53,9 +52,3 @@ def test_market(vcr_record):
         ]
         assert market.parent_list_id is None
 
-
-# @my_vcr.use_cassette('post_endpoint.yaml')
-# def test_post_endpoint():
-#     response = my_sdk.post_endpoint(payload={'key': 'value'})
-#     # Verify response content matches expected JSON structure
-#     assert response.json()['key'] == 'value'

@@ -9,9 +9,7 @@ authors = [
 requires-python = ">=3.10"
 dependencies = [
     "pydantic>=2.10.6",
-    "pytest>=8.3.5",
     "requests>=2.32.3",
-    "ruff>=0.11.2",
 ]
 
 [project.optional-dependencies]
@@ -28,8 +26,13 @@ line-length = 100
 lint.select = ["C", "E", "F", "B", "I", "N", "UP", "PERF", "PL", "D", "T20", "W"]
 lint.ignore = ["D203", "D212", "N803", "N815", "D107"]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["PLR2004"]
+
 [dependency-groups]
 dev = [
+    "pytest>=8.3.5",
     "vcrpy>=7.0.0",
+    "ruff>=0.11.2",
+    "black>=25.1.0",
 ]
-# We ignore N803 and N815 to stick to the same naming convention as the API

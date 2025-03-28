@@ -9,6 +9,13 @@ from typing import Any
 import pytest
 import vcr
 
+from py_play_money import PMClient
+
+
+@pytest.fixture
+def client():
+    """Fixture to create a PMClient instance."""
+    return PMClient()
 
 @pytest.fixture(scope="session")
 def vcr_record():
@@ -24,7 +31,7 @@ def vcr_record():
 def compare_api_model():
     """
     Fixture that returns a function to compare API response data with a model dump.
-    
+
     Handles camelCase to snake_case conversion and special cases like datetime fields.
     """
     def _normalize_datetime(dt_value):
@@ -50,7 +57,7 @@ def compare_api_model():
     ) -> None:
         """
         Compare API response data with a model dump.
-        
+
         Args:
             api_data: The raw API response data (camelCase keys)
             model_dict: The model dump (with snake_case keys translated to camelCase)
