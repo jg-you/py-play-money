@@ -14,13 +14,13 @@ from py_play_money import PMClient
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 
 
-def test_api_init():
+def test_init():
     """Test the initialization of the API client."""
     client = PMClient()
     assert client.base_url is not None
 
 
-def test_api_market(vcr_record):
+def test_market(vcr_record):
     """Test the retrieval of markets."""
     client = PMClient()
     with vcr_record.use_cassette('market.yaml'):
@@ -31,6 +31,11 @@ def test_api_market(vcr_record):
         assert market.amm_account_id == "cm5ifmwfo001j24d2s5b1c7t3"
         assert market.slug == "playmoney-api-python-wrapper-in-january-2025"
         assert market.question == "Playmoney API python wrapper in January 2025?"
+        assert market.description == (
+            "<p>I plan to create a manifoldpy-style "
+            "wrapper for playmoney.</p><p>Resolves to YES if all basic API actions can "
+            "be performed using publicly available code at the end of the month.</p>"
+        )
         assert market.created_at == datetime(2025, 1, 4, 17, 2, 55, 669000, tzinfo=timezone.utc)
         assert market.updated_at == datetime(2025, 2, 3, 23, 50, 54, 104000, tzinfo=timezone.utc)
         assert market.close_date == datetime(2025, 2, 3, 23, 50, 54, 104000, tzinfo=timezone.utc)
