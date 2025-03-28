@@ -149,9 +149,11 @@ class UserResource:
         resp = self._client.execute_get(endpoint, **kwargs)
         return UserWrapper(self._client, User(**resp['data']))
 
-    # def by_referral(self, code: str, **kwargs) -> UserWrapper:
-    #     resp = self.client.execute_get(f"users/referral/{code}", **kwargs)
-    #     return UserWrapper(self.client, User(**resp['data']))
+    def by_referral(self, referral_code: str, **kwargs) -> UserWrapper:
+        """Fetch a user by username."""
+        endpoint = f"users/referral/{referral_code}"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return UserWrapper(self._client, User(**resp['data']))
 
 
 class PMClient:

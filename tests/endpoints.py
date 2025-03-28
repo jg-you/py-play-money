@@ -9,7 +9,8 @@ from py_play_money import PMClient
 
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 TEST_USER_ID = "clzrooq660000a2uznm33y25b"
-TEST_USERNAME = "jgyou"
+TEST_USER_USERNAME = "jgyou"
+TEST_USER_REFERRAL_CODE = "J2P2"
 
 def test_init():
     """Test the initialization of the API client."""
@@ -57,7 +58,8 @@ def test_user(vcr_record, client):
         users = [
             client.user(TEST_USER_ID),
             client.user.by_id(TEST_USER_ID),
-            client.user.by_username(TEST_USERNAME)
+            client.user.by_username(TEST_USER_USERNAME),
+            client.user.by_referral(TEST_USER_REFERRAL_CODE)
         ]
         for u in users:
             u = client.user(TEST_USER_ID)

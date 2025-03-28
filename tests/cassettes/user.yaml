@@ -34,7 +34,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:23 GMT
+      - Fri, 28 Mar 2025 03:07:48 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -48,7 +48,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::k5hp6-1743131003437-97dd917a6038
+      - iad1::iad1::bj4bp-1743131268327-a722b549c741
     status:
       code: 200
       message: OK
@@ -87,7 +87,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:23 GMT
+      - Fri, 28 Mar 2025 03:07:48 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -101,7 +101,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::8qm9l-1743131003859-d6a766db47d5
+      - iad1::iad1::sq8sn-1743131268655-ffb52048a92f
     status:
       code: 200
       message: OK
@@ -140,7 +140,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:24 GMT
+      - Fri, 28 Mar 2025 03:07:48 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -154,7 +154,60 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::vv2sd-1743131004313-06ab1977ae1d
+      - iad1::iad1::d7nq8-1743131268862-d71cd1ff7564
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/referral/J2P2
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 03:07:49 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/referral/[code]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::7vw7x-1743131269052-1edafb70b44e
     status:
       code: 200
       message: OK
@@ -193,7 +246,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:24 GMT
+      - Fri, 28 Mar 2025 03:07:49 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -207,7 +260,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::pp6ng-1743131004520-2c38699668d9
+      - iad1::iad1::mxs8s-1743131269373-201b3638164b
     status:
       code: 200
       message: OK
@@ -246,7 +299,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:24 GMT
+      - Fri, 28 Mar 2025 03:07:49 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -260,7 +313,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::mts8h-1743131004822-76766e76f9d7
+      - iad1::iad1::gc2dm-1743131269571-ed8d1f48aa9d
     status:
       code: 200
       message: OK
@@ -299,7 +352,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:03:25 GMT
+      - Fri, 28 Mar 2025 03:07:49 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -313,7 +366,60 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::cx6s9-1743131005065-c8e6c393089e
+      - iad1::iad1::7mk2q-1743131269945-6e101e6f7b29
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 03:07:50 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::njr6x-1743131270119-3e16b1c9b48d
     status:
       code: 200
       message: OK
