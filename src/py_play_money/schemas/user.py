@@ -5,7 +5,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime, DateModel
+from py_play_money.schemas.base_types import CUID, DateModel, IsoDatetime
 
 AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
 

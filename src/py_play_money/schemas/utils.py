@@ -11,14 +11,14 @@ from py_play_money.schemas.base_types import IsoDatetime
 class GraphTick(BaseModel):
     """Tick for graph data."""
 
-    startAt: IsoDatetime
-    endAt: IsoDatetime
+    start_at: IsoDatetime
+    end_at: IsoDatetime
     # options: list[LiteOption]
 
 
 class PageInfo(BaseModel):
     """Cursor for pagination."""
 
-    hasNextPage: bool = False
-    endCursor: str | None = None
+    has_next_page: bool = False
+    end_cursor: str | None = None
     total: int = Field(ge=0)

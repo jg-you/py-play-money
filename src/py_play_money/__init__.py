@@ -4,8 +4,8 @@ Python SDK for playmoney.dev's API.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 from py_play_money._version import __version__
-from py_play_money.api2 import PMClient
-from py_play_money.schemas.activity import ActivityType, Notification, NotificationType
+from py_play_money.api import PMClient
+from py_play_money.schemas.activity import Activity, ActivityType, Notification, NotificationType
 from py_play_money.schemas.base_types import CUID, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
 from py_play_money.schemas.finance import (

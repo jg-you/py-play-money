@@ -27,4 +27,9 @@ build-backend = "hatchling.build"
 line-length = 100
 lint.select = ["C", "E", "F", "B", "I", "N", "UP", "PERF", "PL", "D", "T20", "W"]
 lint.ignore = ["D203", "D212", "N803", "N815", "D107"]
+
+[dependency-groups]
+dev = [
+    "vcrpy>=7.0.0",
+]
 # We ignore N803 and N815 to stick to the same naming convention as the API

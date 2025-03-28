@@ -7,8 +7,11 @@ import logging
 
 import requests
 
-from py_play_money.schemas import User
-from py_play_money import __version__
+from py_play_money._version import __version__
+from py_play_money.adapters import (
+    activity_list_adapter,
+)
+from py_play_money.schemas import Activity, Market, User
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -21,13 +24,64 @@ logger.addHandler(handler)
 logger.setLevel(logging.WARNING)
 
 
+class MarketWrapper(Market):
+    """
+    Combines the Market model with API functions.
+    """
+
+    def __init__(self, client: 'PMClient', market_data: Market):
+        super().__init__(**market_data.model_dump(by_alias=True))
+        self._client = client
+
+    def activity(self, **kwargs) -> list[Activity]:
+        """Fetch market activity."""
+        endpoint = f"markets/{self.id}/activity"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return activity_list_adapter.validate_python(resp['data'])
+
+    def balance(self, **kwargs):
+        """Fetch market balance."""
+        endpoint = f"markets/{self.id}/balance"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+    def balances(self, **kwargs):
+        """Fetch market balances."""
+        endpoint = f"markets/{self.id}/balances"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+    def comments(self, **kwargs):
+        """Fetch market comments."""
+        endpoint = f"markets/{self.id}/comments"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+    def graph(self, **kwargs):
+        """Fetch market graphs."""
+        endpoint = f"markets/{self.id}/graph"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+    def positions(self, **kwargs):
+        """Fetch market positions."""
+        endpoint = f"markets/{self.id}/positions"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+    def related(self, **kwargs):
+        """Fetch related markets."""
+        endpoint = f"markets/{self.id}/related"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']
+
+
 class UserWrapper(User):
     """
-    User wrapper.
-
     Combines the User model with API functions.
     """
-    def __init__(self, client, user_data: User):
+
+    def __init__(self, client: 'PMClient', user_data: User):
         super().__init__(**user_data.model_dump(by_alias=True))
         self._client = client
 
@@ -48,13 +102,33 @@ class UserWrapper(User):
         return resp['data']
 
 
+class MarketResource:
+    """
+    Functions to fetch market information from the API.
+    """
+
+    def __init__(self, client: 'PMClient'):
+        self._client = client
+
+    def __call__(self, market_id=None):
+        """Make MarketResource callable."""
+        if market_id:
+            return self.by_id(market_id)
+        return self
+
+    def by_id(self, market_id: str, **kwargs) -> MarketWrapper:
+        """Fetch a market by ID."""
+        endpoint = f"markets/{market_id}"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return MarketWrapper(self._client, Market(**resp['data']))
+
+
 class UserResource:
     """
-    User resources.
-    
     Functions to fetch user information from the API.
     """
-    def __init__(self, client):
+
+    def __init__(self, client: 'PMClient'):
         self._client = client
 
     def __call__(self, user_id=None):
@@ -67,13 +141,12 @@ class UserResource:
         """Fetch a user by ID."""
         endpoint = f"users/{user_id}"
         resp = self._client.execute_get(endpoint, **kwargs)
-        user_data = User(**resp['data'])
-        print(user_data)
-        return UserWrapper(self._client, user_data)
+        return UserWrapper(self._client, User(**resp['data']))
 
     def by_username(self, user_name: str, **kwargs) -> UserWrapper:
         """Fetch a user by username."""
-        resp = self._client.execute_get(f"users/username/{user_name}", **kwargs)
+        endpoint = f"users/username/{user_name}"
+        resp = self._client.execute_get(endpoint, **kwargs)
         return UserWrapper(self._client, User(**resp['data']))
 
     # def by_referral(self, code: str, **kwargs) -> UserWrapper:
@@ -116,10 +189,10 @@ class PMClient:
             self.authenticated = False
 
         # Resource proxies
-        # self._market_resource = MarketResource(self)
+        self.market = MarketResource(self)
         self.user = UserResource(self)
 
-    def execute_get(self, endpoint, **kwargs):
+    def execute_get(self, endpoint, **kwargs) -> dict:
         """
         Execute a GET request to the API.
 

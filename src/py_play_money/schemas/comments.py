@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import field_validator
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime, CamelCaseModel, DateModel
+from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
 CommentEntityType = Literal["MARKET", "COMMENT"]
 
@@ -23,8 +23,8 @@ class Comment(DateModel):
     parent_id: CUID | None = None
     hidden: bool = False
     entity_id: CUID
-    createdAt: IsoDatetime
-    updatedAt: IsoDatetime | None = None
+    created_at: IsoDatetime
+    updated_at: IsoDatetime | None = None
 
 
 class CommentReaction(CamelCaseModel):

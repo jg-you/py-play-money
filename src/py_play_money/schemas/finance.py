@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import Field, Json
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime, CamelCaseModel, DateModel
+from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
 AssetType = Literal["MARKET_OPTION", "CURRENCY"]
 

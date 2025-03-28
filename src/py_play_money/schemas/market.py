@@ -8,7 +8,7 @@ from typing import Literal
 
 from pydantic import Field, field_validator
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime, DateModel
+from py_play_money.schemas.base_types import CUID, DateModel, IsoDatetime
 
 ContributionPolicyType = Literal[
     "PUBLIC",
@@ -26,12 +26,12 @@ class Market(DateModel):
     question: str
     description: str
     slug: str
-    parentList_id: CUID | None = None
+    parent_list_id: CUID | None = None
     tags: list[str] = []
 
     # Dates
     created_at: IsoDatetime
-    closeDate: IsoDatetime | None = None
+    close_date: IsoDatetime | None = None
     resolved_at: IsoDatetime | None = None
     canceled_at: IsoDatetime | None = None
     updated_at: IsoDatetime | None = None
@@ -43,10 +43,10 @@ class Market(DateModel):
     canceled_by_id: CUID | None = None
 
     # Activity
-    commentCount: int = Field(ge=0)
-    uniqueTradersCount: int = Field(ge=0)
-    uniquePromotersCount: int = Field(ge=0)
-    liquidityCount: int | None = Field(ge=0, default=None)
+    comment_count: int = Field(ge=0)
+    unique_traders_count: int = Field(ge=0)
+    unique_promoters_count: int = Field(ge=0)
+    liquidity_count: int | None = Field(ge=0, default=None)
 
 
 # Note: This is renamed from `List` to `MarketList` to avoid conflicts with the `List` type.
@@ -72,7 +72,7 @@ class MarketResolution(DateModel):
     market_id: CUID
     resolved_by_id: CUID
     resolution_id: CUID
-    supportingLink: str | None = None
+    supporting_link: str | None = None
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
 

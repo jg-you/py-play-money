@@ -18,6 +18,7 @@ market = client.market.by_id(market_id=MARKET_ID)
 
 # Access properties of the market
 print(market.question)
+print(market.created_at)
 
 # Get various details about the market not included in the base request
 activity  = market.activity()
@@ -28,9 +29,10 @@ graph     = market.graph()
 positions = market.positions()
 related   = market.related()
 
-# List all markets, with pagination
+# List markets, with pagination
 markets, page_info = client.markets(status='all', limit=10)
 if page_info.has_next_page:
+    # get next 10 markets
     cursor = page_info.end_cursor
     markets, _ = client.markets(status='all', limit=10, cursor=cursor)
 

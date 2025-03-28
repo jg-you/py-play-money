@@ -5,22 +5,29 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 import re
 from datetime import datetime
+from typing import Any, ClassVar
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, GetCoreSchemaHandler, model_validator
+from pydantic_core import CoreSchema, core_schema
 
 
 class CUID(str):
     """CUID v1 type for string validation."""
 
-    _pattern = re.compile(r'^c[^\s-]{8,}$')
+    _pattern: ClassVar[re.Pattern] = re.compile(r'^c[^\s-]{8,}$')
 
     @classmethod
-    def __get_validators__(cls):
-        """Magic method to get validators for the CUID type."""
-        yield cls.validate
+    def __get_pydantic_core_schema__(
+        cls, _source_type: Any, _handler: GetCoreSchemaHandler
+    ) -> CoreSchema:
+        return core_schema.with_info_after_validator_function(
+            cls.validate,
+            core_schema.str_schema(),
+            serialization=core_schema.str_schema(),
+        )
 
     @classmethod
-    def validate(cls, v: str, _):
+    def validate(cls, v: str, _: Any) -> 'CUID':
         """Validate that the input is a valid CUID v1 string."""
         if not isinstance(v, str):
             raise TypeError("CUID must be a string")
@@ -36,12 +43,17 @@ class IsoDatetime(datetime):
     """Custom datetime class for ISO formatted strings."""
 
     @classmethod
-    def __get_validators__(cls):
-        """Magic method to get validators for the custom datetime class."""
-        yield cls.validate
+    def __get_pydantic_core_schema__(
+        cls, _source_type: Any, _handler: GetCoreSchemaHandler
+    ) -> CoreSchema:
+        schema = core_schema.datetime_schema()
+        return core_schema.with_info_after_validator_function(
+            cls.validate,
+            schema,
+        )
 
     @classmethod
-    def validate(cls, v: str, _):
+    def validate(cls, v: Any, _: Any) -> datetime:
         """Validate that the input is a valid ISO datetime string."""
         if isinstance(v, str):
             return datetime.fromisoformat(v.replace("Z", "+00:00"))
@@ -73,4 +85,3 @@ class DateModel(CamelCaseModel):
             if self.created_at >= self.updated_at:
                 raise ValueError("Creation date cannot be after the update date.")
         return self
-

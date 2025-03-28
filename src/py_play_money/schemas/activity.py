@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import HttpUrl, Json
 
-from py_play_money.schemas.base_types import CUID, IsoDatetime, DateModel
+from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
 ActivityType = Literal[
     "COMMENT",
@@ -56,7 +56,7 @@ class Notification(DateModel):
     updated_at: IsoDatetime | None = None
 
 
-# class NotificationGroup(BaseModel):
+# class NotificationGroup(DateModel):
 #     """Notification group data."""
 
 #     type: NotificationType
@@ -70,11 +70,11 @@ class Notification(DateModel):
 #     updated_at: IsoDatetime
 
 
-# class Activity(BaseModel):
-#     """Activity data."""
+class Activity(CamelCaseModel):
+    """Activity data."""
 
-#     type: ActivityType
-#     timestamp_at: IsoDatetime
+    type: ActivityType
+    timestamp_at: IsoDatetime
 
 #     # Optional fields, will be removed by mixin if not present
 #     comment: Comment | None = None
