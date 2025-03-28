@@ -4,6 +4,7 @@ All finance-related schemas.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
+from typing_extensions import Self
 
 from pydantic import model_validator
 
@@ -69,9 +70,7 @@ class TransactionEntry(CamelCaseModel):
 class Subtotals(ConstantsTypeModel):
     """Balance subtotals."""
 
-    trade_buy: float = 0.0
-    trade_win: float = 0.0
-    trade_sell: float = 0.0
+    creator_trader_bonus: float = 0.0
     daily_trade_bonus: float = 0.0
     daily_market_bonus: float = 0.0
     daily_comment_bonus: float = 0.0
@@ -81,7 +80,9 @@ class Subtotals(ConstantsTypeModel):
     liquidity_initialize: float = 0.0
     liquidity_returned: float = 0.0
     liquidity_volume_bonus: float = 0.0
-    creator_trader_bonus: float = 0.0
+    trade_buy: float = 0.0
+    trade_win: float = 0.0
+    trade_sell: float = 0.0
 
 
 class UserBalance(DateModel):
@@ -93,13 +94,31 @@ class UserBalance(DateModel):
     asset_id: Literal["PRIMARY"]
     total: float
     subtotals: Subtotals
+    market_id: CUID | None = None
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
 
-    @model_validator(mode='before')
-    @classmethod
-    def process_input_data(cls, data):
-        """Remove market_id from user balance data."""
-        if isinstance(data, dict) and 'marketId' not in data:
-            data.pop('market_id', None)
-        return data
+    # @model_validator(mode='after')
+    # def validate_balance(self) -> Self:
+    #     """Ensure subtotals match total."""
+    #     total_subtotals = sum(self.subtotals.model_dump().values())
+    #     if abs(self.total - total_subtotals) > 0.01:
+    #         raise ValueError(
+    #             "Total is not close to the sum of subtotals."
+    #             f"{self.total} != {total_subtotals}"
+    #         )
+    #     return self
+
+
+# class MarketBalances(DateModel):
+#     """Final balances for a market."""
+
+#     id: CUID
+#     account_id: CUID
+#     asset_type: Literal["CURRENCY"]
+#     asset_id: Literal["PRIMARY"]
+#     total: float
+#     subtotals: Subtotals
+#     market_id: CUID
+#     created_at: IsoDatetime
+#     updated_at: IsoDatetime | None = None

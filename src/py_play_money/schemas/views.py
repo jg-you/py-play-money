@@ -9,6 +9,7 @@ from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
 from py_play_money.schemas.comments import Comment, CommentReaction
+from py_play_money.schemas.finance import UserBalance
 from py_play_money.schemas.market import (
     Market,
     MarketList,
@@ -46,18 +47,39 @@ class CommentView(Comment):
 class AccountView(Account):
     """View of an account with user information."""
 
-    user: User
+    user_primary: User
 
-    @field_validator('user', mode='after')
+    @model_validator(mode='before')
     @classmethod
-    def validate_account(cls, value, info) -> str:
+    def process_input_data(cls, data):
+        """Rename user to user_primary if needed."""
+        if 'user' in data and 'user_primary' not in data:
+            data['userPrimary'] = data.pop('user')
+        return data
+
+    @model_validator(mode='after')
+    def validate_account(self) -> Self:
         """Ensure account_id matches account data."""
-        if value.primary_account_id != info.data.get('id'):
+        if self.user_primary.primary_account_id != self.id:
             raise ValueError(
-                "Account ID does not match the provided account data."
-                f"{value.id} != {info.data.get('account_id')}"
+                "primary_account_id does not match user_primary.id."
+                f"{self.id} != {self.user_primary.primary_account_id}"
             )
-        return value
+        return self
+
+class UserBalanceView(UserBalance):
+    """View of a final market balances."""
+
+    account: AccountView
+
+    @model_validator(mode='after')
+    def validate_account(self) -> Self:
+        if self.account.id != self.account_id:
+            raise ValueError(
+                "account_id does not match the account.id."
+                f"{self.account.id} != {self.account_id}"
+            )
+        return self
 
 
 class MarketOptionPositionView(MarketOptionPosition):
@@ -72,22 +94,22 @@ class MarketOptionPositionView(MarketOptionPosition):
         """Ensure market_id matches the market data."""
         if self.market.id != self.market_id:
             raise ValueError(
-                "Market ID does not match the provided market data."
+                "marked_id does not match market.id."
                 f"{self.market.id} != {self.market_id}"
             )
         if self.market_id != self.option.market_id:
             raise ValueError(
-                "Market ID does not match the option's market_id."
+                "The option's market_id does not not match market.id."
                 f"{self.market_id} != {self.option.market_id}"
             )
         if self.account.id != self.account_id:
             raise ValueError(
-                "Account ID does not match the provided account data."
+                "account_id does not match account.id."
                 f"{self.account.id} != {self.account_id}"
             )
         if self.option.id != self.option_id:
             raise ValueError(
-                "Option ID does not match the provided option data."
+                "option_id does not match option.id."
                 f"{self.option.id} != {self.option_id}"
             )
         return self
@@ -105,7 +127,7 @@ class MarketView(Market):
     @model_validator(mode='before')
     @classmethod
     def process_input_data(cls, data):
-        """Remove shared_tags_count if not provided."""
+        """Remove shared_tags_count if not provided. Handles related markets."""
         if isinstance(data, dict) and 'sharedTagsCount' not in data:
             data.pop('shared_tags_count', None)
         return data
@@ -136,3 +158,4 @@ class MarketView(Market):
 comment_list_adapter = TypeAdapter(list[CommentView])
 market_option_position_list_adapter = TypeAdapter(list[MarketOptionPositionView])
 marketview_list_adapter = TypeAdapter(list[MarketView])
+user_balances_adapter = TypeAdapter(list[UserBalanceView])

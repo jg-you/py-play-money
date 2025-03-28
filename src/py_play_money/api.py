@@ -45,11 +45,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return resp['data']
 
-    def balances(self, **kwargs):
-        """Fetch market balances."""
+    def balances(self, **kwargs) -> list[UserBalance]:
+        """Fetch final market balances."""
         endpoint = f"markets/{self.id}/balances"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return user_balances_adapter.validate_python(resp['data']['balances'])
 
     def comments(self, **kwargs) -> list[CommentView]:
         """Fetch market comments."""

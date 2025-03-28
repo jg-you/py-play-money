@@ -102,9 +102,7 @@ def test_user_balance(api_tester):
         cassette="user_balance_passthrough.yaml",
         client_method="user",
         nested_method="balance",
-        api_transform=lambda data: {
-            k: v for k, v in data['balance'].items() if k != 'marketId'
-        }
+        api_transform=lambda data: data['balance']
     )
 
 # == markets/ endpoints ==
@@ -115,6 +113,17 @@ def test_market(api_tester):
         item_id=TEST_MARKET_ID,
         cassette="market_passthrough.yaml",
         client_method="market"
+    )
+
+def test_market_balances(api_tester):
+    """Test the retrieval of the comments in a specific market."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_balances_passthrough.yaml",
+        client_method="market",
+        nested_method="balances",
+        api_transform=lambda data: data['balances']
     )
 
 def test_market_comment(api_tester):
@@ -139,12 +148,22 @@ def test_market_graph(api_tester):
 
 def test_market_positions(api_tester):
     """Test the retrieval of the positions in a specific market."""
+
+    def _rename_user_subfield(data):
+        """Rename user subfield in the data."""
+        new_data = []
+        for d in data:
+            new_data.append(d)
+            new_data[-1]['account']['userPrimary'] = d['account'].pop('user')
+        return new_data
+    
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,
         cassette="market_positions_passthrough.yaml",
         client_method="market",
-        nested_method="positions"
+        nested_method="positions",
+        api_transform=lambda data: _rename_user_subfield(data)
     )
 
 def test_market_related(api_tester):

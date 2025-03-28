@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u
+  response:
+    body:
+      string: '{"data":{"id":"cm5ifmwfo001g24d2r7fzu34u","question":"Playmoney API
+        python wrapper in January 2025?","description":"<p>I plan to create a manifoldpy-style
+        wrapper for playmoney.</p><p>Resolves to YES if all basic API actions can
+        be performed using publicly available code at the end of the month.</p>","slug":"playmoney-api-python-wrapper-in-january-2025","closeDate":"2025-02-03T23:50:54.104Z","resolvedAt":"2025-02-03T23:50:54.104Z","canceledAt":null,"canceledById":null,"createdBy":"clzrooq660000a2uznm33y25b","tags":["programming","api","python","playmoney","software-development"],"ammAccountId":"cm5ifmwfo001j24d2s5b1c7t3","clearingAccountId":"cm5ifmwfo001k24d2kb21lr27","createdAt":"2025-01-04T17:02:55.669Z","updatedAt":"2025-02-03T23:50:54.104Z","commentCount":4,"uniqueTradersCount":5,"uniquePromotersCount":100,"liquidityCount":1816,"parentListId":null}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 20:04:00 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::lvrfn-1743192240145-b797f70b7337
+    status:
+      code: 200
+      message: OK
+version: 1

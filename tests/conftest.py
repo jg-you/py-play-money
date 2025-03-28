@@ -68,10 +68,21 @@ def compare_api_model():
         """Check that all fields match between API and model data."""
         # Compare values
         for key, value in norm_api_data.items():
-            assert key in norm_model_data, f"Field '{key}' missing from model"
-            assert norm_model_data[key] == value, (
-                f"Field '{key}' mismatch:\n  API:   {value}\n  Model: {norm_model_data[key]}"
-            )
+            # handle the special case of subtotals
+            if key == "subtotals":
+                for sub_key, sub_value in value.items():
+                    assert sub_key in norm_model_data['subtotals'], (
+                        f"Field '{key}.{sub_key}' missing from model"
+                    )
+                    assert abs(norm_model_data['subtotals'][sub_key] == sub_value), (
+                        f"Field '{key}.{sub_key}' mismatch:\n  API:   {sub_value}\n"
+                        "Model: {norm_model_data['subtotals'][sub_key]}"
+                    )
+            else:
+                assert key in norm_model_data, f"Field '{key}' missing from model"
+                assert norm_model_data[key] == value, (
+                    f"Field '{key}' mismatch:\n  API:   {value}\n  Model: {norm_model_data[key]}"
+                )
 
         # Check for extra fields in the model
         extra_keys = set(norm_model_data) - set(norm_api_data)
