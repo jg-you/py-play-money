@@ -23,7 +23,7 @@ from py_play_money.schemas.market import (
     MarketResolution,
 )
 from py_play_money.schemas.user import Account, AccountType, User, UserRoleType
-from py_play_money.schemas.utils import GraphTick, PageInfo
+from py_play_money.schemas.utils import PageInfo
 
 __all__ = [
     'PMClient',

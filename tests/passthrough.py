@@ -79,15 +79,6 @@ def test_comment(api_tester):
         client_method="comment"
     )
 
-def test_market(api_tester):
-    """Test the retrieval of markets."""
-    api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
-        cassette="market_passthrough.yaml",
-        client_method="market"
-    )
-
 def test_user(api_tester):
     """Test the retrieval of users."""
     api_tester.test(
@@ -97,8 +88,19 @@ def test_user(api_tester):
         client_method="user"
     )
 
+
+# == markets/ endpoints ==
+def test_market(api_tester):
+    """Test the retrieval of an individual market."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_passthrough.yaml",
+        client_method="market"
+    )
+
 def test_market_comment(api_tester):
-    """Test the retrieval of comments for a specific market."""
+    """Test the retrieval of the comments in a specific market."""
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,
@@ -107,12 +109,32 @@ def test_market_comment(api_tester):
         nested_method="comments"
     )
 
+def test_market_graph(api_tester):
+    """Test the retrieval of a market graph."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_graph_passthrough.yaml",
+        client_method="market",
+        nested_method="graph"
+    )
+
 def test_market_positions(api_tester):
-    """Test the retrieval of positions for a specific market."""
+    """Test the retrieval of the positions in a specific market."""
     api_tester.test(
         endpoint="markets",
         item_id=TEST_MARKET_ID,
         cassette="market_positions_passthrough.yaml",
         client_method="market",
         nested_method="positions"
+    )
+
+def test_market_related(api_tester):
+    """Test the retrieval of related markets."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_related_passthrough.yaml",
+        client_method="market",
+        nested_method="related"
     )

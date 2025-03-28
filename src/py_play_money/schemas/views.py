@@ -1,5 +1,7 @@
 """
-Compound schemas for various API endpoints.
+View schemas for API endpoints.
+
+Created by extending the base schemas.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
@@ -7,7 +9,13 @@ from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
 from py_play_money.schemas.comments import Comment, CommentReaction
-from py_play_money.schemas.market import Market, MarketOption, MarketOptionPosition
+from py_play_money.schemas.market import (
+    Market,
+    MarketList,
+    MarketOption,
+    MarketOptionPosition,
+    MarketResolution,
+)
 from py_play_money.schemas.user import Account, User
 
 
@@ -51,6 +59,7 @@ class AccountView(Account):
             )
         return value
 
+
 class MarketOptionPositionView(MarketOptionPosition):
     """View of a market option position with user information."""
 
@@ -83,5 +92,47 @@ class MarketOptionPositionView(MarketOptionPosition):
             )
         return self
 
+
+class MarketView(Market):
+    """Augmented view of a market."""
+
+    user: User
+    options: list[MarketOption]
+    market_resolution: MarketResolution | None = None
+    parent_list: MarketList | None = None
+    shared_tags_count: int = 0
+
+    @model_validator(mode='before')
+    @classmethod
+    def process_input_data(cls, data):
+        """Remove shared_tags_count if not provided."""
+        if isinstance(data, dict) and 'sharedTagsCount' not in data:
+            data.pop('shared_tags_count', None)
+        return data
+
+    @model_validator(mode='after')
+    def validate_market_ids(self) -> Self:
+        """Ensure market_id matches the market data."""
+        if self.user.id != self.created_by:
+            raise ValueError(
+                "user.id does not match created_by."
+                f"{self.user.id} != {self.created_by}"
+            )
+        if self.parent_list is not None:
+            if self.parent_list.id != self.parent_list_id:
+                raise ValueError(
+                    "Parent list ID does not match parent_list_id."
+                    f"{self.parent_list.id} != {self.parent_list_id}"
+                )
+        for option in self.options:
+            if option.market_id != self.id:
+                raise ValueError(
+                    "Option market_id does not match the market's ID."
+                    f"{option.market_id} != {self.id}"
+                )
+        return self
+
+# Type adapters for serialization
 comment_list_adapter = TypeAdapter(list[CommentView])
 market_option_position_list_adapter = TypeAdapter(list[MarketOptionPositionView])
+marketview_list_adapter = TypeAdapter(list[MarketView])

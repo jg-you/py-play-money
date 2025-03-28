@@ -11,15 +11,7 @@ from py_play_money._version import __version__
 from py_play_money.adapters import (
     activity_list_adapter,
 )
-from py_play_money.schemas import (
-    Activity,
-    CommentView,
-    Market,
-    MarketOptionPositionView,
-    User,
-    comment_list_adapter,
-    market_option_position_list_adapter,
-)
+from py_play_money.schemas import *
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -65,11 +57,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return comment_list_adapter.validate_python(resp['data'])
 
-    def graph(self, **kwargs):
+    def graph(self, **kwargs) -> list[MarketGraphTick]:
         """Fetch market graphs."""
         endpoint = f"markets/{self.id}/graph"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return market_graph_tick_list_adapter.validate_python(resp['data'])
 
     def positions(self, **kwargs) -> list[MarketOptionPositionView]:
         """Fetch market positions."""
@@ -77,11 +69,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return market_option_position_list_adapter.validate_python(resp['data'])
 
-    def related(self, **kwargs):
+    def related(self, **kwargs) -> list[MarketView]:
         """Fetch related markets."""
         endpoint = f"markets/{self.id}/related"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return marketview_list_adapter.validate_python(resp['data'])
 
 
 class UserWrapper(User):
