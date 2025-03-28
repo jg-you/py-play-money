@@ -11,7 +11,7 @@ from py_play_money._version import __version__
 from py_play_money.adapters import (
     activity_list_adapter,
 )
-from py_play_money.schemas import Activity, Market, User
+from py_play_money.schemas import Activity, CommentView, Market, User, comment_list_adapter
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -100,6 +100,26 @@ class UserWrapper(User):
         """Fetch current user positions."""
         resp = self._client.execute_get(f"users/{self.id}/positions", **kwargs)
         return resp['data']
+
+
+class CommentResource:
+    """
+    Functions to fetch comment information from the API.
+    """
+
+    def __init__(self, client: 'PMClient'):
+        self._client = client
+
+    def __call__(self, comment_id: str = None) -> CommentView:
+        if comment_id:
+            return self.by_id(comment_id)
+        return self
+
+    def by_id(self, comment_id: str, **kwargs) -> CommentView:
+        """Fetch a comment by ID."""
+        endpoint = f"comments/{comment_id}"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return CommentView(**resp['data'])
 
 
 class MarketResource:
@@ -191,6 +211,7 @@ class PMClient:
             self.authenticated = False
 
         # Resource proxies
+        self.comment = CommentResource(self)
         self.market = MarketResource(self)
         self.user = UserResource(self)
 
@@ -218,13 +239,3 @@ class PMClient:
         except requests.HTTPError as e:
             logger.error("HTTP error occurred: %s", e)
             raise
-
-
-    # def markets(self, **kwargs):
-    #     # Paginated market listing remains intact.
-    #     response = self.execute_get("markets", params=kwargs)
-    #     markets = [Market(self, m['id']) for m in response['data']]
-    #     return markets, response['pageInfo']
-
-    # def check_username(self, user_name, **kwargs):
-    #     return self.execute_get(f"users/check-username/{user_name}", **kwargs)['data']

@@ -82,6 +82,6 @@ class DateModel(CamelCaseModel):
     def validate_dates(self):
         """Validate that the creation date is not after the update date."""
         if self.updated_at is not None:
-            if self.created_at >= self.updated_at:
+            if self.created_at > self.updated_at:
                 raise ValueError("Creation date cannot be after the update date.")
         return self

@@ -39,5 +39,10 @@ class CommentReaction(CamelCaseModel):
     @classmethod
     def validate_emoji(cls, value):
         """Validate that the emoji is a valid code."""
+        if value is None:
+            return value
+        if not isinstance(value, str):
+            return value
         if not value.startswith(":") or not value.endswith(":"):
             raise ValueError("Emoji must be in the format ':emoji_code:'")
+        return value

@@ -11,6 +11,7 @@ TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 TEST_USER_ID = "clzrooq660000a2uznm33y25b"
 TEST_USER_USERNAME = "jgyou"
 TEST_USER_REFERRAL_CODE = "J2P2"
+TEST_COMMENT_ID = "cm5j3371q008elbahtrgixruy"
 
 def test_init():
     """Test the initialization of the API client."""
@@ -62,7 +63,6 @@ def test_user(vcr_record, client):
             client.user.by_referral(TEST_USER_REFERRAL_CODE)
         ]
         for u in users:
-            u = client.user(TEST_USER_ID)
             assert u is not None
             assert u.id == TEST_USER_ID
             assert u.username == "jgyou"
@@ -79,3 +79,34 @@ def test_user(vcr_record, client):
             assert u.referred_by is None
             assert u.created_at == datetime(2024, 8, 13, 0, 27, 58, 974000, tzinfo=timezone.utc)
             assert u.updated_at == datetime(2024, 10, 1, 5, 40, 44, 407000, tzinfo=timezone.utc)
+
+def test_comment(vcr_record, client):
+    """Test the retrieval of comments."""
+    with vcr_record.use_cassette('comment.yaml'):
+        comments = [
+            client.comment(TEST_COMMENT_ID),
+            client.comment.by_id(TEST_COMMENT_ID),
+        ]
+        for c in comments:
+            # Check if the comment has the expected properties
+            assert c is not None
+            assert c.id == TEST_COMMENT_ID
+            assert c.content == (
+                "<p>i bought yes and the price went down??? is that supposed to happen</p>"
+            )
+            assert c.created_at == datetime(2025, 1, 5, 3, 59, 27, 86000, tzinfo=timezone.utc)
+            assert c.updated_at == datetime(2025, 1, 5, 3, 59, 27, 86000, tzinfo=timezone.utc)
+            assert c.edited is False
+            assert c.author_id == "cm3ze0aqx0000kpj5ai4nv5tm"
+            assert c.parent_id is None
+            assert c.hidden is False
+            assert c.entity_type == "MARKET"
+            assert c.entity_id == "cm5ifmwfo001g24d2r7fzu34u"
+            # Check if the author is loaded correctly
+            assert c.author is not None
+            assert c.author.id == "cm3ze0aqx0000kpj5ai4nv5tm"
+            # Check if the reactions are loaded properly
+            assert c.reactions is not None
+            assert len(c.reactions) > 0
+            assert c.reactions[0].id == "cm5jwu6kf0001110nhcg2lbgi"
+            assert c.reactions[0].emoji == ":smiling_face_with_tear:"
