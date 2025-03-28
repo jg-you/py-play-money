@@ -8,7 +8,11 @@ from typing import Literal
 from pydantic import model_validator
 
 from py_play_money.schemas.base_types import (
-    CUID, CamelCaseModel, ConstantsTypeModel, DateModel, IsoDatetime
+    CUID,
+    CamelCaseModel,
+    ConstantsTypeModel,
+    DateModel,
+    IsoDatetime,
 )
 
 AssetType = Literal["MARKET_OPTION", "CURRENCY"]

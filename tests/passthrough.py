@@ -29,7 +29,9 @@ class ApiPassthroughTester:
         self.client = client
         self.baseurl = BASEURL
 
-    def test(self, endpoint, item_id, cassette, client_method, nested_method=None, api_transform=None):
+    def test(self,  # noqa: PLR0913
+             endpoint, item_id, cassette, client_method,
+             nested_method=None, api_transform=None):
         """
         Apply a generic passthrough test.
 
@@ -41,6 +43,7 @@ class ApiPassthroughTester:
             nested_method (str, optional): Nested method name for sub-resources (e.g., "comments"
                 to test markets/[ID]/comments.)
             api_transform (callable, optional): Function to transform API data before comparison.
+
         """
         with self.vcr.use_cassette(cassette):
             resource = getattr(self.client, client_method)(item_id)
