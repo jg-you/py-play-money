@@ -8,7 +8,6 @@ from py_play_money.schemas.base_types import CUID, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
 from py_play_money.schemas.finance import (
     AssetType,
-    Position,
     Transaction,
     TransactionEntry,
     TransactionType,
@@ -23,4 +22,9 @@ from py_play_money.schemas.market import (
 )
 from py_play_money.schemas.user import Account, AccountType, User, UserRoleType
 from py_play_money.schemas.utils import GraphTick, PageInfo
-from py_play_money.schemas.views import CommentView, comment_list_adapter
+from py_play_money.schemas.views import (
+    CommentView,
+    MarketOptionPositionView,
+    comment_list_adapter,
+    market_option_position_list_adapter,
+)

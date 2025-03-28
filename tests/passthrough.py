@@ -106,3 +106,13 @@ def test_market_comment(api_tester):
         client_method="market",
         nested_method="comments"
     )
+
+def test_market_positions(api_tester):
+    """Test the retrieval of positions for a specific market."""
+    api_tester.test(
+        endpoint="markets",
+        item_id=TEST_MARKET_ID,
+        cassette="market_positions_passthrough.yaml",
+        client_method="market",
+        nested_method="positions"
+    )

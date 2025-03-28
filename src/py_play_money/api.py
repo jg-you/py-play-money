@@ -11,7 +11,15 @@ from py_play_money._version import __version__
 from py_play_money.adapters import (
     activity_list_adapter,
 )
-from py_play_money.schemas import Activity, CommentView, Market, User, comment_list_adapter
+from py_play_money.schemas import (
+    Activity,
+    CommentView,
+    Market,
+    MarketOptionPositionView,
+    User,
+    comment_list_adapter,
+    market_option_position_list_adapter,
+)
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -63,11 +71,11 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return resp['data']
 
-    def positions(self, **kwargs):
+    def positions(self, **kwargs) -> list[MarketOptionPositionView]:
         """Fetch market positions."""
         endpoint = f"markets/{self.id}/positions"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return resp['data']
+        return market_option_position_list_adapter.validate_python(resp['data'])
 
     def related(self, **kwargs):
         """Fetch related markets."""

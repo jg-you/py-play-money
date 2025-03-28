@@ -28,19 +28,20 @@ def normalize_datetime(dt_value: Any) -> Any:
     return dt_value
 
 
-def normalize_data(obj: Any, dt_fields: set[str]) -> Any:
-    """Recursively walk dicts/lists, normalizing known datetime fields."""
+def normalize_data(obj: Any) -> Any:
+    """Recursively walk dicts/lists, normalizing datetimes and numerical fields."""
     if isinstance(obj, dict):
         normalized = {}
         for k, v in obj.items():
-            # Detect if the key is a datetime field (either by exact match or by suffix)
-            if k in dt_fields or k.endswith("At") or k.endswith("Date"):
+            if k.endswith("At") or k.endswith("Date"):
                 normalized[k] = normalize_datetime(v)
+            elif k in {"cost", "quantity", "value", "liquidityProbability"}:
+                normalized[k] = float(v)
             else:
-                normalized[k] = normalize_data(v, dt_fields)
+                normalized[k] = normalize_data(v)
         return normalized
     elif isinstance(obj, list):
-        return [normalize_data(i, dt_fields) for i in obj]
+        return [normalize_data(i) for i in obj]
     return obj
 
 # == Fixtures ==
@@ -83,8 +84,6 @@ def compare_api_model():
     def _compare(
         api_data: dict[str, Any],
         model_dict: dict[str, Any],
-        ignore_fields: list[str] = None,
-        datetime_fields: list[str] = None
     ) -> None:
         """
         Compare API response data with a model dump.
@@ -92,25 +91,14 @@ def compare_api_model():
         Args:
             api_data (dict): The raw API response data (camelCase keys).
             model_dict (dict): The model dump (camelCase).
-            ignore_fields (list): Top-level fields to ignore in the comparison.
-            datetime_fields (list): Fields to treat as datetimes.
 
         Raises:
             AssertionError: If any fields mismatch or if extra/missing fields are found.
 
         """
-        ignore_fields = ignore_fields or []
-        dt_fields = set(datetime_fields or [])
-
         # Normalize recursively
-        norm_api_data = normalize_data(api_data, dt_fields)
-        norm_model_data = normalize_data(model_dict, dt_fields)
-
-        # Remove ignored top-level keys
-        for field in ignore_fields:
-            norm_api_data.pop(field, None)
-            norm_model_data.pop(field, None)
-
+        norm_api_data = normalize_data(api_data)
+        norm_model_data = normalize_data(model_dict)
         _check_fields_match(norm_api_data, norm_model_data)
 
     return _compare

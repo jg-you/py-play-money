@@ -10,7 +10,6 @@ from py_play_money.schemas.base_types import CUID, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
 from py_play_money.schemas.finance import (
     AssetType,
-    Position,
     Transaction,
     TransactionEntry,
     TransactionType,

@@ -5,7 +5,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
-from pydantic import Field, Json
+from pydantic import Json
 
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
@@ -31,20 +31,6 @@ TransactionType = Literal[
     "REFERRER_BONUS",
     "REFERREE_BONUS",
 ]
-
-
-class Position(DateModel):
-    """Position on a market."""
-
-    id: CUID
-    account_id: CUID
-    market_id: CUID
-    option_id: CUID
-    cost: float
-    quantity: float
-    value: float = Field(ge=0)
-    created_at: IsoDatetime
-    updated_at: IsoDatetime | None = None
 
 
 class Transaction(DateModel):
