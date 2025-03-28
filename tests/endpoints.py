@@ -7,21 +7,17 @@ from datetime import datetime, timezone
 
 from py_play_money import PMClient
 
-# from .conftest import vcr_record
-# from freezegun import freeze_time
-
 
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
-
+TEST_USER_ID = "clzrooq660000a2uznm33y25b"
 
 def test_init():
     """Test the initialization of the API client."""
     client = PMClient()
     assert client.base_url is not None
 
-def test_market(vcr_record):
-    """Test the retrieval of markets."""
-    client = PMClient()
+def test_market(vcr_record, client):
+    """Test retrieval of market data."""
     with vcr_record.use_cassette('market.yaml'):
         market = client.market(market_id=TEST_MARKET_ID)
         assert market is not None
@@ -52,3 +48,23 @@ def test_market(vcr_record):
         ]
         assert market.parent_list_id is None
 
+def test_user(vcr_record, client):
+    """Test the retrieval of user data."""
+    with vcr_record.use_cassette('user.yaml'):
+        user = client.user(TEST_USER_ID)
+        assert user is not None
+        assert user.id == TEST_USER_ID
+        assert user.username == "jgyou"
+        assert user.display_name == "jgyou"
+        assert user.avatar_url is None
+        assert user.twitter_handle is None
+        assert user.discord_handle is None
+        assert user.website is None
+        assert user.bio == "https://manifold.markets/jgyou"
+        assert user.timezone == "America/New_York"
+        assert user.primary_account_id == "c66cc328ef6c13d1767417889"
+        assert user.role == "USER"
+        assert user.referral_code == "J2P2"
+        assert user.referred_by is None
+        assert user.created_at == datetime(2024, 8, 13, 0, 27, 58, 974000, tzinfo=timezone.utc)
+        assert user.updated_at == datetime(2024, 10, 1, 5, 40, 44, 407000, tzinfo=timezone.utc)
