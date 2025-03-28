@@ -37,7 +37,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 05:02:45 GMT
+      - Fri, 28 Mar 2025 21:19:38 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -51,7 +51,171 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::76dhl-1743138165928-dcd0ddf71629
+      - iad1::iad1::8f49j-1743196778835-dad070e9a9c0
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/positions
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm5s5iwsk0009xu0eqvufobo1\",\"accountId\":\"cm1806j9500013rjvbsnipdnv\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"100\",\"quantity\":\"-2e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-11T12:17:35.060Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm1806j9500013rjvbsnipdnv\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm1806j9500003rjviym3v9c8\",\"marketId\":null,\"createdAt\":\"2024-09-18T15:13:46.587Z\",\"updatedAt\":\"2024-11-21T20:24:02.038Z\",\"user\":{\"id\":\"cm1806j9500003rjviym3v9c8\",\"username\":\"astrosnat\",\"displayName\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"I
+        just really like science and forecasting I guess\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm1806j9500013rjvbsnipdnv\",\"role\":\"USER\",\"referralCode\":\"L2Y2\",\"referredBy\":null,\"createdAt\":\"2024-09-18T15:13:46.587Z\",\"updatedAt\":\"2024-10-03T07:02:34.064Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ocnbxq0009d3yym29fx40b\",\"accountId\":\"cm47mdglk0001fgr94z6s8qjn\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"333\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-08T20:25:53.873Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm47mdglk0001fgr94z6s8qjn\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm47mdglk0000fgr9in2lssil\",\"marketId\":null,\"createdAt\":\"2024-12-02T22:46:22.280Z\",\"updatedAt\":\"2024-12-02T22:46:22.324Z\",\"user\":{\"id\":\"cm47mdglk0000fgr9in2lssil\",\"username\":\"mimimitor3782\",\"displayName\":\"mimimitor3782\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm47mdglk0001fgr94z6s8qjn\",\"role\":\"USER\",\"referralCode\":\"WM9W\",\"referredBy\":null,\"createdAt\":\"2024-12-02T22:46:22.280Z\",\"updatedAt\":\"2025-01-08T20:35:47.943Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5jihqhz0009cg5s3ba45bk0\",\"accountId\":\"c66cc328e3e0ffc8b38d99c45\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001i24d2ff3ul1sj\",\"cost\":\"100\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-05T11:10:39.668Z\",\"updatedAt\":\"2025-02-03T23:50:54.445Z\",\"account\":{\"id\":\"c66cc328e3e0ffc8b38d99c45\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clydldvix0000rhznmgr36pt6\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clydldvix0000rhznmgr36pt6\",\"username\":\"p\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e3e0ffc8b38d99c45\",\"role\":\"USER\",\"referralCode\":\"LDAW\",\"referredBy\":null,\"createdAt\":\"2024-07-08T23:07:05.049Z\",\"updatedAt\":\"2024-10-01T05:40:46.818Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001i24d2ff3ul1sj\",\"name\":\"No\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#607d8b\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.668Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":29}},{\"id\":\"cm5j329yi003w5x46ab3m0irw\",\"accountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"83.21924591064453\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-05T03:58:44.170Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"marketId\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-11-27T04:30:01.919Z\",\"user\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ispyc3002213rkactccx5v\",\"accountId\":\"c66cc328e34d813a5745e6584\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"100\",\"quantity\":\"2e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-04T23:09:13.071Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"c66cc328e34d813a5745e6584\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clyaz02c500008my2vxivkyaa\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ifn06l001db76nxrimcorz\",\"accountId\":\"c66cc328ef6c13d1767417889\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"403.3147931098938\",\"quantity\":\"4e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-04T17:03:00.490Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"c66cc328ef6c13d1767417889\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clzrooq660000a2uznm33y25b\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":\"cm5ifn06l001db76nxrimcorz\",\"total\":6}}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 21:19:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/positions
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::8fwk6-1743196778927-24e40e9182a9
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/positions
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm5s5iwsk0009xu0eqvufobo1\",\"accountId\":\"cm1806j9500013rjvbsnipdnv\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"100\",\"quantity\":\"-2e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-11T12:17:35.060Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm1806j9500013rjvbsnipdnv\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm1806j9500003rjviym3v9c8\",\"marketId\":null,\"createdAt\":\"2024-09-18T15:13:46.587Z\",\"updatedAt\":\"2024-11-21T20:24:02.038Z\",\"user\":{\"id\":\"cm1806j9500003rjviym3v9c8\",\"username\":\"astrosnat\",\"displayName\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"I
+        just really like science and forecasting I guess\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm1806j9500013rjvbsnipdnv\",\"role\":\"USER\",\"referralCode\":\"L2Y2\",\"referredBy\":null,\"createdAt\":\"2024-09-18T15:13:46.587Z\",\"updatedAt\":\"2024-10-03T07:02:34.064Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ocnbxq0009d3yym29fx40b\",\"accountId\":\"cm47mdglk0001fgr94z6s8qjn\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"333\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-08T20:25:53.873Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm47mdglk0001fgr94z6s8qjn\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm47mdglk0000fgr9in2lssil\",\"marketId\":null,\"createdAt\":\"2024-12-02T22:46:22.280Z\",\"updatedAt\":\"2024-12-02T22:46:22.324Z\",\"user\":{\"id\":\"cm47mdglk0000fgr9in2lssil\",\"username\":\"mimimitor3782\",\"displayName\":\"mimimitor3782\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm47mdglk0001fgr94z6s8qjn\",\"role\":\"USER\",\"referralCode\":\"WM9W\",\"referredBy\":null,\"createdAt\":\"2024-12-02T22:46:22.280Z\",\"updatedAt\":\"2025-01-08T20:35:47.943Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5jihqhz0009cg5s3ba45bk0\",\"accountId\":\"c66cc328e3e0ffc8b38d99c45\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001i24d2ff3ul1sj\",\"cost\":\"100\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-05T11:10:39.668Z\",\"updatedAt\":\"2025-02-03T23:50:54.445Z\",\"account\":{\"id\":\"c66cc328e3e0ffc8b38d99c45\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clydldvix0000rhznmgr36pt6\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clydldvix0000rhznmgr36pt6\",\"username\":\"p\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e3e0ffc8b38d99c45\",\"role\":\"USER\",\"referralCode\":\"LDAW\",\"referredBy\":null,\"createdAt\":\"2024-07-08T23:07:05.049Z\",\"updatedAt\":\"2024-10-01T05:40:46.818Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001i24d2ff3ul1sj\",\"name\":\"No\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#607d8b\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.668Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":29}},{\"id\":\"cm5j329yi003w5x46ab3m0irw\",\"accountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"83.21924591064453\",\"quantity\":\"0\",\"value\":\"0\",\"createdAt\":\"2025-01-05T03:58:44.170Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"marketId\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-11-27T04:30:01.919Z\",\"user\":{\"id\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"username\":\"evergreenemily\",\"displayName\":\"evergreen\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"cm3ze0aqx0001kpj5r2w3qusm\",\"role\":\"USER\",\"referralCode\":\"4UNA\",\"referredBy\":null,\"createdAt\":\"2024-11-27T04:30:01.834Z\",\"updatedAt\":\"2024-12-18T22:02:14.937Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ispyc3002213rkactccx5v\",\"accountId\":\"c66cc328e34d813a5745e6584\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"100\",\"quantity\":\"2e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-04T23:09:13.071Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"c66cc328e34d813a5745e6584\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clyaz02c500008my2vxivkyaa\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}},{\"id\":\"cm5ifn06l001db76nxrimcorz\",\"accountId\":\"c66cc328ef6c13d1767417889\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"optionId\":\"cm5ifmwfo001h24d210bt6ek1\",\"cost\":\"403.3147931098938\",\"quantity\":\"4e-14\",\"value\":\"0\",\"createdAt\":\"2025-01-04T17:03:00.490Z\",\"updatedAt\":\"2025-02-03T23:50:54.171Z\",\"account\":{\"id\":\"c66cc328ef6c13d1767417889\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clzrooq660000a2uznm33y25b\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"user\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"}},\"market\":{\"id\":\"cm5ifmwfo001g24d2r7fzu34u\",\"question\":\"Playmoney
+        API python wrapper in January 2025?\",\"description\":\"<p>I plan to create
+        a manifoldpy-style wrapper for playmoney.</p><p>Resolves to YES if all basic
+        API actions can be performed using publicly available code at the end of the
+        month.</p>\",\"slug\":\"playmoney-api-python-wrapper-in-january-2025\",\"closeDate\":\"2025-02-03T23:50:54.104Z\",\"resolvedAt\":\"2025-02-03T23:50:54.104Z\",\"canceledAt\":null,\"canceledById\":null,\"createdBy\":\"clzrooq660000a2uznm33y25b\",\"tags\":[\"programming\",\"api\",\"python\",\"playmoney\",\"software-development\"],\"ammAccountId\":\"cm5ifmwfo001j24d2s5b1c7t3\",\"clearingAccountId\":\"cm5ifmwfo001k24d2kb21lr27\",\"createdAt\":\"2025-01-04T17:02:55.669Z\",\"updatedAt\":\"2025-02-03T23:50:54.104Z\",\"commentCount\":4,\"uniqueTradersCount\":5,\"uniquePromotersCount\":100,\"liquidityCount\":1816,\"parentListId\":null},\"option\":{\"id\":\"cm5ifmwfo001h24d210bt6ek1\",\"name\":\"Yes\",\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"color\":\"#9c27b0\",\"liquidityProbability\":\"0.5\",\"createdAt\":\"2025-01-04T17:02:55.667Z\",\"updatedAt\":\"2025-01-11T12:17:35.887Z\",\"probability\":71}}],\"pageInfo\":{\"hasNextPage\":false,\"endCursor\":\"cm5ifn06l001db76nxrimcorz\",\"total\":6}}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 21:19:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/positions
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::pb8pl-1743196779095-2482a6cb17aa
     status:
       code: 200
       message: OK

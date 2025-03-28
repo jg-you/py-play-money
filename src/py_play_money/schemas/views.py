@@ -114,22 +114,43 @@ class MarketOptionPositionView(MarketOptionPosition):
             )
         return self
 
+class MarketResolutionView(MarketResolution):
+    """View of a market resolution with user information."""
+
+    resolved_by: User
+    resolution: MarketOption
+
+    @model_validator(mode='after')
+    def validate_ids(self) -> Self:
+        """Ensure market_id matches the market data."""
+        if self.market_id != self.resolution.market_id:
+            raise ValueError(
+                "resolution.market_id does not match market.id."
+                f"{self.resolution.market_id} != {self.market_id}"
+            )
+        if self.resolved_by.id != self.resolved_by_id:
+            raise ValueError(
+                "resolved_by.id does not match resolved_by_id."
+                f"{self.resolved_by.id} != {self.resolved_by_id}"
+            )
+        return self
+    
+
 class MarketView(Market):
     """Augmented view of a market."""
 
     user: User
     options: list[MarketOption]
-    market_resolution: MarketResolution | None = None
+    market_resolution: MarketResolutionView | None = None
     parent_list: MarketList | None = None
-    shared_tags_count: int = 0
+    shared_tags_count: int | None = None
 
-    @model_validator(mode='before')
-    @classmethod
-    def process_input_data(cls, data):
-        """Remove shared_tags_count if not provided. Handles related markets."""
-        if isinstance(data, dict) and 'sharedTagsCount' not in data:
-            data.pop('shared_tags_count', None)
-        return data
+    @model_validator(mode='after')
+    def remove_none_shared_tags(self) -> 'MarketView':
+        """Remove shared_tags_count if it's None."""
+        if self.shared_tags_count is None:
+            object.__delattr__(self, 'shared_tags_count')
+        return self
 
     @model_validator(mode='after')
     def validate_market_ids(self) -> Self:

@@ -4,6 +4,7 @@ Handles all API interactions.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 import logging
+from typing import Literal
 
 import requests
 
@@ -239,3 +240,64 @@ class PMClient:
         except requests.HTTPError as e:
             logger.error("HTTP error occurred: %s", e)
             raise
+    
+    def markets(self,
+                cursor: str | None = None,
+                status: Literal['active', 'closed', 'all'] = 'all',
+                created_by: str | None = None,
+                tags: list[str] | None = None,
+                limit: int = 10,
+                sort_field: str | None = None,
+                sort_direction: Literal['asc', 'desc'] = 'asc',
+                **kwargs) -> tuple[list[MarketView], PageInfo]:
+        """
+        Page through all markets.
+
+        Args:
+            cursor (str | None): Pagination cursor, i.e., the market after which to start.
+            status (str): Market status. Can be 'active', 'closed', or 'all'.
+            created_by (str | None): Filter by user ID of the market creator.
+            tags (list[str] | None): Filter by tags associated with the market.
+            limit (int): Number of markets to return per page.
+            sort_field (str | None): Field to sort by.
+            sort_direction (str): Sort direction. Can be 'asc' or 'desc'.
+            **kwargs: Additional keyword arguments to pass to the request.
+     
+        Returns:
+            tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
+            print(f"Found {len(markets)} markets")
+            cursor = page_info.end_cursor
+            if page_info.has_next_page is False:
+                break
+        ```
+        """
+        # validate request
+        if cursor and not CUID.validate(cursor):
+            raise ValueError(f"`cursor` is an invalid market CUID: {cursor}")
+        if created_by and not CUID.validate(created_by):
+            raise ValueError(f"`created_by` is an invalid user CUID: {created_by}")
+        
+        # prepare payload
+        tags = [] if tags is None else tags
+        payload = {
+            "cursor": cursor,
+            "status": status,
+            "createdBy": created_by,
+            "tags": tags,
+            "limit": limit,
+            "sortField": sort_field,
+            "sortDirection": sort_direction
+        }
+
+        # make request
+        response = self.execute_get("markets", params=payload, **kwargs)
+        return (
+            market_views_adapter.validate_python(response['data']),
+            PageInfo(**response['pageInfo'])
+        )

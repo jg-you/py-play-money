@@ -27,7 +27,7 @@ class CUID(str):
         )
 
     @classmethod
-    def validate(cls, v: str, _: Any) -> 'CUID':
+    def validate(cls, v: str, _: Any=None) -> 'CUID':
         """Validate that the input is a valid CUID v1 string."""
         if not isinstance(v, str):
             raise TypeError("CUID must be a string")

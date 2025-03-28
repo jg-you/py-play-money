@@ -30,16 +30,16 @@ class ApiPassthroughTester:
         self.baseurl = BASEURL
 
     def test(self,  # noqa: PLR0913
-             endpoint, item_id, cassette, client_method,
-             nested_method=None, api_transform=None):
+            cassette, endpoint, client_method, item_id,
+            nested_method=None, api_transform=None):
         """
         Apply a generic passthrough test.
 
         Args:
-            endpoint (str): API endpoint (e.g., "markets")
-            item_id (str): Resource ID
             cassette (str): VCR cassette name
+            endpoint (str): API endpoint (e.g., "markets")
             client_method (str): Client method name to get resource associated with endpoint
+            item_id (str): Resource ID
             nested_method (str, optional): Nested method name for sub-resources (e.g., "comments"
                 to test markets/[ID]/comments.)
             api_transform (callable, optional): Function to transform API data before comparison.
@@ -47,12 +47,14 @@ class ApiPassthroughTester:
         """
         with self.vcr.use_cassette(cassette):
             resource = getattr(self.client, client_method)(item_id)
-
-        if nested_method is not None:
-            resource = getattr(resource, nested_method)()
-            resp = requests.get(f"{self.baseurl}/{endpoint}/{item_id}/{nested_method}", timeout=10)
-        else:
-            resp = requests.get(f"{self.baseurl}/{endpoint}/{item_id}", timeout=10)
+            if nested_method is not None:
+                resource = getattr(resource, nested_method)()
+                resp = requests.get(
+                    f"{self.baseurl}/{endpoint}/{item_id}/{nested_method}",
+                    timeout=10
+                )
+            else:
+                resp = requests.get(f"{self.baseurl}/{endpoint}/{item_id}", timeout=10)
 
         api_data = resp.json()['data']
         if api_transform is not None:
@@ -78,50 +80,89 @@ def api_tester_fixture(vcr_record, compare_api_model, client):
 def test_comment(api_tester):
     """Test the retrieval of a specific comment."""
     api_tester.test(
-        endpoint="comments",
-        item_id=TEST_COMMENT_ID,
         cassette="comment_passthrough.yaml",
-        client_method="comment"
+        endpoint="comments",
+        client_method="comment",
+        item_id=TEST_COMMENT_ID,
     )
 
 # == users/ endpoints ==
 def test_user(api_tester):
     """Test the retrieval of an individual user."""
     api_tester.test(
-        endpoint="users",
-        item_id=TEST_USER_ID,
         cassette="user_passthrough.yaml",
-        client_method="user"
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
     )
 
 def test_user_balance(api_tester):
     """Test the retrieval of a user's balance."""
     api_tester.test(
-        endpoint="users",
-        item_id=TEST_USER_ID,
         cassette="user_balance_passthrough.yaml",
+        endpoint="users",
         client_method="user",
+        item_id=TEST_USER_ID,
         nested_method="balance",
         api_transform=lambda data: data['balance']
     )
 
 # == markets/ endpoints ==
+
+def test_markets(vcr_record, compare_api_model, client):
+    """Test the retrieval of an individual market."""
+    with vcr_record.use_cassette("markets_passthrough.yaml"):
+        # client
+        markets, page_info = client.markets(
+            limit=10,
+            sort_direction='asc',
+            status='all'
+        )
+        # direct API call
+        params = {
+            "limit": 10,
+            "sortDirection": 'asc',
+            "status": 'all'
+        }
+        resp = requests.get(
+            f"{BASEURL}/markets",
+            params=params,
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        api_page_info = resp.json()['pageInfo']
+        print(page_info)
+        print(api_page_info)
+        assert len(markets) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(markets):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of markets doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )
+
+
 def test_market(api_tester):
     """Test the retrieval of an individual market."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_passthrough.yaml",
-        client_method="market"
+        endpoint="markets",
+        client_method="market",
+        item_id=TEST_MARKET_ID,
     )
 
 def test_market_balance(api_tester):
     """Test the retrieval of the AMM balance for a specific market."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_balance_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="balance",
         api_transform=lambda data: data['amm']
     )
@@ -129,10 +170,10 @@ def test_market_balance(api_tester):
 def test_market_balances(api_tester):
     """Test the retrieval of the final balances for a specific market."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_balances_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="balances",
         api_transform=lambda data: data['balances']
     )
@@ -140,20 +181,20 @@ def test_market_balances(api_tester):
 def test_market_comment(api_tester):
     """Test the retrieval of the comments on a specific market."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_comments_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="comments"
     )
 
 def test_market_graph(api_tester):
     """Test the retrieval of a market graph."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_graph_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="graph"
     )
 
@@ -169,10 +210,10 @@ def test_market_positions(api_tester):
         return new_data
 
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_positions_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="positions",
         api_transform=lambda data: _rename_user_subfield(data)
     )
@@ -180,9 +221,9 @@ def test_market_positions(api_tester):
 def test_market_related(api_tester):
     """Test the retrieval of related markets."""
     api_tester.test(
-        endpoint="markets",
-        item_id=TEST_MARKET_ID,
         cassette="market_related_passthrough.yaml",
+        endpoint="markets",
         client_method="market",
+        item_id=TEST_MARKET_ID,
         nested_method="related"
     )

@@ -37,7 +37,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 03:52:26 GMT
+      - Fri, 28 Mar 2025 21:19:35 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -51,7 +51,63 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::pktgm-1743133946360-448aa563a15b
+      - iad1::iad1::szn8q-1743196775719-53305ec37d29
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/comments/cm5j3371q008elbahtrgixruy
+  response:
+    body:
+      string: '{"data":{"id":"cm5j3371q008elbahtrgixruy","content":"<p>i bought yes
+        and the price went down??? is that supposed to happen</p>","createdAt":"2025-01-05T03:59:27.086Z","updatedAt":"2025-01-05T03:59:27.086Z","edited":false,"authorId":"cm3ze0aqx0000kpj5ai4nv5tm","parentId":null,"hidden":false,"entityType":"MARKET","entityId":"cm5ifmwfo001g24d2r7fzu34u","author":{"id":"cm3ze0aqx0000kpj5ai4nv5tm","username":"evergreenemily","displayName":"evergreen","avatarUrl":"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png","twitterHandle":null,"discordHandle":null,"website":null,"bio":"28
+        y.o. trans woman pursuing a graduate degree in ecology and biogeography. obsessed
+        with nintendo and pokemon","timezone":"America/Los_Angeles","primaryAccountId":"cm3ze0aqx0001kpj5r2w3qusm","role":"USER","referralCode":"4UNA","referredBy":null,"createdAt":"2024-11-27T04:30:01.834Z","updatedAt":"2024-12-18T22:02:14.937Z"},"reactions":[{"id":"cm5jwu6kf0001110nhcg2lbgi","emoji":":smiling_face_with_tear:","userId":"clzrooq660000a2uznm33y25b","commentId":"cm5j3371q008elbahtrgixruy","user":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}]}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 21:19:35 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::w9d6m-1743196775915-cec148e652e8
     status:
       code: 200
       message: OK

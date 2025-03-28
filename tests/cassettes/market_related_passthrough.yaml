@@ -37,7 +37,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 14:48:01 GMT
+      - Fri, 28 Mar 2025 21:19:39 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -51,7 +51,117 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::6mkpf-1743173281647-50f06bbacccf
+      - iad1::iad1::g6vqr-1743196779232-a29fa8a9dff1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/related
+  response:
+    body:
+      string: '{"data":[{"id":"cm5mp85h100002uv5lsob04xa","question":"Will playmoney.dev
+        raise *capital* from its members in 2025?","description":"<p>Not donation:
+        actual ownership. In a coop style or something.</p>","slug":"will-playmoneydev-raise-capital-from-its-members","closeDate":"2025-12-31T17:00:00.000Z","resolvedAt":null,"canceledAt":null,"canceledById":null,"createdBy":"clzrooq660000a2uznm33y25b","tags":["finance","crowdfunding","playmoney","investment","capital-raising"],"ammAccountId":"cm5mp85h200032uv530pgpt7o","clearingAccountId":"cm5mp85h200042uv559izvy2c","createdAt":"2025-01-07T16:42:28.406Z","updatedAt":"2025-01-08T00:57:45.996Z","commentCount":1,"uniqueTradersCount":2,"uniquePromotersCount":950,"liquidityCount":1700,"parentListId":null,"user":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"},"options":[{"id":"cm5mp85h100022uv5mhe8yt8h","name":"No","marketId":"cm5mp85h100002uv5lsob04xa","color":"#8bc34a","liquidityProbability":"0.5","createdAt":"2025-01-07T16:42:28.404Z","updatedAt":"2025-01-08T00:57:46.241Z","probability":45},{"id":"cm5mp85h100012uv5islpg4e6","name":"Yes","marketId":"cm5mp85h100002uv5lsob04xa","color":"#2196f3","liquidityProbability":"0.5","createdAt":"2025-01-07T16:42:28.403Z","updatedAt":"2025-01-08T00:57:46.242Z","probability":55}],"marketResolution":null,"parentList":null,"sharedTagsCount":1}]}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 21:19:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/related
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::ntmxc-1743196779328-714552e69a06
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/related
+  response:
+    body:
+      string: '{"data":[{"id":"cm5mp85h100002uv5lsob04xa","question":"Will playmoney.dev
+        raise *capital* from its members in 2025?","description":"<p>Not donation:
+        actual ownership. In a coop style or something.</p>","slug":"will-playmoneydev-raise-capital-from-its-members","closeDate":"2025-12-31T17:00:00.000Z","resolvedAt":null,"canceledAt":null,"canceledById":null,"createdBy":"clzrooq660000a2uznm33y25b","tags":["finance","crowdfunding","playmoney","investment","capital-raising"],"ammAccountId":"cm5mp85h200032uv530pgpt7o","clearingAccountId":"cm5mp85h200042uv559izvy2c","createdAt":"2025-01-07T16:42:28.406Z","updatedAt":"2025-01-08T00:57:45.996Z","commentCount":1,"uniqueTradersCount":2,"uniquePromotersCount":950,"liquidityCount":1700,"parentListId":null,"user":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"},"options":[{"id":"cm5mp85h100022uv5mhe8yt8h","name":"No","marketId":"cm5mp85h100002uv5lsob04xa","color":"#8bc34a","liquidityProbability":"0.5","createdAt":"2025-01-07T16:42:28.404Z","updatedAt":"2025-01-08T00:57:46.241Z","probability":45},{"id":"cm5mp85h100012uv5islpg4e6","name":"Yes","marketId":"cm5mp85h100002uv5lsob04xa","color":"#2196f3","liquidityProbability":"0.5","createdAt":"2025-01-07T16:42:28.403Z","updatedAt":"2025-01-08T00:57:46.242Z","probability":55}],"marketResolution":null,"parentList":null,"sharedTagsCount":1}]}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 28 Mar 2025 21:19:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/related
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::w5l9n-1743196779484-a48d82a1fb50
     status:
       code: 200
       message: OK
