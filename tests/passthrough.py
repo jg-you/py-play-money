@@ -107,6 +107,43 @@ def test_user_balance(api_tester):
         api_transform=lambda data: data['balance']
     )
 
+
+def test_user_positions(vcr_record, compare_api_model, client):
+    """Test the retrieval of a user's positions."""
+    with vcr_record.use_cassette("user_position_passthrough.yaml"):
+        # client
+        positions, page_info = client.markets(
+            limit=10,
+            sort_direction='asc',
+            status='all'
+        )
+        # direct API call
+        params = {
+            "limit": 10,
+            "sortDirection": 'asc',
+            "status": 'all'
+        }
+        resp = requests.get(
+            f"{BASEURL}/markets",
+            params=params,
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        api_page_info = resp.json()['pageInfo']
+        assert len(positions) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(positions):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of markets doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )
+
+
 def test_user_graph(api_tester):
     """Test the retrieval of a user's graph."""
     api_tester.test(

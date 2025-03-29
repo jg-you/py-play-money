@@ -98,10 +98,58 @@ class UserWrapper(User):
         resp = self._client.execute_get(endpoint, **kwargs)
         return user_graph_ticks_adapter.validate_python(resp['data'])
 
-    def positions(self, **kwargs):
-        """Fetch current user positions."""
-        resp = self._client.execute_get(f"users/{self.id}/positions", **kwargs)
-        return resp['data']
+    def positions(self,
+                  cursor: str | None = None,
+                  status: Literal['active', 'closed', 'all'] = 'all',
+                  limit: int = 10,
+                  sort_field: str | None = None,
+                  sort_direction: Literal['asc', 'desc'] = 'asc',
+                  **kwargs) -> tuple[list[MarketOptionPositionView], PageInfo]:
+        """
+        Page through positions of the user.
+
+        Args:
+            cursor (str | None): Pagination cursor, i.e., the market after which to start.
+            status (str): Market status. Can be 'active', 'closed', or 'all'.
+            limit (int): Number of markets to return per page.
+            sort_field (str | None): Field to sort by.
+            sort_direction (str): Sort direction. Can be 'asc' or 'desc'.
+            **kwargs: Additional keyword arguments to pass to the request.
+     
+        Returns:
+            tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
+            print(f"Found {len(markets)} markets")
+            cursor = page_info.end_cursor
+            if page_info.has_next_page is False:
+                break
+        ```
+        """
+        # validate request
+        if cursor and not CUID.validate(cursor):
+            raise ValueError(f"`cursor` is an invalid market CUID: {cursor}")
+
+        # prepare payload
+        payload = {
+            "cursor": cursor,
+            "status": status,
+            "limit": limit,
+            "sortField": sort_field,
+            "sortDirection": sort_direction
+        }
+
+        # make request
+        endpoint = f"users/{self.id}/positions"
+        response = self.execute_get(endpoint, params=payload, **kwargs)
+        return (
+            market_option_positions_adapter.validate_python(response['data']),
+            PageInfo(**response['pageInfo'])
+        )
 
 
 class CommentResource:
@@ -191,14 +239,14 @@ class PMClient:
         version (str): Version of the API to use. Supported: 'v1'.
 
     Examples:
-        ```python
-        from py_play_money import Client
-        client = Client()
-        # Get a market
-        market = client.markets.get(market_id="cm5ifmwfo001g24d2r7fzu34u")
-        # Get a user, with timeout
-        user = client.users.get(user_id="user123", timeout=5)
-        ```
+    ```python
+    from py_play_money import PMClient
+    client = PMClient()
+    # Get a market
+    market = client.market(market_id="cm5ifmwfo001g24d2r7fzu34u")
+    # Get a user, with timeout
+    user = client.user.by_username("user123", timeout=5)
+    ```
 
     """
 
