@@ -39,6 +39,11 @@ class MarketListWrapper(MarketList):
         print(resp['data'])
         return market_balances_adapter.validate_python(resp['data']['user'])
 
+    def comments(self, **kwargs) -> list[CommentView]:
+        """Fetch list comments."""
+        endpoint = f"lists/{self.id}/comments"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return comments_adapter.validate_python(resp['data'])
 
 class MarketWrapper(Market):
     """Combines the Market model with API functions."""

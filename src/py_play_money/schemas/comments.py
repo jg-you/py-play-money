@@ -9,7 +9,7 @@ from pydantic import field_validator
 
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
-CommentEntityType = Literal["MARKET", "COMMENT"]
+CommentEntityType = Literal["MARKET", "COMMENT", "LIST"]
 
 
 class Comment(DateModel):

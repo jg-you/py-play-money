@@ -1,0 +1,208 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri
+  response:
+    body:
+      string: '{"data":{"id":"cm1npliun006q11x80i8lvcri","title":"Best LLM at the
+        end of the year?","slug":"best-llm-at-the-end-of-the-year","description":"","ownerId":"clzrooq660000a2uznm33y25b","contributionPolicy":"PUBLIC","contributionReview":false,"tags":["technology","llm","ai"],"createdAt":"2024-09-29T15:01:49.099Z","updatedAt":"2024-09-29T15:01:49.099Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:57:15 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::r8p48-1743224235003-aa59d679640b
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/comments
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm1nrfhsx000173cyoqj7rkmf\",\"content\":\"<p>Whoops.
+        They should have been linked, and lists can't be edited. <br><br></p>\",\"createdAt\":\"2024-09-29T15:53:07.041Z\",\"updatedAt\":\"2024-09-29T15:53:07.041Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1nul19m0001hdkk8ircnmea\",\"content\":\"<p>Oh
+        no!! Want me to delete this on my end since there is no delete feature yet?</p>\",\"createdAt\":\"2024-09-29T17:21:24.394Z\",\"updatedAt\":\"2024-09-29T17:21:24.394Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1nrfhsx000173cyoqj7rkmf\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1nvf8k5000112iswnylfm13\",\"content\":\"<p>Sure!
+        Will be better than having to arbitrage the probabilities. And much cheaper
+        too? 1000 \xA4 vs 3400\xA4</p>\",\"createdAt\":\"2024-09-29T17:44:53.525Z\",\"updatedAt\":\"2024-09-29T17:44:53.525Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":\"cm1nul19m0001hdkk8ircnmea\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1o1g4l8002f12j34vxfwx3l\",\"content\":\"<p>oh,
+        I bet on this, will the shares disappear</p>\",\"createdAt\":\"2024-09-29T20:33:32.732Z\",\"updatedAt\":\"2024-09-29T20:33:32.732Z\",\"edited\":false,\"authorId\":\"clydkjwr6000ems4ztn9gftkb\",\"parentId\":\"cm1nvf8k5000112iswnylfm13\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clydkjwr6000ems4ztn9gftkb\",\"username\":\"Bayesian\",\"displayName\":\"Bayesian\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"ahhhhhhhhh\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e31331b71fbbf3d76\",\"role\":\"USER\",\"referralCode\":\"S519\",\"referredBy\":null,\"createdAt\":\"2024-07-08T22:43:46.962Z\",\"updatedAt\":\"2025-01-25T21:30:59.356Z\"},\"reactions\":[]},{\"id\":\"cm1o1qbsg0001ls047i23dlz0\",\"content\":\"<p>Ill
+        see if I can refund them. Feel free to go bet in this one though :P <a target=\\\"_blank\\\"
+        rel=\\\"noopener noreferrer nofollow\\\" class=\\\"text-primary\\\" href=\\\"https://playmoney.dev/questions/cm0ly87ky0000ai89p4789ddv/what-will-be-the-best-llm-of-2024\\\">https://playmoney.dev/questions/cm0ly87ky0000ai89p4789ddv/what-will-be-the-best-llm-of-2024</a></p>\",\"createdAt\":\"2024-09-29T20:41:28.624Z\",\"updatedAt\":\"2024-09-29T20:41:28.624Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1o1g4l8002f12j34vxfwx3l\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1o3s78e0001z4vtk0t2i6k4\",\"content\":\"<p>Omg!.
+        Missed it. Sorry about the copy-cat market.</p>\",\"createdAt\":\"2024-09-29T21:38:55.263Z\",\"updatedAt\":\"2024-09-30T00:51:18.311Z\",\"edited\":true,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":\"cm1o1qbsg0001ls047i23dlz0\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1onjq5w0001xpj8favuzbpn\",\"content\":\"<p>All
+        good :P</p>\",\"createdAt\":\"2024-09-30T06:52:12.212Z\",\"updatedAt\":\"2024-09-30T06:52:12.212Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1o3s78e0001z4vtk0t2i6k4\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1zhact3000x2w4rywwm1edu\",\"content\":\"<p><mention
+        data-id=\\\"clydkjwr6000ems4ztn9gftkb\\\"></mention>  do you prefer an N/A
+        as soon as it becomes available or leave the trades up until EOY?</p>\",\"createdAt\":\"2024-10-07T20:42:25.239Z\",\"updatedAt\":\"2024-10-07T20:42:25.239Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm212n6bs000x11fbd2t3o01l\",\"content\":\"<p>N/A,
+        or reopened where I can sell them. if it can't be reopened then i'd rather
+        N/A, but otherwise i'd rather not N/A, if that makes sense. but anything works
+        tbh</p>\",\"createdAt\":\"2024-10-08T23:28:01.480Z\",\"updatedAt\":\"2024-10-08T23:28:01.480Z\",\"edited\":false,\"authorId\":\"clydkjwr6000ems4ztn9gftkb\",\"parentId\":\"cm1zhact3000x2w4rywwm1edu\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clydkjwr6000ems4ztn9gftkb\",\"username\":\"Bayesian\",\"displayName\":\"Bayesian\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"ahhhhhhhhh\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e31331b71fbbf3d76\",\"role\":\"USER\",\"referralCode\":\"S519\",\"referredBy\":null,\"createdAt\":\"2024-07-08T22:43:46.962Z\",\"updatedAt\":\"2025-01-25T21:30:59.356Z\"},\"reactions\":[]},{\"id\":\"cm2c3v4dd0084g80fi11x3bf8\",\"content\":\"<p>Battle-tested
+        the new N/A feature. Now we have an edge-<mention data-id=\\\"clyaz02c500008my2vxivkyaa\\\"></mention>
+        <br>A list of canceled markets \U0001F914<br></p>\",\"createdAt\":\"2024-10-16T16:47:39.746Z\",\"updatedAt\":\"2024-10-16T16:47:39.746Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[{\"id\":\"cm2c76sl20001147fnka8qrnu\",\"emoji\":\":heart:\",\"userId\":\"clyaz02c500008my2vxivkyaa\",\"commentId\":\"cm2c3v4dd0084g80fi11x3bf8\",\"user\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"}}]},{\"id\":\"cm2c77vsd0007147fdc4ozrjs\",\"content\":\"<p>Similar
+        to adding liquidity it probably makes sense to be able to cancel everything
+        at once from the list view</p>\",\"createdAt\":\"2024-10-16T18:21:33.998Z\",\"updatedAt\":\"2024-10-16T18:21:33.998Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm2c3v4dd0084g80fi11x3bf8\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]}]}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:57:15 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]/comments
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::dlpvs-1743224235301-261a00b2172e
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/comments
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"cm1nrfhsx000173cyoqj7rkmf\",\"content\":\"<p>Whoops.
+        They should have been linked, and lists can't be edited. <br><br></p>\",\"createdAt\":\"2024-09-29T15:53:07.041Z\",\"updatedAt\":\"2024-09-29T15:53:07.041Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1nul19m0001hdkk8ircnmea\",\"content\":\"<p>Oh
+        no!! Want me to delete this on my end since there is no delete feature yet?</p>\",\"createdAt\":\"2024-09-29T17:21:24.394Z\",\"updatedAt\":\"2024-09-29T17:21:24.394Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1nrfhsx000173cyoqj7rkmf\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1nvf8k5000112iswnylfm13\",\"content\":\"<p>Sure!
+        Will be better than having to arbitrage the probabilities. And much cheaper
+        too? 1000 \xA4 vs 3400\xA4</p>\",\"createdAt\":\"2024-09-29T17:44:53.525Z\",\"updatedAt\":\"2024-09-29T17:44:53.525Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":\"cm1nul19m0001hdkk8ircnmea\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1o1g4l8002f12j34vxfwx3l\",\"content\":\"<p>oh,
+        I bet on this, will the shares disappear</p>\",\"createdAt\":\"2024-09-29T20:33:32.732Z\",\"updatedAt\":\"2024-09-29T20:33:32.732Z\",\"edited\":false,\"authorId\":\"clydkjwr6000ems4ztn9gftkb\",\"parentId\":\"cm1nvf8k5000112iswnylfm13\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clydkjwr6000ems4ztn9gftkb\",\"username\":\"Bayesian\",\"displayName\":\"Bayesian\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"ahhhhhhhhh\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e31331b71fbbf3d76\",\"role\":\"USER\",\"referralCode\":\"S519\",\"referredBy\":null,\"createdAt\":\"2024-07-08T22:43:46.962Z\",\"updatedAt\":\"2025-01-25T21:30:59.356Z\"},\"reactions\":[]},{\"id\":\"cm1o1qbsg0001ls047i23dlz0\",\"content\":\"<p>Ill
+        see if I can refund them. Feel free to go bet in this one though :P <a target=\\\"_blank\\\"
+        rel=\\\"noopener noreferrer nofollow\\\" class=\\\"text-primary\\\" href=\\\"https://playmoney.dev/questions/cm0ly87ky0000ai89p4789ddv/what-will-be-the-best-llm-of-2024\\\">https://playmoney.dev/questions/cm0ly87ky0000ai89p4789ddv/what-will-be-the-best-llm-of-2024</a></p>\",\"createdAt\":\"2024-09-29T20:41:28.624Z\",\"updatedAt\":\"2024-09-29T20:41:28.624Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1o1g4l8002f12j34vxfwx3l\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1o3s78e0001z4vtk0t2i6k4\",\"content\":\"<p>Omg!.
+        Missed it. Sorry about the copy-cat market.</p>\",\"createdAt\":\"2024-09-29T21:38:55.263Z\",\"updatedAt\":\"2024-09-30T00:51:18.311Z\",\"edited\":true,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":\"cm1o1qbsg0001ls047i23dlz0\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm1onjq5w0001xpj8favuzbpn\",\"content\":\"<p>All
+        good :P</p>\",\"createdAt\":\"2024-09-30T06:52:12.212Z\",\"updatedAt\":\"2024-09-30T06:52:12.212Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm1o3s78e0001z4vtk0t2i6k4\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]},{\"id\":\"cm1zhact3000x2w4rywwm1edu\",\"content\":\"<p><mention
+        data-id=\\\"clydkjwr6000ems4ztn9gftkb\\\"></mention>  do you prefer an N/A
+        as soon as it becomes available or leave the trades up until EOY?</p>\",\"createdAt\":\"2024-10-07T20:42:25.239Z\",\"updatedAt\":\"2024-10-07T20:42:25.239Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[]},{\"id\":\"cm212n6bs000x11fbd2t3o01l\",\"content\":\"<p>N/A,
+        or reopened where I can sell them. if it can't be reopened then i'd rather
+        N/A, but otherwise i'd rather not N/A, if that makes sense. but anything works
+        tbh</p>\",\"createdAt\":\"2024-10-08T23:28:01.480Z\",\"updatedAt\":\"2024-10-08T23:28:01.480Z\",\"edited\":false,\"authorId\":\"clydkjwr6000ems4ztn9gftkb\",\"parentId\":\"cm1zhact3000x2w4rywwm1edu\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clydkjwr6000ems4ztn9gftkb\",\"username\":\"Bayesian\",\"displayName\":\"Bayesian\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"ahhhhhhhhh\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e31331b71fbbf3d76\",\"role\":\"USER\",\"referralCode\":\"S519\",\"referredBy\":null,\"createdAt\":\"2024-07-08T22:43:46.962Z\",\"updatedAt\":\"2025-01-25T21:30:59.356Z\"},\"reactions\":[]},{\"id\":\"cm2c3v4dd0084g80fi11x3bf8\",\"content\":\"<p>Battle-tested
+        the new N/A feature. Now we have an edge-<mention data-id=\\\"clyaz02c500008my2vxivkyaa\\\"></mention>
+        <br>A list of canceled markets \U0001F914<br></p>\",\"createdAt\":\"2024-10-16T16:47:39.746Z\",\"updatedAt\":\"2024-10-16T16:47:39.746Z\",\"edited\":false,\"authorId\":\"clzrooq660000a2uznm33y25b\",\"parentId\":null,\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clzrooq660000a2uznm33y25b\",\"username\":\"jgyou\",\"displayName\":\"jgyou\",\"avatarUrl\":null,\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"https://manifold.markets/jgyou\",\"timezone\":\"America/New_York\",\"primaryAccountId\":\"c66cc328ef6c13d1767417889\",\"role\":\"USER\",\"referralCode\":\"J2P2\",\"referredBy\":null,\"createdAt\":\"2024-08-13T00:27:58.974Z\",\"updatedAt\":\"2024-10-01T05:40:44.407Z\"},\"reactions\":[{\"id\":\"cm2c76sl20001147fnka8qrnu\",\"emoji\":\":heart:\",\"userId\":\"clyaz02c500008my2vxivkyaa\",\"commentId\":\"cm2c3v4dd0084g80fi11x3bf8\",\"user\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"}}]},{\"id\":\"cm2c77vsd0007147fdc4ozrjs\",\"content\":\"<p>Similar
+        to adding liquidity it probably makes sense to be able to cancel everything
+        at once from the list view</p>\",\"createdAt\":\"2024-10-16T18:21:33.998Z\",\"updatedAt\":\"2024-10-16T18:21:33.998Z\",\"edited\":false,\"authorId\":\"clyaz02c500008my2vxivkyaa\",\"parentId\":\"cm2c3v4dd0084g80fi11x3bf8\",\"hidden\":false,\"entityType\":\"LIST\",\"entityId\":\"cm1npliun006q11x80i8lvcri\",\"author\":{\"id\":\"clyaz02c500008my2vxivkyaa\",\"username\":\"case\",\"displayName\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":\"Feedback?
+        case@casesandberg.com\",\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e34d813a5745e6584\",\"role\":\"ADMIN\",\"referralCode\":\"9PYU\",\"referredBy\":null,\"createdAt\":\"2024-07-07T03:04:56.790Z\",\"updatedAt\":\"2024-11-26T22:51:16.573Z\"},\"reactions\":[]}]}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:57:15 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]/comments
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::vd4kt-1743224235653-63da1e2d6dd7
+    status:
+      code: 200
+      message: OK
+version: 1
