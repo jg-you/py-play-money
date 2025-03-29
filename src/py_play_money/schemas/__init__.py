@@ -1,5 +1,5 @@
 """
-API Schemas
+API Schemas.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """

@@ -26,9 +26,7 @@ logger.setLevel(logging.WARNING)
 
 
 class MarketListWrapper(MarketList):
-    """
-    Combines the MarketList model with API functions.
-    """
+    """Combines the MarketList model with API functions."""
 
     def __init__(self, client: 'PMClient', list_data: MarketList):
         super().__init__(**list_data.model_dump(by_alias=True))
@@ -36,9 +34,7 @@ class MarketListWrapper(MarketList):
 
 
 class MarketWrapper(Market):
-    """
-    Combines the Market model with API functions.
-    """
+    """Combines the Market model with API functions."""
 
     def __init__(self, client: 'PMClient', market_data: Market):
         super().__init__(**market_data.model_dump(by_alias=True))
@@ -88,9 +84,7 @@ class MarketWrapper(Market):
 
 
 class UserWrapper(User):
-    """
-    Combines the User model with API functions.
-    """
+    """Combines the User model with API functions."""
 
     def __init__(self, client: 'PMClient', user_data: User):
         super().__init__(**user_data.model_dump(by_alias=True))
@@ -126,10 +120,10 @@ class UserWrapper(User):
             sort_field (str, optional): Field to sort by.
                 Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
-            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'. 
+            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'.
                 Defaults to 'all'
             **kwargs: Additional keyword arguments to pass to the request.
-     
+
         Returns:
             tuple: A tuple containing a list of positions, and a paging information.
 
@@ -171,9 +165,7 @@ class UserWrapper(User):
 
 
 class CommentResource:
-    """
-    Functions to fetch comment information from the API.
-    """
+    """Functions to fetch comment information from the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
@@ -190,9 +182,7 @@ class CommentResource:
         return CommentView(**resp['data'])
 
 class MarketListResource:
-    """
-    Functions to fetch lists from the API.
-    """
+    """Functions to fetch lists from the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
@@ -210,9 +200,7 @@ class MarketListResource:
 
 
 class MarketResource:
-    """
-    Functions to fetch markets from the API.
-    """
+    """Functions to fetch markets from the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
@@ -231,9 +219,7 @@ class MarketResource:
 
 
 class UserResource:
-    """
-    Functions to fetch users from the API.
-    """
+    """Functions to fetch users from the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
@@ -271,8 +257,8 @@ class PMClient:
 
     Args:
         api_key (str, optional): API key to use for authenticated requests.
-        base_url (str, optional): Base URL of the API. 
-            Defaults to the API of the main hosted instance of PlayMoney.dev. 
+        base_url (str, optional): Base URL of the API.
+            Defaults to the API of the main hosted instance of PlayMoney.dev.
         version (str): Version of the API to use. Supported: 'v1'.
 
     Examples:
@@ -352,7 +338,7 @@ class PMClient:
             sort_field (str, optional): Field to sort by.
                 Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
-            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'. 
+            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'.
                 Defaults to 'all'
             tags (list[str], optional): Filter by tags associated with the market.
 
