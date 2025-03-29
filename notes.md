@@ -30,3 +30,8 @@ List of API quirks I worked around
 
 * the GET lists/ endpoints wraps the markets under a list in repeated information?
   unsure what is added by this tripled of ids + created_at
+
+* I decided to replace "activity" by a transaction endpoints that just returns transaction.
+  * Comments are available in their own end points,
+  * Creation and resolution are available in the market() endpoint directly
+  * Which leaves only transaction as the missing piece

@@ -9,9 +9,6 @@ from typing import Literal
 import requests
 
 from py_play_money._version import __version__
-from py_play_money.adapters import (
-    activity_list_adapter,
-)
 from py_play_money.schemas import *
 
 logger = logging.getLogger(__name__)
@@ -59,12 +56,6 @@ class MarketWrapper(Market):
         super().__init__(**market_data.model_dump(by_alias=True))
         self._client = client
 
-    def activity(self, **kwargs) -> list[Activity]:
-        """Fetch market activity."""
-        endpoint = f"markets/{self.id}/activity"
-        resp = self._client.execute_get(endpoint, **kwargs)
-        return activity_list_adapter.validate_python(resp['data'])
-
     def balance(self, **kwargs) -> list[MarketBalance]:
         """Fetch market balance."""
         endpoint = f"markets/{self.id}/balance"
@@ -101,6 +92,21 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return markets_adapter.validate_python(resp['data'])
 
+    def resolution(self, **kwargs) -> MarketResolutionView | None:
+        """Fetch market resolution."""
+        endpoint = f"markets/{self.id}/activity"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        # look for resolution activity
+        for activity in resp['data']:
+            if activity['type'] == 'MARKET_RESOLVED':
+                return MarketResolutionView(**activity['marketResolution'])
+        return None
+
+    # def transactions(self, **kwargs) -> list[Transaction]:
+    #     """Fetch all transactions on a market."""
+    #     endpoint = f"markets/{self.id}/activity"
+    #     resp = self._client.execute_get(endpoint, **kwargs)
+    #     return market_activities_adapter.validate_python(resp['data'])
 
 class UserWrapper(User):
     """Combines the User model with API functions."""

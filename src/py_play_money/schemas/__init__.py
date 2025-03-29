@@ -39,6 +39,7 @@ from py_play_money.schemas.views import (
     CommentView,
     MarketOptionPositionView,
     MarketListView,
+    MarketResolutionView,
     MarketView,
     UserBalanceView,
     comments_adapter,

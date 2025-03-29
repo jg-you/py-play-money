@@ -142,3 +142,16 @@ def test_check_username(client):
     random_username = ''.join(random.choices(string.ascii_letters, k=50))
     assert client.check_username("case") is False
     assert client.check_username(random_username) is True
+
+
+def test_resolution(vcr_record, client):
+    """Test that the resolution endpoint is working."""
+    with vcr_record.use_cassette('resolution.yaml'):
+        res = client.market(TEST_MARKET_ID).resolution()
+        assert res is not None
+        assert res.id == "cm6ppf4480002146uoh2izs1h"
+        assert res.market_id == TEST_MARKET_ID
+        assert res.market.resolved_at == datetime(2025, 2, 3, 23, 50, 54, 104000, tzinfo=timezone.utc)
+        assert res.resolution.name == "No"
+        assert res.resolution.probability == 29
+        assert res.resolved_by.username == "jgyou"

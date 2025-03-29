@@ -8,6 +8,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
+from py_play_money.schemas.activity import Activity
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
 from py_play_money.schemas.finance import UserBalance
@@ -121,6 +122,16 @@ class MarketResolutionView(MarketResolution):
 
     resolved_by: User
     resolution: MarketOption
+    market: Market | None = None
+
+    @model_validator(mode='after')
+    def remove_none_market(self) -> 'MarketResolutionView':
+        """Remove market if it's None."""
+        # Handle the case where the market is not included in the response,
+        # which is the most common, except for the activity endpoint.
+        if self.market is None:
+            object.__delattr__(self, 'market')
+        return self
 
     @model_validator(mode='after')
     def validate_ids(self) -> Self:
@@ -214,8 +225,13 @@ class MarketListView(MarketList):
                 )
         return self
 
+# class MarketActivityView(Activity):
+#     """Augmented view of a market activity."""
+    
+
 # Type adapters for serialization
 comments_adapter = TypeAdapter(list[CommentView])
+# market_activities_adapter = TypeAdapter(list[MarketActivityView])
 market_lists_adapter = TypeAdapter(list[MarketListView])
 market_option_positions_adapter = TypeAdapter(list[MarketOptionPositionView])
 markets_adapter = TypeAdapter(list[MarketView])
