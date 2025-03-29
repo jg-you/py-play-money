@@ -27,6 +27,7 @@ from py_play_money.schemas.market import (
     ContributionPolicyType,
     Market,
     MarketList,
+    MarketListSortFieldType,
     MarketOption,
     MarketOptionPosition,
     MarketResolution,
@@ -37,10 +38,12 @@ from py_play_money.schemas.utils import PageInfo
 from py_play_money.schemas.views import (
     CommentView,
     MarketOptionPositionView,
+    MarketListView,
     MarketView,
     UserBalanceView,
     comments_adapter,
+    market_lists_adapter,
     market_option_positions_adapter,
-    market_views_adapter,
+    markets_adapter,
     user_balances_adapter,
 )

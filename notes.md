@@ -28,4 +28,5 @@ List of API quirks I worked around
 * Some markets fields are always null?
   E.g.: resolvedAt, canceledAt,
 
-* List balance acts inconsistently?
+* the GET lists/ endpoints wraps the markets under a list in repeated information?
+  unsure what is added by this tripled of ids + created_at

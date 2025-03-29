@@ -8,6 +8,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
+from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
 from py_play_money.schemas.finance import UserBalance
 from py_play_money.schemas.market import (
@@ -136,14 +137,13 @@ class MarketResolutionView(MarketResolution):
             )
         return self
 
-
 class MarketView(Market):
     """Augmented view of a market."""
 
     user: User
     options: list[MarketOption]
     market_resolution: MarketResolutionView | None = None
-    parent_list: MarketList | None = None
+    parent_list: str | None = None
     shared_tags_count: int | None = None
 
     @model_validator(mode='after')
@@ -175,8 +175,48 @@ class MarketView(Market):
                 )
         return self
 
+
+# Note: The following three classes are needed to wrap the API
+#       response, even if this is inelegant.
+class MarketInList(Market):
+    """Simplified market model used within lists."""
+
+    options: list[MarketOption]
+    market_resolution: MarketResolutionView | None = None
+
+class MarketListEntry(CamelCaseModel):
+    """Represents a market entry in a list."""
+
+    id: CUID
+    list_id: CUID
+    market_id: CUID
+    created_at: IsoDatetime
+    market: MarketInList
+
+class MarketListView(MarketList):
+    """Augmented view of a market list."""
+    owner: User
+    markets: list[MarketListEntry]
+
+    @model_validator(mode='after')
+    def validate_market_ids(self) -> Self:
+        """Ensure list ids match."""
+        for m in self.markets:
+            if m.market.parent_list_id != self.id:
+                raise ValueError(
+                    "Market parent_list_id does not match the market list's ID."
+                    f"{m.parent_list_id} != {self.id}"
+                )
+            if m.list_id != self.id:
+                raise ValueError(
+                    "Market list_id does not match the market list's ID."
+                    f"{m.list_id} != {self.id}"
+                )
+        return self
+
 # Type adapters for serialization
 comments_adapter = TypeAdapter(list[CommentView])
+market_lists_adapter = TypeAdapter(list[MarketListView])
 market_option_positions_adapter = TypeAdapter(list[MarketOptionPositionView])
-market_views_adapter = TypeAdapter(list[MarketView])
+markets_adapter = TypeAdapter(list[MarketView])
 user_balances_adapter = TypeAdapter(list[UserBalanceView])

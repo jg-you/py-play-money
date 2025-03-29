@@ -99,7 +99,7 @@ class MarketWrapper(Market):
         """Fetch related markets."""
         endpoint = f"markets/{self.id}/related"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return market_views_adapter.validate_python(resp['data'])
+        return markets_adapter.validate_python(resp['data'])
 
 
 class UserWrapper(User):
@@ -134,12 +134,12 @@ class UserWrapper(User):
         Page through positions of the user.
 
         Args:
-            cursor (str, optional): Pagination cursor, i.e., the market after which to start.
-            limit (int, optional): Number of markets to return per page. Defaults to 10.
+            cursor (str, optional): Pagination cursor, i.e., the position after which to start.
+            limit (int, optional): Number of positions to return per page. Defaults to 10.
             sort_field (str, optional): Field to sort by.
                 Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
-            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'.
+            status (str, optional): Status of positions to include. Can be 'active', 'closed', or 'all'.
                 Defaults to 'all'
             **kwargs: Additional keyword arguments to pass to the request.
 
@@ -150,8 +150,8 @@ class UserWrapper(User):
         ```python
         cursor = None
         while True:
-            markets, page_info = client.markets(cursor=cursor, status='active', limit=5)
-            print(f"Found {len(markets)} markets")
+            positions, page_info = client.user(user_id).positions(cursor=cursor)
+            print(f"Found {len(positions)} positions")
             cursor = page_info.end_cursor
             if page_info.has_next_page is False:
                 break
@@ -355,10 +355,12 @@ class PMClient:
             cursor (str, optional): Pagination cursor, i.e., the market after which to start.
             limit (int, optional): Number of markets to return per page. Defaults to 10.
             sort_field (str, optional): Field to sort by.
-                Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
+                Can be "comment_count" "close_date", "created_at", "description", 
+                "liquidity_count", "question", "updated_at", "unique_traders_count",
+                "unique_promoters_count"
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
-            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'.
-                Defaults to 'all'
+            status (str, optional): Status of markets to include.
+                Can be 'active', 'closed', or 'all'. Defaults to 'all'
             tags (list[str], optional): Filter by tags associated with the market.
 
         Returns:
@@ -400,6 +402,64 @@ class PMClient:
         # make request
         response = self.execute_get("markets", params=payload, **kwargs)
         return (
-            market_views_adapter.validate_python(response['data']),
+            markets_adapter.validate_python(response['data']),
+            PageInfo(**response['pageInfo'])
+        )
+
+    def lists(self,
+        cursor: str | None = None,
+        limit: int = 10,
+        owner_id: str | None = None,
+        sort_field: MarketListSortFieldType | None = None,
+        sort_direction: Literal['asc', 'desc'] = 'asc',
+        **kwargs) -> tuple[list[MarketListView], PageInfo]:
+        """
+        Page through all lists.
+
+        Args:
+            cursor (str, optional): Pagination cursor, i.e., the list after which to start.
+            limit (int, optional): Number of lists to return per page. Defaults to 10.
+            owner_id (str, optional): Filter by ID of the list owner.
+            sort_field (str, optional): Field to sort by.
+                Can be "created_at", "contribution_policy, "description", "title", "updated_at".
+            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+
+        Returns:
+            tuple: A tuple containing a list of market lists, and a paging information.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            market_lists, page_info = client.lists(cursor=cursor, limit=5)
+            print(f"Found {len(market_lists)} market lists")
+            cursor = page_info.end_cursor
+            if page_info.has_next_page is False:
+                break
+        ```
+
+        """
+        # validate request
+        if cursor and not CUID.validate(cursor):
+            raise ValueError(f"`cursor` is an invalid market CUID: {cursor}")
+        if owner_id and not CUID.validate(owner_id):
+            raise ValueError(f"`owner_id` is an invalid user CUID: {owner_id}")
+
+        # prepare payload
+        if sort_field:
+            first, *others = sort_field.split('_')
+            sort_field = ''.join([first.lower(), *map(str.title, others)])
+        payload = {
+            "cursor": cursor,
+            "ownerId": owner_id,
+            "limit": limit,
+            "sortField": sort_field,
+            "sortDirection": sort_direction
+        }
+
+        # make request
+        response = self.execute_get("lists", params=payload, **kwargs)
+        return (
+            market_lists_adapter.validate_python(response['data']),
             PageInfo(**response['pageInfo'])
         )

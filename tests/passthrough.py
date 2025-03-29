@@ -95,7 +95,7 @@ def rename_user_subfield(data):
 
 # == comments/ endpoints ==
 def test_comment(api_tester):
-    """Test the retrieval of a specific comment."""
+    """Test retrieval of a specific comment."""
     api_tester.test(
         cassette="comment_passthrough.yaml",
         endpoint="comments",
@@ -105,8 +105,42 @@ def test_comment(api_tester):
 
 
 # == lists/ endpoints ==
+def test_lists(vcr_record, compare_api_model, client):
+    """Test retrieval of pages of lists."""
+    with vcr_record.use_cassette("lists_passthrough.yaml"):
+        # client
+        lists, page_info = client.lists(
+            limit=10,
+            sort_direction='asc'
+        )
+        # direct API call
+        params = {
+            "limit": 10,
+            "sortDirection": 'asc',
+        }
+        resp = requests.get(
+            f"{BASEURL}/lists",
+            params=params,
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        api_page_info = resp.json()['pageInfo']
+        assert len(lists) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(lists):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of lists doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )
+
+
 def test_list(api_tester):
-    """Test the retrieval of a specific list."""
+    """Test retrieval of a specific list."""
     api_tester.test(
         cassette="list_passthrough.yaml",
         endpoint="lists",
@@ -115,7 +149,7 @@ def test_list(api_tester):
     )
 
 def test_list_balance(api_tester):
-    """Test the retrieval of a list balance."""
+    """Test retrieval of a list balance."""
     api_tester.test(
         cassette="list_balance_passthrough.yaml",
         endpoint="lists",
@@ -126,7 +160,7 @@ def test_list_balance(api_tester):
     )
 
 def test_list_comments(api_tester):
-    """Test the retrieval of comments on a specific list."""
+    """Test retrieval of comments on a specific list."""
     api_tester.test(
         cassette="list_comments_passthrough.yaml",
         endpoint="lists",
@@ -136,7 +170,7 @@ def test_list_comments(api_tester):
     )
 
 def test_list_graph(api_tester):
-    """Test the retrieval of a list graph."""
+    """Test retrieval of a list graph."""
     api_tester.test(
         cassette="list_graph_passthrough.yaml",
         endpoint="lists",
@@ -148,7 +182,7 @@ def test_list_graph(api_tester):
 
 # == markets/ endpoints ==
 def test_markets(vcr_record, compare_api_model, client):
-    """Test the retrieval of an individual market."""
+    """Test retrieval of pages of markets."""
     with vcr_record.use_cassette("markets_passthrough.yaml"):
         # client
         markets, page_info = client.markets(
@@ -184,7 +218,7 @@ def test_markets(vcr_record, compare_api_model, client):
 
 
 def test_market(api_tester):
-    """Test the retrieval of an individual market."""
+    """Test retrieval of an individual market."""
     api_tester.test(
         cassette="market_passthrough.yaml",
         endpoint="markets",
@@ -193,7 +227,7 @@ def test_market(api_tester):
     )
 
 def test_market_balance(api_tester):
-    """Test the retrieval of the AMM balance for a specific market."""
+    """Test retrieval of the AMM balance for a specific market."""
     api_tester.test(
         cassette="market_balance_passthrough.yaml",
         endpoint="markets",
@@ -204,7 +238,7 @@ def test_market_balance(api_tester):
     )
 
 def test_market_balances(api_tester):
-    """Test the retrieval of the final balances for a specific market."""
+    """Test retrieval of the final balances for a specific market."""
     api_tester.test(
         cassette="market_balances_passthrough.yaml",
         endpoint="markets",
@@ -215,7 +249,7 @@ def test_market_balances(api_tester):
     )
 
 def test_market_comment(api_tester):
-    """Test the retrieval of the comments on a specific market."""
+    """Test retrieval of the comments on a specific market."""
     api_tester.test(
         cassette="market_comments_passthrough.yaml",
         endpoint="markets",
@@ -225,7 +259,7 @@ def test_market_comment(api_tester):
     )
 
 def test_market_graph(api_tester):
-    """Test the retrieval of a market graph."""
+    """Test retrieval of a market graph."""
     api_tester.test(
         cassette="market_graph_passthrough.yaml",
         endpoint="markets",
@@ -235,7 +269,7 @@ def test_market_graph(api_tester):
     )
 
 def test_market_positions(api_tester):
-    """Test the retrieval of the positions in a specific market."""
+    """Test retrieval of the positions in a specific market."""
     api_tester.test(
         cassette="market_positions_passthrough.yaml",
         endpoint="markets",
@@ -246,7 +280,7 @@ def test_market_positions(api_tester):
     )
 
 def test_market_related(api_tester):
-    """Test the retrieval of related markets."""
+    """Test retrieval of related markets."""
     api_tester.test(
         cassette="market_related_passthrough.yaml",
         endpoint="markets",
@@ -258,7 +292,7 @@ def test_market_related(api_tester):
 
 # == users/ endpoints ==
 def test_user(api_tester):
-    """Test the retrieval of an individual user."""
+    """Test retrieval of an individual user."""
     api_tester.test(
         cassette="user_passthrough.yaml",
         endpoint="users",
@@ -267,7 +301,7 @@ def test_user(api_tester):
     )
 
 def test_user_balance(api_tester):
-    """Test the retrieval of a user's balance."""
+    """Test retrieval of a user's balance."""
     api_tester.test(
         cassette="user_balance_passthrough.yaml",
         endpoint="users",
@@ -279,7 +313,7 @@ def test_user_balance(api_tester):
 
 
 def test_user_positions(vcr_record, compare_api_model, client):
-    """Test the retrieval of a user's positions."""
+    """Test retrieval of a user's positions."""
     with vcr_record.use_cassette("user_position_passthrough.yaml"):
         # client
         positions, page_info = client.user(TEST_USER_ID).positions(
@@ -305,7 +339,7 @@ def test_user_positions(vcr_record, compare_api_model, client):
         for i, item in enumerate(positions):
             compare_api_model(api_data[i], item.model_dump(by_alias=True))
         assert page_info.total == api_page_info['total'], (
-            "Total number of markets doesn't match"
+            "Total number of positions doesn't match"
         )
         assert page_info.has_next_page == api_page_info['hasNextPage'], (
             "Has next page doesn't match"
@@ -316,7 +350,7 @@ def test_user_positions(vcr_record, compare_api_model, client):
 
 
 def test_user_graph(api_tester):
-    """Test the retrieval of a user's graph."""
+    """Test retrieval of a user's graph."""
     api_tester.test(
         cassette="user_graph_passthrough.yaml",
         endpoint="users",

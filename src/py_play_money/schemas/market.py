@@ -19,17 +19,24 @@ ContributionPolicyType = Literal[
 
 
 MarketSortFieldType = Literal[
-    "commentCount"
+    "comment_count",
     "close_date",
     "created_at",
     "description",
-    "liquidityCount",
+    "liquidity_count",
     "question",
     "updated_at",
-    "uniqueTradersCount",
-    "uniquePromotersCount"
+    "unique_traders_count",
+    "unique_promoters_count"
 ]
 
+MarketListSortFieldType = Literal[
+    "created_at",
+    "contribution_policy",
+    "description",
+    "title",
+    "updated_at",
+]
 
 class Market(DateModel):
     """Market data."""
