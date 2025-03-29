@@ -3,6 +3,8 @@ Tests every end point of client.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
+import random
+import string
 from datetime import datetime, timezone
 
 from py_play_money import PMClient
@@ -132,3 +134,11 @@ def test_user_positions_paging(vcr_record, client):
         next_pos, _ = client.user(TEST_USER_ID).positions(limit=10, cursor=page_info.end_cursor)
         assert len(next_pos) > 0
         assert next_pos[0].id != positions[0].id
+
+def test_check_username(client):
+    """Test that we can check if a username is available."""
+    # We do not record to avoid collisions created by maliciously creating a username
+    # recorded in the cassette.
+    random_username = ''.join(random.choices(string.ascii_letters, k=50))
+    assert client.check_username("case") is False
+    assert client.check_username(random_username) is True

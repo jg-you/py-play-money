@@ -338,6 +338,22 @@ class PMClient:
             logger.error("HTTP error occurred: %s", e)
             raise
 
+    def check_username(self, username: str, **kwargs) -> bool:
+        """
+        Check if a username is available.
+
+        Args:
+            username (str): The username to check.
+            **kwargs: Additional keyword arguments to pass to the request.
+
+        Returns:
+            bool: True if the username is available, False otherwise.
+
+        """
+        endpoint = "users/check-username"
+        response = self.execute_get(endpoint, params={"username": username}, **kwargs)
+        return response['data']['available']
+
     def markets(self,
         created_by: str | None = None,
         cursor: str | None = None,
