@@ -264,7 +264,7 @@ def test_market_positions(api_tester):
         client_method="market",
         item_id=TEST_MARKET_ID,
         nested_method="positions",
-        api_transform=lambda data: rename_user_subfield(data)
+        api_transform=rename_user_subfield
     )
 
 def test_market_related(api_tester):

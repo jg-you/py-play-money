@@ -7,6 +7,7 @@ from pydantic import Field
 
 from py_play_money.schemas.base_types import CamelCaseModel
 
+
 class PageInfo(CamelCaseModel):
     """Cursor for pagination."""
 

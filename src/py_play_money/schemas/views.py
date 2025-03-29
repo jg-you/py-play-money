@@ -9,7 +9,7 @@ from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
 from py_play_money.schemas.comments import Comment, CommentReaction
-from py_play_money.schemas.finance import UserBalance, MarketBalance
+from py_play_money.schemas.finance import UserBalance
 from py_play_money.schemas.market import (
     Market,
     MarketList,
@@ -135,7 +135,7 @@ class MarketResolutionView(MarketResolution):
                 f"{self.resolved_by.id} != {self.resolved_by_id}"
             )
         return self
-    
+
 
 class MarketView(Market):
     """Augmented view of a market."""

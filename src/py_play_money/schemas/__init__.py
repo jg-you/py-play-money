@@ -13,7 +13,7 @@ from py_play_money.schemas.finance import (
     TransactionEntry,
     TransactionType,
     UserBalance,
-    market_balances_adapter
+    market_balances_adapter,
 )
 from py_play_money.schemas.graphs import (
     MarketGraphTick,
@@ -28,6 +28,7 @@ from py_play_money.schemas.market import (
     MarketOption,
     MarketOptionPosition,
     MarketResolution,
+    MarketSortFieldType,
 )
 from py_play_money.schemas.user import Account, AccountType, User, UserRoleType
 from py_play_money.schemas.utils import PageInfo

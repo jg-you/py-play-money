@@ -24,7 +24,6 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.setLevel(logging.WARNING)
 
-
 class MarketWrapper(Market):
     """
     Combines the Market model with API functions.
@@ -98,26 +97,30 @@ class UserWrapper(User):
         resp = self._client.execute_get(endpoint, **kwargs)
         return user_graph_ticks_adapter.validate_python(resp['data'])
 
-    def positions(self,
-                  cursor: str | None = None,
-                  status: Literal['active', 'closed', 'all'] = 'all',
-                  limit: int = 10,
-                  sort_field: str | None = None,
-                  sort_direction: Literal['asc', 'desc'] = 'asc',
-                  **kwargs) -> tuple[list[MarketOptionPositionView], PageInfo]:
+    def positions(
+        self,
+        cursor: str | None = None,
+        limit: int = 10,
+        sort_field: Literal['cost', 'quantity', 'value', 'created_at', 'updated_at'] | None = None,
+        sort_direction: Literal['asc', 'desc'] = 'asc',
+        status: Literal['active', 'closed', 'all'] = 'all',
+        **kwargs
+    ) -> tuple[list[MarketOptionPositionView], PageInfo]:
         """
         Page through positions of the user.
 
         Args:
-            cursor (str | None): Pagination cursor, i.e., the market after which to start.
-            status (str): Market status. Can be 'active', 'closed', or 'all'.
-            limit (int): Number of markets to return per page.
-            sort_field (str | None): Field to sort by.
-            sort_direction (str): Sort direction. Can be 'asc' or 'desc'.
+            cursor (str, optional): Pagination cursor, i.e., the market after which to start.
+            limit (int, optional): Number of markets to return per page. Defaults to 10.
+            sort_field (str, optional): Field to sort by.
+                Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
+            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'. 
+                Defaults to 'all'
             **kwargs: Additional keyword arguments to pass to the request.
      
         Returns:
-            tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+            tuple: A tuple containing a list of positions, and a paging information.
 
         Example:
         ```python
@@ -129,12 +132,16 @@ class UserWrapper(User):
             if page_info.has_next_page is False:
                 break
         ```
+
         """
         # validate request
         if cursor and not CUID.validate(cursor):
             raise ValueError(f"`cursor` is an invalid market CUID: {cursor}")
 
         # prepare payload
+        if sort_field:
+            first, *others = sort_field.split('_')
+            sort_field = ''.join([first.lower(), *map(str.title, others)])
         payload = {
             "cursor": cursor,
             "status": status,
@@ -233,8 +240,8 @@ class PMClient:
     All requests accept keyword arguments that are passed to the `requests` library.
 
     Args:
-        api_key (str | None): API key to use for authenticated requests.
-        base_url (str): Base URL of the API. 
+        api_key (str, optional): API key to use for authenticated requests.
+        base_url (str, optional): Base URL of the API. 
             Defaults to the API of the main hosted instance of PlayMoney.dev. 
         version (str): Version of the API to use. Supported: 'v1'.
 
@@ -250,7 +257,12 @@ class PMClient:
 
     """
 
-    def __init__(self, api_key=None, base_url="https://api.playmoney.dev", version="v1") -> None:
+    def __init__(
+        self,
+        api_key: str | None=None,
+        base_url: str="https://api.playmoney.dev",
+        version: Literal["v1"] = "v1"
+    ) -> None:
         self.api_key = api_key
         self.base_url = f"{base_url}/{version}"
         self.headers = {'User-Agent': f"py-play-money/{__version__}"}
@@ -289,31 +301,32 @@ class PMClient:
         except requests.HTTPError as e:
             logger.error("HTTP error occurred: %s", e)
             raise
-    
+
     def markets(self,
-                cursor: str | None = None,
-                status: Literal['active', 'closed', 'all'] = 'all',
-                created_by: str | None = None,
-                tags: list[str] | None = None,
-                limit: int = 10,
-                sort_field: str | None = None,
-                sort_direction: Literal['asc', 'desc'] = 'asc',
-                **kwargs) -> tuple[list[MarketView], PageInfo]:
+        created_by: str | None = None,
+        cursor: str | None = None,
+        limit: int = 10,
+        sort_field: MarketSortFieldType | None = None,
+        sort_direction: Literal['asc', 'desc'] = 'asc',
+        status: Literal['active', 'closed', 'all'] = 'all',
+        tags: list[str] | None = None,
+        **kwargs) -> tuple[list[MarketView], PageInfo]:
         """
         Page through all markets.
 
         Args:
-            cursor (str | None): Pagination cursor, i.e., the market after which to start.
-            status (str): Market status. Can be 'active', 'closed', or 'all'.
-            created_by (str | None): Filter by user ID of the market creator.
-            tags (list[str] | None): Filter by tags associated with the market.
-            limit (int): Number of markets to return per page.
-            sort_field (str | None): Field to sort by.
-            sort_direction (str): Sort direction. Can be 'asc' or 'desc'.
-            **kwargs: Additional keyword arguments to pass to the request.
-     
+            created_by (str, optional): Filter by user ID of the market creator.
+            cursor (str, optional): Pagination cursor, i.e., the market after which to start.
+            limit (int, optional): Number of markets to return per page. Defaults to 10.
+            sort_field (str, optional): Field to sort by.
+                Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
+            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            status (str, optional): Market status to include. Can be 'active', 'closed', or 'all'. 
+                Defaults to 'all'
+            tags (list[str], optional): Filter by tags associated with the market.
+
         Returns:
-            tuple: A tuple containing a list of FullMarket objects and a PageInfo object.
+            tuple: A tuple containing a list of markets, and a paging information.
 
         Example:
         ```python
@@ -325,15 +338,19 @@ class PMClient:
             if page_info.has_next_page is False:
                 break
         ```
+
         """
         # validate request
         if cursor and not CUID.validate(cursor):
             raise ValueError(f"`cursor` is an invalid market CUID: {cursor}")
         if created_by and not CUID.validate(created_by):
             raise ValueError(f"`created_by` is an invalid user CUID: {created_by}")
-        
+
         # prepare payload
         tags = [] if tags is None else tags
+        if sort_field:
+            first, *others = sort_field.split('_')
+            sort_field = ''.join([first.lower(), *map(str.title, others)])
         payload = {
             "cursor": cursor,
             "status": status,
