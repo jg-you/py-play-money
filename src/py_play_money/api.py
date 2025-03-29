@@ -102,11 +102,18 @@ class MarketWrapper(Market):
                 return MarketResolutionView(**activity['marketResolution'])
         return None
 
-    # def transactions(self, **kwargs) -> list[Transaction]:
-    #     """Fetch all transactions on a market."""
-    #     endpoint = f"markets/{self.id}/activity"
-    #     resp = self._client.execute_get(endpoint, **kwargs)
-    #     return market_activities_adapter.validate_python(resp['data'])
+    def transactions(self, **kwargs) -> list[TransactionView]:
+        """Fetch all transactions on a market."""
+        endpoint = f"markets/{self.id}/activity"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        # look for transactions
+        transactions = []
+        for activity in resp['data']:
+            if "TRANSACTION" in activity['type']:
+                for t in activity['transactions']:
+                    transactions.append(TransactionView(**t))
+        return transactions
+
 
 class UserWrapper(User):
     """Combines the User model with API functions."""

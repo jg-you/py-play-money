@@ -226,16 +226,6 @@ def test_market(api_tester):
         item_id=TEST_MARKET_ID,
     )
 
-def test_market_activity(api_tester):
-    """Test retrieval of the activity for a specific market."""
-    api_tester.test(
-        cassette="market_activity_passthrough.yaml",
-        endpoint="markets",
-        client_method="market",
-        item_id=TEST_MARKET_ID,
-        nested_method="activity",
-    )
-
 def test_market_balance(api_tester):
     """Test retrieval of the AMM balance for a specific market."""
     api_tester.test(

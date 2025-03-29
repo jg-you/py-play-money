@@ -155,3 +155,20 @@ def test_resolution(vcr_record, client):
         assert res.resolution.name == "No"
         assert res.resolution.probability == 29
         assert res.resolved_by.username == "jgyou"
+
+def test_transactions(vcr_record, client):
+    """Test that the transactions endpoint is working."""
+    with vcr_record.use_cassette('market_transactions.yaml'):
+        transactions = client.market(TEST_MARKET_ID).transactions()
+        liquidity_transactions = [t for t in transactions if "LIQUIDITY" in t.type]
+        trade_transactions = [t for t in transactions if "TRADE" in t.type]
+        assert len(liquidity_transactions) == 1
+        assert len(trade_transactions) == 12
+        primary_asset_transactions = [
+            entry
+            for transaction in trade_transactions
+            for entry in transaction.entries
+            if entry.asset_id == "PRIMARY"
+        ]
+        total_value = sum([entry.amount for entry in primary_asset_transactions])
+        assert abs(total_value - 2246.46) < 0.1

@@ -8,10 +8,9 @@ Author: JGY <jean.gabriel.young@gmail.com>
 from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
-from py_play_money.schemas.activity import Activity
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
-from py_play_money.schemas.finance import UserBalance
+from py_play_money.schemas.finance import Transaction, TransactionEntry, UserBalance
 from py_play_money.schemas.market import (
     Market,
     MarketList,
@@ -225,9 +224,14 @@ class MarketListView(MarketList):
                 )
         return self
 
-# class MarketActivityView(Activity):
-#     """Augmented view of a market activity."""
-    
+class TransactionView(Transaction):
+    """View of a transaction with user information."""
+
+    entries: list[TransactionEntry]
+    market: Market
+    initiator: User
+    options: list[MarketOption]
+
 
 # Type adapters for serialization
 comments_adapter = TypeAdapter(list[CommentView])

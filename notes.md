@@ -35,3 +35,6 @@ List of API quirks I worked around
   * Comments are available in their own end points,
   * Creation and resolution are available in the market() endpoint directly
   * Which leaves only transaction as the missing piece
+  
+* Transactions return the option.. which includes a probability
+  But that probability is the final value, not at time of purchase, so the information is not super useful
