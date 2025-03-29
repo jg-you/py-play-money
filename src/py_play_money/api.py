@@ -45,6 +45,13 @@ class MarketListWrapper(MarketList):
         resp = self._client.execute_get(endpoint, **kwargs)
         return comments_adapter.validate_python(resp['data'])
 
+    def graph(self, **kwargs) -> list[MarketListGraphTick]:
+        """Fetch list graphs."""
+        endpoint = f"lists/{self.id}/graph"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return market_list_graph_ticks_adapter.validate_python(resp['data'])
+
+
 class MarketWrapper(Market):
     """Combines the Market model with API functions."""
 

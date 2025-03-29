@@ -135,6 +135,17 @@ def test_list_comments(api_tester):
         nested_method="comments"
     )
 
+def test_list_graph(api_tester):
+    """Test the retrieval of a list graph."""
+    api_tester.test(
+        cassette="list_graph_passthrough.yaml",
+        endpoint="lists",
+        client_method="list",
+        item_id=TEST_LIST_ID,
+        nested_method="graph"
+    )
+
+
 # == markets/ endpoints ==
 def test_markets(vcr_record, compare_api_model, client):
     """Test the retrieval of an individual market."""

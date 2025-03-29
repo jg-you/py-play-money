@@ -17,8 +17,10 @@ from py_play_money.schemas.finance import (
 )
 from py_play_money.schemas.graphs import (
     MarketGraphTick,
+    MarketListGraphTick,
     UserGraphTick,
     market_graph_ticks_adapter,
+    market_list_graph_ticks_adapter,
     user_graph_ticks_adapter,
 )
 from py_play_money.schemas.market import (
