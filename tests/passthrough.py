@@ -7,6 +7,7 @@ import pytest
 import requests
 
 BASEURL = "https://api.playmoney.dev/v1"
+TEST_LIST_ID = "cm3o29jaj00b7rgrbwlw56rqd"
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 TEST_USER_ID = "clzrooq660000a2uznm33y25b"
 TEST_COMMENT_ID = "cm5j3371q008elbahtrgixruy"
@@ -79,7 +80,7 @@ def api_tester_fixture(vcr_record, compare_api_model, client):
 def rename_user_subfield(data):
     """
     Rename user subfield.
-    
+
     The inconsistency breaks some passthrough tests.
     """
     new_data = []
@@ -88,7 +89,11 @@ def rename_user_subfield(data):
         new_data[-1]['account']['userPrimary'] = d['account'].pop('user')
     return new_data
 
-# == Test Cases ==
+# =============================================================================
+# test cases
+# =============================================================================
+
+# == comments/ endpoints ==
 def test_comment(api_tester):
     """Test the retrieval of a specific comment."""
     api_tester.test(
@@ -98,73 +103,16 @@ def test_comment(api_tester):
         item_id=TEST_COMMENT_ID,
     )
 
-# == users/ endpoints ==
-def test_user(api_tester):
-    """Test the retrieval of an individual user."""
+
+# == lists/ endpoints ==
+
+def test_list(api_tester):
+    """Test the retrieval of a specific list."""
     api_tester.test(
-        cassette="user_passthrough.yaml",
-        endpoint="users",
-        client_method="user",
-        item_id=TEST_USER_ID,
-    )
-
-def test_user_balance(api_tester):
-    """Test the retrieval of a user's balance."""
-    api_tester.test(
-        cassette="user_balance_passthrough.yaml",
-        endpoint="users",
-        client_method="user",
-        item_id=TEST_USER_ID,
-        nested_method="balance",
-        api_transform=lambda data: data['balance']
-    )
-
-
-def test_user_positions(vcr_record, compare_api_model, client):
-    """Test the retrieval of a user's positions."""
-    with vcr_record.use_cassette("user_position_passthrough.yaml"):
-        # client
-        positions, page_info = client.user(TEST_USER_ID).positions(
-            limit=10,
-            sort_direction='asc',
-            status='all'
-        )
-        # direct API call
-        params = {
-            "limit": 10,
-            "sortDirection": 'asc',
-            "status": 'all'
-        }
-        resp = requests.get(
-            f"{BASEURL}/users/{TEST_USER_ID}/positions",
-            params=params,
-            timeout=10
-        )
-        api_data = resp.json()['data']
-        api_data = rename_user_subfield(api_data)
-        api_page_info = resp.json()['pageInfo']
-        assert len(positions) == len(api_data), "Number of items doesn't match"
-        for i, item in enumerate(positions):
-            compare_api_model(api_data[i], item.model_dump(by_alias=True))
-        assert page_info.total == api_page_info['total'], (
-            "Total number of markets doesn't match"
-        )
-        assert page_info.has_next_page == api_page_info['hasNextPage'], (
-            "Has next page doesn't match"
-        )
-        assert page_info.end_cursor == api_page_info['endCursor'], (
-            "End cursor doesn't match"
-        )
-
-
-def test_user_graph(api_tester):
-    """Test the retrieval of a user's graph."""
-    api_tester.test(
-        cassette="user_graph_passthrough.yaml",
-        endpoint="users",
-        client_method="user",
-        item_id=TEST_USER_ID,
-        nested_method="graph",
+        cassette="list_passthrough.yaml",
+        endpoint="lists",
+        client_method="list",
+        item_id=TEST_LIST_ID
     )
 
 # == markets/ endpoints ==
@@ -275,4 +223,74 @@ def test_market_related(api_tester):
         client_method="market",
         item_id=TEST_MARKET_ID,
         nested_method="related"
+    )
+
+
+# == users/ endpoints ==
+def test_user(api_tester):
+    """Test the retrieval of an individual user."""
+    api_tester.test(
+        cassette="user_passthrough.yaml",
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
+    )
+
+def test_user_balance(api_tester):
+    """Test the retrieval of a user's balance."""
+    api_tester.test(
+        cassette="user_balance_passthrough.yaml",
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
+        nested_method="balance",
+        api_transform=lambda data: data['balance']
+    )
+
+
+def test_user_positions(vcr_record, compare_api_model, client):
+    """Test the retrieval of a user's positions."""
+    with vcr_record.use_cassette("user_position_passthrough.yaml"):
+        # client
+        positions, page_info = client.user(TEST_USER_ID).positions(
+            limit=10,
+            sort_direction='asc',
+            status='all'
+        )
+        # direct API call
+        params = {
+            "limit": 10,
+            "sortDirection": 'asc',
+            "status": 'all'
+        }
+        resp = requests.get(
+            f"{BASEURL}/users/{TEST_USER_ID}/positions",
+            params=params,
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        api_data = rename_user_subfield(api_data)
+        api_page_info = resp.json()['pageInfo']
+        assert len(positions) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(positions):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of markets doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )
+
+
+def test_user_graph(api_tester):
+    """Test the retrieval of a user's graph."""
+    api_tester.test(
+        cassette="user_graph_passthrough.yaml",
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
+        nested_method="graph",
     )

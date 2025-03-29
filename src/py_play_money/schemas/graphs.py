@@ -1,5 +1,5 @@
 """
-Graph models
+Graph models.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """

@@ -24,6 +24,17 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.setLevel(logging.WARNING)
 
+
+class MarketListWrapper(MarketList):
+    """
+    Combines the MarketList model with API functions.
+    """
+
+    def __init__(self, client: 'PMClient', list_data: MarketList):
+        super().__init__(**list_data.model_dump(by_alias=True))
+        self._client = client
+
+
 class MarketWrapper(Market):
     """
     Combines the Market model with API functions.
@@ -178,16 +189,35 @@ class CommentResource:
         resp = self._client.execute_get(endpoint, **kwargs)
         return CommentView(**resp['data'])
 
-
-class MarketResource:
+class MarketListResource:
     """
-    Functions to fetch market information from the API.
+    Functions to fetch lists from the API.
     """
 
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, market_id=None):
+    def __call__(self, list_id: str = None) -> MarketListWrapper:
+        if list_id:
+            return self.by_id(list_id)
+        return self
+
+    def by_id(self, list_id: str, **kwargs) -> MarketListWrapper:
+        """Fetch a list by ID."""
+        endpoint = f"lists/{list_id}"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return MarketList(**resp['data'])
+
+
+class MarketResource:
+    """
+    Functions to fetch markets from the API.
+    """
+
+    def __init__(self, client: 'PMClient'):
+        self._client = client
+
+    def __call__(self, market_id=None) -> MarketWrapper:
         """Make MarketResource callable."""
         if market_id:
             return self.by_id(market_id)
@@ -202,13 +232,13 @@ class MarketResource:
 
 class UserResource:
     """
-    Functions to fetch user information from the API.
+    Functions to fetch users from the API.
     """
 
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, user_id=None):
+    def __call__(self, user_id=None) -> UserWrapper:
         """Make UserResource callable."""
         if user_id:
             return self.by_id(user_id)
@@ -274,6 +304,7 @@ class PMClient:
 
         # Resource proxies
         self.comment = CommentResource(self)
+        self.list = MarketListResource(self)
         self.market = MarketResource(self)
         self.user = UserResource(self)
 

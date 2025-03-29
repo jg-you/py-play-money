@@ -129,6 +129,6 @@ def test_user_positions_paging(vcr_record, client):
         assert len(positions) > 0
         assert page_info is not None
         assert page_info.has_next_page is True
-        next_positions, _ = client.user(TEST_USER_ID).positions(limit=10, cursor=page_info.end_cursor)
-        assert len(next_positions) > 0
-        assert next_positions[0].id != positions[0].id
+        next_pos, _ = client.user(TEST_USER_ID).positions(limit=10, cursor=page_info.end_cursor)
+        assert len(next_pos) > 0
+        assert next_pos[0].id != positions[0].id

@@ -1,0 +1,128 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm3o29jaj00b7rgrbwlw56rqd
+  response:
+    body:
+      string: '{"data":{"id":"cm3o29jaj00b7rgrbwlw56rqd","title":"What foods will
+        I make (from scratch) this winter?","slug":"what-foods-will-i-make-from-scratch-this-winter","description":"<p>It
+        might still be Fall, but winter weather is here! Counting from now until the
+        official end of the season.</p><p>I usually keep things simple when I cook:
+        soup, stir fry, rice, or heating up a box of something. But I also love a
+        big day of cooking and baking from time to time.</p><p>Some of these are old
+        favorites. Others I want to attempt! May add more later. Variations are very
+        likely to happen but won''t count, such as: making a turkey without stuffing,
+        a marionberry pie instead of a crumble, etc.</p><p>\"From scratch\" means
+        no pre-made mixes, doughs, etc., and fresh ingredients where possible (frozen-fresh
+        is okay).</p>","ownerId":"clydldvix0000rhznmgr36pt6","contributionPolicy":"OWNERS_ONLY","contributionReview":false,"tags":["food","cooking","winter-recipes","seasonal-ingredients","comfort-food"],"createdAt":"2024-11-19T06:15:49.477Z","updatedAt":"2024-11-19T06:15:49.477Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:30:49 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::qlrlz-1743222649615-15d8bf28b204
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm3o29jaj00b7rgrbwlw56rqd
+  response:
+    body:
+      string: '{"data":{"id":"cm3o29jaj00b7rgrbwlw56rqd","title":"What foods will
+        I make (from scratch) this winter?","slug":"what-foods-will-i-make-from-scratch-this-winter","description":"<p>It
+        might still be Fall, but winter weather is here! Counting from now until the
+        official end of the season.</p><p>I usually keep things simple when I cook:
+        soup, stir fry, rice, or heating up a box of something. But I also love a
+        big day of cooking and baking from time to time.</p><p>Some of these are old
+        favorites. Others I want to attempt! May add more later. Variations are very
+        likely to happen but won''t count, such as: making a turkey without stuffing,
+        a marionberry pie instead of a crumble, etc.</p><p>\"From scratch\" means
+        no pre-made mixes, doughs, etc., and fresh ingredients where possible (frozen-fresh
+        is okay).</p>","ownerId":"clydldvix0000rhznmgr36pt6","contributionPolicy":"OWNERS_ONLY","contributionReview":false,"tags":["food","cooking","winter-recipes","seasonal-ingredients","comfort-food"],"createdAt":"2024-11-19T06:15:49.477Z","updatedAt":"2024-11-19T06:15:49.477Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:30:49 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::qhtfr-1743222649931-5c093154f0cc
+    status:
+      code: 200
+      message: OK
+version: 1
