@@ -110,3 +110,25 @@ def test_comment(vcr_record, client):
             assert len(c.reactions) > 0
             assert c.reactions[0].id == "cm5jwu6kf0001110nhcg2lbgi"
             assert c.reactions[0].emoji == ":smiling_face_with_tear:"
+
+def test_markets_paging(vcr_record, client):
+    """Test that we can page through markets."""
+    with vcr_record.use_cassette('markets_paging.yaml'):
+        markets, page_info = client.markets(limit=10)
+        assert len(markets) > 0
+        assert page_info is not None
+        assert page_info.has_next_page is True
+        next_markets, _ = client.markets(limit=10, cursor=page_info.end_cursor)
+        assert len(next_markets) > 0
+        assert next_markets[0].id != markets[0].id
+
+def test_user_positions_paging(vcr_record, client):
+    """Test that we can page through markets."""
+    with vcr_record.use_cassette('user_positions_paging.yaml'):
+        positions, page_info = client.user(TEST_USER_ID).positions(limit=10)
+        assert len(positions) > 0
+        assert page_info is not None
+        assert page_info.has_next_page is True
+        next_positions, _ = client.user(TEST_USER_ID).positions(limit=10, cursor=page_info.end_cursor)
+        assert len(next_positions) > 0
+        assert next_positions[0].id != positions[0].id

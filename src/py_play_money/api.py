@@ -145,7 +145,7 @@ class UserWrapper(User):
 
         # make request
         endpoint = f"users/{self.id}/positions"
-        response = self.execute_get(endpoint, params=payload, **kwargs)
+        response = self._client.execute_get(endpoint, params=payload, **kwargs)
         return (
             market_option_positions_adapter.validate_python(response['data']),
             PageInfo(**response['pageInfo'])

@@ -1,0 +1,214 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 03:40:25 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::rbzsg-1743219625448-128ea67872bc
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 03:40:25 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::jb595-1743219625761-ca7cab21c18e
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/username/jgyou
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 03:40:26 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/username/[username]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::dgxg6-1743219626055-70833879fafa
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/referral/J2P2
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 03:40:26 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/referral/[code]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::jhp9z-1743219626235-4594d7f40c8f
+    status:
+      code: 200
+      message: OK
+version: 1

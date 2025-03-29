@@ -74,6 +74,7 @@ class UserBalanceView(UserBalance):
 
     @model_validator(mode='after')
     def validate_account(self) -> Self:
+        """Ensure account_id matches account data."""
         if self.account.id != self.account_id:
             raise ValueError(
                 "account_id does not match the account.id."

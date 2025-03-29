@@ -76,6 +76,18 @@ def api_tester_fixture(vcr_record, compare_api_model, client):
         client=client
     )
 
+def rename_user_subfield(data):
+    """
+    Rename user subfield.
+    
+    The inconsistency breaks some passthrough tests.
+    """
+    new_data = []
+    for d in data:
+        new_data.append(d)
+        new_data[-1]['account']['userPrimary'] = d['account'].pop('user')
+    return new_data
+
 # == Test Cases ==
 def test_comment(api_tester):
     """Test the retrieval of a specific comment."""
@@ -112,7 +124,7 @@ def test_user_positions(vcr_record, compare_api_model, client):
     """Test the retrieval of a user's positions."""
     with vcr_record.use_cassette("user_position_passthrough.yaml"):
         # client
-        positions, page_info = client.markets(
+        positions, page_info = client.user(TEST_USER_ID).positions(
             limit=10,
             sort_direction='asc',
             status='all'
@@ -124,11 +136,12 @@ def test_user_positions(vcr_record, compare_api_model, client):
             "status": 'all'
         }
         resp = requests.get(
-            f"{BASEURL}/markets",
+            f"{BASEURL}/users/{TEST_USER_ID}/positions",
             params=params,
             timeout=10
         )
         api_data = resp.json()['data']
+        api_data = rename_user_subfield(api_data)
         api_page_info = resp.json()['pageInfo']
         assert len(positions) == len(api_data), "Number of items doesn't match"
         for i, item in enumerate(positions):
@@ -245,22 +258,13 @@ def test_market_graph(api_tester):
 
 def test_market_positions(api_tester):
     """Test the retrieval of the positions in a specific market."""
-
-    def _rename_user_subfield(data):
-        """Rename user subfield in the data."""
-        new_data = []
-        for d in data:
-            new_data.append(d)
-            new_data[-1]['account']['userPrimary'] = d['account'].pop('user')
-        return new_data
-
     api_tester.test(
         cassette="market_positions_passthrough.yaml",
         endpoint="markets",
         client_method="market",
         item_id=TEST_MARKET_ID,
         nested_method="positions",
-        api_transform=lambda data: _rename_user_subfield(data)
+        api_transform=lambda data: rename_user_subfield(data)
     )
 
 def test_market_related(api_tester):
