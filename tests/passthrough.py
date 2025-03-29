@@ -7,7 +7,7 @@ import pytest
 import requests
 
 BASEURL = "https://api.playmoney.dev/v1"
-TEST_LIST_ID = "cm3o29jaj00b7rgrbwlw56rqd"
+TEST_LIST_ID = "cm1npliun006q11x80i8lvcri"
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
 TEST_USER_ID = "clzrooq660000a2uznm33y25b"
 TEST_COMMENT_ID = "cm5j3371q008elbahtrgixruy"
@@ -105,7 +105,6 @@ def test_comment(api_tester):
 
 
 # == lists/ endpoints ==
-
 def test_list(api_tester):
     """Test the retrieval of a specific list."""
     api_tester.test(
@@ -115,8 +114,18 @@ def test_list(api_tester):
         item_id=TEST_LIST_ID
     )
 
-# == markets/ endpoints ==
+def test_list_balance(api_tester):
+    """Test the retrieval of a list balance."""
+    api_tester.test(
+        cassette="list_balance_passthrough.yaml",
+        endpoint="lists",
+        client_method="list",
+        item_id=TEST_LIST_ID,
+        nested_method="balance",
+        api_transform=lambda data: data['user']
+    )
 
+# == markets/ endpoints ==
 def test_markets(vcr_record, compare_api_model, client):
     """Test the retrieval of an individual market."""
     with vcr_record.use_cassette("markets_passthrough.yaml"):

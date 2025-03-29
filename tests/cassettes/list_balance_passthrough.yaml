@@ -35,7 +35,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 29 Mar 2025 04:42:30 GMT
+      - Sat, 29 Mar 2025 04:54:21 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -49,7 +49,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::cszdz-1743223350862-525a260a9604
+      - iad1::iad1::xv9h4-1743224061417-fbc0efa0173d
     status:
       code: 200
       message: OK
@@ -63,13 +63,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.32.3
+      - py-play-money/0.1.0
     method: GET
-    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri
+    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/balance
   response:
     body:
-      string: '{"data":{"id":"cm1npliun006q11x80i8lvcri","title":"Best LLM at the
-        end of the year?","slug":"best-llm-at-the-end-of-the-year","description":"","ownerId":"clzrooq660000a2uznm33y25b","contributionPolicy":"PUBLIC","contributionReview":false,"tags":["technology","llm","ai"],"createdAt":"2024-09-29T15:01:49.099Z","updatedAt":"2024-09-29T15:01:49.099Z"}}'
+      string: '{"data":{"user":[],"userPositions":[]}}'
     headers:
       Access-Control-Allow-Credentials:
       - 'true'
@@ -89,7 +88,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 29 Mar 2025 04:42:31 GMT
+      - Sat, 29 Mar 2025 04:54:21 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -99,11 +98,64 @@ interactions:
       Vary:
       - RSC, Next-Router-State-Tree, Next-Router-Prefetch
       X-Matched-Path:
-      - /api/v1/lists/[id]
+      - /api/v1/lists/[id]/balance
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::4tjcc-1743223351055-b3fe62d829c2
+      - iad1::iad1::xhstl-1743224061810-ff193bc831a6
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/balance
+  response:
+    body:
+      string: '{"data":{"user":[],"userPositions":[]}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Mar 2025 04:54:22 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/lists/[id]/balance
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::tqlwq-1743224062164-69aa52203016
     status:
       code: 200
       message: OK

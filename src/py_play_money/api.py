@@ -32,6 +32,13 @@ class MarketListWrapper(MarketList):
         super().__init__(**list_data.model_dump(by_alias=True))
         self._client = client
 
+    def balance(self, **kwargs) -> list[MarketBalance]:
+        """Fetch list balance."""
+        endpoint = f"lists/{self.id}/balance"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        print(resp['data'])
+        return market_balances_adapter.validate_python(resp['data']['user'])
+
 
 class MarketWrapper(Market):
     """Combines the Market model with API functions."""
@@ -196,7 +203,7 @@ class MarketListResource:
         """Fetch a list by ID."""
         endpoint = f"lists/{list_id}"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return MarketList(**resp['data'])
+        return MarketListWrapper(self._client, MarketList(**resp['data']))
 
 
 class MarketResource:
