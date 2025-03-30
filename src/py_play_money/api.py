@@ -52,7 +52,19 @@ class MeWrapper(User):
     """Combines the User model with API functions for authenticated user."""
     def __init__(self, client: 'PMClient', user_data: User):
         super().__init__(**user_data.model_dump(by_alias=True))
+        self._client = client
 
+    def balance(self, **kwargs) -> float:
+        """Fetch the user balance."""
+        endpoint = "users/me/balance"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return resp['data']['balance']
+
+    def referrals(self, **kwargs) -> list[User]:
+        """Fetch all referrals for the authenticated user."""
+        endpoint = "users/me/referrals"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return users_adapter.validate_python(resp['data'])
 
 class MarketWrapper(Market):
     """Combines the Market model with API functions."""

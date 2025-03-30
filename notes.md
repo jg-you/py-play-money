@@ -38,3 +38,5 @@ List of API quirks I worked around
   
 * Transactions return the option.. which includes a probability
   But that probability is the final value, not at time of purchase, so the information is not super useful
+
+* users/me/balance is different from users/[MY_ID]/balance

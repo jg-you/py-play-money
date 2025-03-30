@@ -5,6 +5,8 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from typing import Literal
 
+from pydantic import TypeAdapter
+
 from py_play_money.schemas.base_types import CUID, DateModel, IsoDatetime
 
 AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
@@ -42,3 +44,7 @@ class Account(DateModel):
     market_id: CUID | None = None
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
+
+
+# Type adapters for serialization
+users_adapter = TypeAdapter(list[User])
