@@ -169,12 +169,10 @@ class UserWrapper(User):
 
         Args:
             cursor (str, optional): Pagination cursor, i.e., the position after which to start.
-            limit (int, optional): Number of positions to return per page. Defaults to 10.
+            limit (int, optional): Number of positions to return per page.
             sort_field (str, optional): Field to sort by.
-                Can be 'cost', 'quantity', 'value', 'created_at', 'updated_at'.
-            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
-            status (str, optional): Status of positions to include. Can be 'active', 'closed', or 'all'.
-                Defaults to 'all'
+            sort_direction (str, optional): Sort direction.
+            status (str, optional): Status of positions to include.
             **kwargs: Additional keyword arguments to pass to requests.
 
         Returns:
@@ -455,14 +453,10 @@ class PMClient:
         Args:
             created_by (str, optional): Filter by user ID of the market creator.
             cursor (str, optional): Pagination cursor, i.e., the market after which to start.
-            limit (int, optional): Number of markets to return per page. Defaults to 10.
+            limit (int, optional): Number of markets to return per page.
             sort_field (str, optional): Field to sort by.
-                Can be "comment_count" "close_date", "created_at", "description",
-                "liquidity_count", "question", "updated_at", "unique_traders_count",
-                "unique_promoters_count"
-            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            sort_direction (str, optional): Sort direction.
             status (str, optional): Status of markets to include.
-                Can be 'active', 'closed', or 'all'. Defaults to 'all'
             tags (list[str], optional): Filter by tags associated with the market.
 
         Returns:
@@ -520,11 +514,10 @@ class PMClient:
 
         Args:
             cursor (str, optional): Pagination cursor, i.e., the list after which to start.
-            limit (int, optional): Number of lists to return per page. Defaults to 10.
+            limit (int, optional): Number of lists to return per page.
             owner_id (str, optional): Filter by ID of the list owner.
             sort_field (str, optional): Field to sort by.
-                Can be "created_at", "contribution_policy, "description", "title", "updated_at".
-            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            sort_direction (str, optional): Sort direction.
 
         Returns:
             tuple: A tuple containing a list of market lists, and a paging information.
@@ -581,21 +574,12 @@ class PMClient:
 
         Args:
             cursor (str, optional): Pagination cursor, i.e., the transaction after which to start.
-            limit (int, optional): Number of transactions to return per page. Defaults to 10.
+            limit (int, optional): Number of transactions to return per page.
             market_id (str, optional): Only include transaction for this market.
             sort_field (str, optional): Field to sort by.
-                Can be "id", "type", "initiator_id", "created_at", "updated_at", 
-                "batch_id", "market_id".
-            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            sort_direction (str, optional): Sort direction.
             status (str, optional): Status of transactions to include.
-                Can be 'active', 'closed', or 'all'. Defaults to 'all'
             transaction_type (str, optional): Type of transaction to include.
-                Can be  "trade_buy", "trade_sell", "trade_win", "trade_sell", 
-                "creator_trader_bonus", "liquidity_initialize", "liquidity_deposit",
-                "liquidity_withdrawal", "liquidity_returned", "liquidity_volume_bonus",
-                "daily_trade_bonus", "daily_market_bonus", "daily_comment_bonus",
-                "daily_liquidity_bonus", "house_gift", "house_signup_bonus", "referrer_bonus",
-                "referree_bonus",
             user_id (str, optional): Only include transaction for this user.
 
             **kwargs: Additional keyword arguments to pass to requests.

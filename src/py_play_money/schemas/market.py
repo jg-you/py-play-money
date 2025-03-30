@@ -19,21 +19,27 @@ ContributionPolicyType = Literal[
 
 
 MarketSortFieldType = Literal[
+    "id",
     "comment_count",
     "close_date",
     "created_at",
+    "created_by"
     "description",
     "liquidity_count",
     "question",
+    "slug",
     "updated_at",
     "unique_traders_count",
     "unique_promoters_count"
 ]
 
 MarketListSortFieldType = Literal[
+    "id",
     "created_at",
     "contribution_policy",
     "description",
+    "owner_id"
+    "slug",
     "title",
     "updated_at",
 ]
