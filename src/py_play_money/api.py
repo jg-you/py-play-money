@@ -33,7 +33,6 @@ class MarketListWrapper(MarketList):
         """Fetch list balance."""
         endpoint = f"lists/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
-        print(resp['data'])
         return market_balances_adapter.validate_python(resp['data']['user'])
 
     def comments(self, **kwargs) -> list[CommentView]:
@@ -47,6 +46,12 @@ class MarketListWrapper(MarketList):
         endpoint = f"lists/{self.id}/graph"
         resp = self._client.execute_get(endpoint, **kwargs)
         return market_list_graph_ticks_adapter.validate_python(resp['data'])
+
+
+class MeWrapper(User):
+    """Combines the User model with API functions for authenticated user."""
+    def __init__(self, client: 'PMClient', user_data: User):
+        super().__init__(**user_data.model_dump(by_alias=True))
 
 
 class MarketWrapper(Market):
@@ -202,9 +207,9 @@ class CommentResource:
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, comment_id: str = None) -> CommentView:
+    def __call__(self, comment_id: str = None, **kwargs) -> CommentView:
         if comment_id:
-            return self.by_id(comment_id)
+            return self.by_id(comment_id, **kwargs)
         return self
 
     def by_id(self, comment_id: str, **kwargs) -> CommentView:
@@ -219,9 +224,9 @@ class MarketListResource:
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, list_id: str = None) -> MarketListWrapper:
+    def __call__(self, list_id: str = None, **kwargs) -> MarketListWrapper:
         if list_id:
-            return self.by_id(list_id)
+            return self.by_id(list_id, **kwargs)
         return self
 
     def by_id(self, list_id: str, **kwargs) -> MarketListWrapper:
@@ -237,10 +242,10 @@ class MarketResource:
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, market_id=None) -> MarketWrapper:
+    def __call__(self, market_id=None, **kwargs) -> MarketWrapper:
         """Make MarketResource callable."""
         if market_id:
-            return self.by_id(market_id)
+            return self.by_id(market_id, **kwargs)
         return self
 
     def by_id(self, market_id: str, **kwargs) -> MarketWrapper:
@@ -250,16 +255,29 @@ class MarketResource:
         return MarketWrapper(self._client, Market(**resp['data']))
 
 
+class MeResource:
+    """Functions to fetch the authenticated user."""
+    def __init__(self, client: 'PMClient'):
+        self._client = client
+
+    def __call__(self, **kwargs) -> MeWrapper:
+        if not self._client.authenticated:
+            raise PermissionError("No API key provided.")
+        endpoint = "users/me"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return MeWrapper(self._client, User(**resp['data']))
+
+
 class UserResource:
     """Functions to fetch users from the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
 
-    def __call__(self, user_id=None) -> UserWrapper:
+    def __call__(self, user_id=None, **kwargs) -> UserWrapper:
         """Make UserResource callable."""
         if user_id:
-            return self.by_id(user_id)
+            return self.by_id(user_id, **kwargs)
         return self
 
     def by_id(self, user_id: str, **kwargs) -> UserWrapper:
@@ -324,6 +342,7 @@ class PMClient:
         self.comment = CommentResource(self)
         self.list = MarketListResource(self)
         self.market = MarketResource(self)
+        self.me = MeResource(self)
         self.user = UserResource(self)
 
     def execute_get(self, endpoint, **kwargs) -> dict:

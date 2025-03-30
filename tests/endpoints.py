@@ -7,6 +7,8 @@ import random
 import string
 from datetime import datetime, timezone
 
+import pytest
+
 from py_play_money import PMClient
 
 TEST_MARKET_ID = "cm5ifmwfo001g24d2r7fzu34u"
@@ -172,3 +174,10 @@ def test_transactions(vcr_record, client):
         ]
         total_value = sum([entry.amount for entry in primary_asset_transactions])
         assert abs(total_value - 2246.46) < 0.1
+
+def test_authentication_error():
+    """Tests that unauthenticated access to me() raises an error."""
+    api_key = None
+    client = PMClient(api_key=api_key)
+    with pytest.raises(PermissionError, match="No API key provided."):
+        client.me()
