@@ -58,5 +58,6 @@ from py_play_money.schemas.views import (
     market_lists_adapter,
     market_option_positions_adapter,
     markets_adapter,
+    transactions_adapter,
     user_balances_adapter,
 )

@@ -367,3 +367,25 @@ def test_user_stats(api_tester):
         item_id=TEST_USER_ID,
         nested_method="stats",
     )
+
+def test_user_transactions(vcr_record, compare_api_model, client):
+    """Test retrieval of a user's transactions."""
+    with vcr_record.use_cassette("user_transactions_passthrough.yaml"):
+        # client
+        transactions, page_info = client.user(TEST_USER_ID).transactions()
+        # direct API call
+        resp = requests.get(f"{BASEURL}/users/{TEST_USER_ID}/transactions", timeout=10)
+        api_data = resp.json()['data']
+        api_page_info = resp.json()['pageInfo']
+        assert len(transactions) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(transactions):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of transactions doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )

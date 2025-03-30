@@ -175,7 +175,7 @@ class UserWrapper(User):
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
             status (str, optional): Status of positions to include. Can be 'active', 'closed', or 'all'.
                 Defaults to 'all'
-            **kwargs: Additional keyword arguments to pass to the request.
+            **kwargs: Additional keyword arguments to pass to requests.
 
         Returns:
             tuple: A tuple containing a list of positions, and a paging information.
@@ -222,6 +222,36 @@ class UserWrapper(User):
         resp = self._client.execute_get(endpoint, **kwargs)
         return UserStatistics(**resp['data'])
 
+    def transactions(self, **kwargs) -> tuple[list[MarketOptionPositionView], PageInfo]:
+        """
+        Page through transactions of the user.
+
+        Args:
+            **kwargs: Additional keyword arguments to pass to requests.
+
+        Returns:
+            tuple: A tuple containing a list of transactions, and a paging information.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            transactions, page_info = client.user(user_id).transactions(cursor=cursor)
+            print(f"Found {len(transactions)} transactions")
+            cursor = page_info.end_cursor
+            if page_info.has_next_page is False:
+                break
+        ```
+
+        """
+        # make request
+        endpoint = f"users/{self.id}/transactions"
+        response = self._client.execute_get(endpoint, **kwargs)
+        return (
+            transactions_adapter.validate_python(response['data']),
+            PageInfo(**response['pageInfo'])
+        )
+
 
 class CommentResource:
     """Functions to fetch comment information from the API."""
@@ -239,6 +269,7 @@ class CommentResource:
         endpoint = f"comments/{comment_id}"
         resp = self._client.execute_get(endpoint, **kwargs)
         return CommentView(**resp['data'])
+
 
 class MarketListResource:
     """Functions to fetch lists from the API."""
@@ -374,7 +405,7 @@ class PMClient:
 
         Args:
             endpoint (str): The API endpoint to call.
-            **kwargs: Additional keyword arguments to pass to the request.
+            **kwargs: Additional keyword arguments to pass to requests.
                       Timeout defaults to 10 seconds if not specified.
 
         Returns:
@@ -399,7 +430,7 @@ class PMClient:
 
         Args:
             username (str): The username to check.
-            **kwargs: Additional keyword arguments to pass to the request.
+            **kwargs: Additional keyword arguments to pass to requests.
 
         Returns:
             bool: True if the username is available, False otherwise.

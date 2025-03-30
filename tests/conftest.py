@@ -35,7 +35,7 @@ def normalize_data(obj: Any) -> Any:
         for k, v in obj.items():
             if k.endswith("At") or k.endswith("Date"):
                 normalized[k] = normalize_datetime(v)
-            elif k in {"cost", "quantity", "value", "liquidityProbability"}:
+            elif k in {"amount", "cost", "quantity", "value", "liquidityProbability"}:
                 normalized[k] = float(v)
             else:
                 normalized[k] = normalize_data(v)
