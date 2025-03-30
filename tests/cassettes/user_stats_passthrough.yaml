@@ -1,0 +1,169 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b
+  response:
+    body:
+      string: '{"data":{"id":"clzrooq660000a2uznm33y25b","username":"jgyou","displayName":"jgyou","avatarUrl":null,"twitterHandle":null,"discordHandle":null,"website":null,"bio":"https://manifold.markets/jgyou","timezone":"America/New_York","primaryAccountId":"c66cc328ef6c13d1767417889","role":"USER","referralCode":"J2P2","referredBy":null,"createdAt":"2024-08-13T00:27:58.974Z","updatedAt":"2024-10-01T05:40:44.407Z"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 20:56:59 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::zgmhx-1743368219123-dc980a9c13f8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b/stats
+  response:
+    body:
+      string: '{"data":{"netWorth":11532.314289074551,"tradingVolume":130531.88556559081,"totalMarkets":52,"lastTradeAt":"2025-03-28T14:24:11.743Z","activeDayCount":144,"otherIncome":45060.40944996937,"quests":[{"title":"Bet
+        in a market","award":100,"completed":false,"href":"/questions"},{"title":"Create
+        a market","award":500,"completed":false,"href":"/create-post"},{"title":"Write
+        a comment","award":50,"completed":false,"href":"/questions"},{"title":"Boost
+        liquidity in a market","award":250,"completed":false,"href":"/questions"}]}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 20:56:59 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]/stats
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::gh6ql-1743368219541-0856b73a8c54
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/users/clzrooq660000a2uznm33y25b/stats
+  response:
+    body:
+      string: '{"data":{"netWorth":11532.314289074551,"tradingVolume":130531.88556559081,"totalMarkets":52,"lastTradeAt":"2025-03-28T14:24:11.743Z","activeDayCount":144,"otherIncome":45060.40944996937,"quests":[{"title":"Bet
+        in a market","award":100,"completed":false,"href":"/questions"},{"title":"Create
+        a market","award":500,"completed":false,"href":"/create-post"},{"title":"Write
+        a comment","award":50,"completed":false,"href":"/questions"},{"title":"Boost
+        liquidity in a market","award":250,"completed":false,"href":"/questions"}]}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 20:56:59 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/users/[id]/stats
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::jvm92-1743368219864-a77722b96c7a
+    status:
+      code: 200
+      message: OK
+version: 1

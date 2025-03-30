@@ -348,7 +348,6 @@ def test_user_positions(vcr_record, compare_api_model, client):
             "End cursor doesn't match"
         )
 
-
 def test_user_graph(api_tester):
     """Test retrieval of a user's graph."""
     api_tester.test(
@@ -357,4 +356,14 @@ def test_user_graph(api_tester):
         client_method="user",
         item_id=TEST_USER_ID,
         nested_method="graph",
+    )
+
+def test_user_stats(api_tester):
+    """Test retrieval of a user's stats."""
+    api_tester.test(
+        cassette="user_stats_passthrough.yaml",
+        endpoint="users",
+        client_method="user",
+        item_id=TEST_USER_ID,
+        nested_method="stats",
     )

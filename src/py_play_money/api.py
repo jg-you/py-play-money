@@ -216,6 +216,12 @@ class UserWrapper(User):
             PageInfo(**response['pageInfo'])
         )
 
+    def stats(self, **kwargs) -> UserStatistics:
+        """Fetch user statistics."""
+        endpoint = f"users/{self.id}/stats"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return UserStatistics(**resp['data'])
+
 
 class CommentResource:
     """Functions to fetch comment information from the API."""

@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import TypeAdapter
 
-from py_play_money.schemas.base_types import CUID, DateModel, IsoDatetime
+from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
 AccountType = Literal["USER", "MARKET_AMM", "MARKET_CLEARING", "HOUSE"]
 
@@ -45,6 +45,25 @@ class Account(DateModel):
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
 
+
+class UserQuest(CamelCaseModel):
+    """User quests."""
+
+    title: str
+    award: int
+    completed: bool
+    href: str
+
+class UserStatistics(CamelCaseModel):
+    """Usage statistics for user."""
+
+    net_worth: float
+    trading_volume: float
+    total_markets: int
+    last_trade_at: IsoDatetime | None = None
+    active_day_count: int
+    other_income: float | None = None
+    quests: list[UserQuest]
 
 # Type adapters for serialization
 users_adapter = TypeAdapter(list[User])
