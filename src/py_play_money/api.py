@@ -79,11 +79,14 @@ class MarketWrapper(Market):
         resp = self._client.execute_get(endpoint, **kwargs)
         return MarketBalanceView(**resp['data'])
 
-    def balances(self, **kwargs) -> list[UserBalance]:
-        """Fetch final market balances."""
+    def balances(self, **kwargs) -> AuthenticatedMarketBalancesView | MarketBalancesView:
+        """Fetch final market balances with data about the authenticated user if available."""
         endpoint = f"markets/{self.id}/balances"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return user_balances_adapter.validate_python(resp['data']['balances'])
+        if self._client.authenticated:
+            return AuthenticatedMarketBalancesView(**resp['data'])
+        else:
+            return MarketBalancesView(**resp['data'])
 
     def comments(self, **kwargs) -> list[CommentView]:
         """Fetch market comments."""

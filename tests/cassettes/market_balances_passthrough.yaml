@@ -9,6 +9,60 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/balances
+  response:
+    body:
+      string: "{\"data\":{\"balances\":[{\"id\":\"cm5jihqmh000fcg5sraj0g4rn\",\"accountId\":\"c66cc328e3e0ffc8b38d99c45\",\"assetType\":\"CURRENCY\",\"assetId\":\"PRIMARY\",\"total\":379.396206779661,\"subtotals\":{\"TRADE_BUY\":-100,\"TRADE_WIN\":479.396206779661},\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"createdAt\":\"2025-01-05T11:10:39.876Z\",\"updatedAt\":\"2025-02-03T23:50:54.428Z\",\"account\":{\"id\":\"c66cc328e3e0ffc8b38d99c45\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clydldvix0000rhznmgr36pt6\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"userPrimary\":{\"id\":\"clydldvix0000rhznmgr36pt6\",\"username\":\"p\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e3e0ffc8b38d99c45\",\"role\":\"USER\",\"referralCode\":\"LDAW\",\"referredBy\":null,\"createdAt\":\"2024-07-08T23:07:05.049Z\",\"updatedAt\":\"2024-10-01T05:40:46.818Z\"}}}]}}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 12:54:35 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/markets/[id]/balances
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - iad1::iad1::x9cfp-1743339275583-f60a41330055
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
       - py-play-money/0.1.0
     method: GET
     uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u
@@ -37,7 +91,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 21:19:37 GMT
+      - Sun, 30 Mar 2025 12:54:35 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -51,7 +105,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::rxph4-1743196777382-757d2c3353a0
+      - iad1::iad1::9wh49-1743339275710-377b0e647e19
     status:
       code: 200
       message: OK
@@ -91,7 +145,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 28 Mar 2025 21:19:37 GMT
+      - Sun, 30 Mar 2025 12:54:36 GMT
       Server:
       - Vercel
       Strict-Transport-Security:
@@ -105,61 +159,7 @@ interactions:
       X-Vercel-Cache:
       - MISS
       X-Vercel-Id:
-      - iad1::iad1::8fwk6-1743196777480-aa695822daac
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python-requests/2.32.3
-    method: GET
-    uri: https://api.playmoney.dev/v1/markets/cm5ifmwfo001g24d2r7fzu34u/balances
-  response:
-    body:
-      string: "{\"data\":{\"balances\":[{\"id\":\"cm5jihqmh000fcg5sraj0g4rn\",\"accountId\":\"c66cc328e3e0ffc8b38d99c45\",\"assetType\":\"CURRENCY\",\"assetId\":\"PRIMARY\",\"total\":379.396206779661,\"subtotals\":{\"TRADE_BUY\":-100,\"TRADE_WIN\":479.396206779661},\"marketId\":\"cm5ifmwfo001g24d2r7fzu34u\",\"createdAt\":\"2025-01-05T11:10:39.876Z\",\"updatedAt\":\"2025-02-03T23:50:54.428Z\",\"account\":{\"id\":\"c66cc328e3e0ffc8b38d99c45\",\"type\":\"USER\",\"internalType\":null,\"userId\":\"clydldvix0000rhznmgr36pt6\",\"marketId\":null,\"createdAt\":\"2024-08-26T07:45:17.509Z\",\"updatedAt\":\"2024-08-26T07:45:17.509Z\",\"userPrimary\":{\"id\":\"clydldvix0000rhznmgr36pt6\",\"username\":\"p\",\"displayName\":\"Pat
-        Scott\U0001FA74\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"twitterHandle\":null,\"discordHandle\":null,\"website\":null,\"bio\":null,\"timezone\":\"America/Los_Angeles\",\"primaryAccountId\":\"c66cc328e3e0ffc8b38d99c45\",\"role\":\"USER\",\"referralCode\":\"LDAW\",\"referredBy\":null,\"createdAt\":\"2024-07-08T23:07:05.049Z\",\"updatedAt\":\"2024-10-01T05:40:46.818Z\"}}}]}}"
-    headers:
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Headers:
-      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
-        Content-Type, Date, X-Api-Version
-      Access-Control-Allow-Methods:
-      - GET,OPTIONS,PATCH,DELETE,POST,PUT
-      Access-Control-Allow-Origin:
-      - https://playmoney.dev
-      Age:
-      - '0'
-      Cache-Control:
-      - public, max-age=0, must-revalidate
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Fri, 28 Mar 2025 21:19:37 GMT
-      Server:
-      - Vercel
-      Strict-Transport-Security:
-      - max-age=63072000
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
-      X-Matched-Path:
-      - /api/v1/markets/[id]/balances
-      X-Vercel-Cache:
-      - MISS
-      X-Vercel-Id:
-      - iad1::iad1::cf2kb-1743196777640-5e7ebd05bed7
+      - iad1::iad1::qm6dz-1743339275948-471b83628f23
     status:
       code: 200
       message: OK

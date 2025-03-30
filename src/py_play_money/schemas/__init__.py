@@ -36,8 +36,10 @@ from py_play_money.schemas.market import (
 from py_play_money.schemas.user import Account, AccountType, User, UserRoleType, users_adapter
 from py_play_money.schemas.utils import PageInfo
 from py_play_money.schemas.views import (
+    AuthenticatedMarketBalancesView,
     CommentView,
     MarketBalanceView,
+    MarketBalancesView,
     MarketOptionPositionView,
     MarketListView,
     MarketResolutionView,

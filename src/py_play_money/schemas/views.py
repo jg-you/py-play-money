@@ -190,12 +190,25 @@ class MarketView(Market):
                 )
         return self
 
+
 class MarketBalanceView(CamelCaseModel):
-    """View of a final market balances."""
+    """View of a market balance."""
 
     amm: list[MarketBalance]
     user: list[MarketBalance]
     user_positions: list[MarketOptionPositionView]
+
+
+class AuthenticatedMarketBalancesView(CamelCaseModel):
+    """View of a final market balances for authenticated user."""
+
+    balances: list[UserBalanceView]
+    user: UserBalanceView
+
+class MarketBalancesView(CamelCaseModel):
+    """View of a final market balances."""
+
+    balances: list[UserBalanceView]
 
 # Note: The following three classes are needed to wrap the API
 #       response, even if this is inelegant.
@@ -246,7 +259,6 @@ class TransactionView(Transaction):
 
 # Type adapters for serialization
 comments_adapter = TypeAdapter(list[CommentView])
-# market_activities_adapter = TypeAdapter(list[MarketActivityView])
 market_lists_adapter = TypeAdapter(list[MarketListView])
 market_option_positions_adapter = TypeAdapter(list[MarketOptionPositionView])
 markets_adapter = TypeAdapter(list[MarketView])

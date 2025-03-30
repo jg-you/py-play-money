@@ -226,7 +226,7 @@ def test_market(api_tester):
     )
 
 def test_market_balance(vcr_record, compare_api_model, client):
-    """Test retrieval of the AMM balance for a specific market."""
+    """Test retrieval of the balance for a specific market."""
     with vcr_record.use_cassette("market_balance_passthrough.yaml"):
         # client
         balance = client.market(TEST_MARKET_ID).balance()
@@ -239,16 +239,15 @@ def test_market_balance(vcr_record, compare_api_model, client):
         for b_client, b_api in zip(balance.user_positions, api_data['userPositions']):
             compare_api_model(b_api, b_client.model_dump(by_alias=True))
 
-def test_market_balances(api_tester):
+def test_market_balances(vcr_record, compare_api_model, client):
     """Test retrieval of the final balances for a specific market."""
-    api_tester.test(
-        cassette="market_balances_passthrough.yaml",
-        endpoint="markets",
-        client_method="market",
-        item_id=TEST_MARKET_ID,
-        nested_method="balances",
-        api_transform=lambda data: data['balances']
-    )
+    # Note: does not test authenticated request
+    with vcr_record.use_cassette("market_balances_passthrough.yaml"):
+        balances = client.market(TEST_MARKET_ID).balances()
+        resp = requests.get(f"{BASEURL}/markets/{TEST_MARKET_ID}/balances", timeout=10)
+        api_data = resp.json()['data']
+        for b_client, b_api in zip(balances.balances, api_data['balances']):
+            compare_api_model(b_api, b_client.model_dump(by_alias=True))
 
 def test_market_comment(api_tester):
     """Test retrieval of the comments on a specific market."""
