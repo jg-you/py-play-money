@@ -232,11 +232,11 @@ def test_market_balance(vcr_record, compare_api_model, client):
         balance = client.market(TEST_MARKET_ID).balance()
         resp = requests.get(f"{BASEURL}/markets/{TEST_MARKET_ID}/balance",timeout=10)
         api_data = resp.json()['data']
-        for b_client, b_api in zip(balance.amm, api_data['amm']):
+        for b_client, b_api in zip(balance.amm, api_data['amm'], strict=False):
             compare_api_model(b_api, b_client.model_dump(by_alias=True))
-        for b_client, b_api in zip(balance.user, api_data['user']):
+        for b_client, b_api in zip(balance.user, api_data['user'], strict=False):
             compare_api_model(b_api, b_client.model_dump(by_alias=True))
-        for b_client, b_api in zip(balance.user_positions, api_data['userPositions']):
+        for b_client, b_api in zip(balance.user_positions, api_data['userPositions'], strict=False):
             compare_api_model(b_api, b_client.model_dump(by_alias=True))
 
 def test_market_balances(vcr_record, compare_api_model, client):
@@ -246,7 +246,7 @@ def test_market_balances(vcr_record, compare_api_model, client):
         balances = client.market(TEST_MARKET_ID).balances()
         resp = requests.get(f"{BASEURL}/markets/{TEST_MARKET_ID}/balances", timeout=10)
         api_data = resp.json()['data']
-        for b_client, b_api in zip(balances.balances, api_data['balances']):
+        for b_client, b_api in zip(balances.balances, api_data['balances'], strict=False):
             compare_api_model(b_api, b_client.model_dump(by_alias=True))
 
 def test_market_comment(api_tester):

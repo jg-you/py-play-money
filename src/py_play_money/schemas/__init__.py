@@ -38,10 +38,10 @@ from py_play_money.schemas.utils import PageInfo
 from py_play_money.schemas.views import (
     AuthenticatedMarketBalancesView,
     CommentView,
-    MarketBalanceView,
     MarketBalancesView,
-    MarketOptionPositionView,
+    MarketBalanceView,
     MarketListView,
+    MarketOptionPositionView,
     MarketResolutionView,
     MarketView,
     TransactionView,

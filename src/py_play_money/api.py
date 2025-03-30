@@ -50,6 +50,7 @@ class MarketListWrapper(MarketList):
 
 class MeWrapper(User):
     """Combines the User model with API functions for authenticated user."""
+
     def __init__(self, client: 'PMClient', user_data: User):
         super().__init__(**user_data.model_dump(by_alias=True))
         self._client = client
@@ -272,6 +273,7 @@ class MarketResource:
 
 class MeResource:
     """Functions to fetch the authenticated user."""
+
     def __init__(self, client: 'PMClient'):
         self._client = client
 
@@ -418,7 +420,7 @@ class PMClient:
             cursor (str, optional): Pagination cursor, i.e., the market after which to start.
             limit (int, optional): Number of markets to return per page. Defaults to 10.
             sort_field (str, optional): Field to sort by.
-                Can be "comment_count" "close_date", "created_at", "description", 
+                Can be "comment_count" "close_date", "created_at", "description",
                 "liquidity_count", "question", "updated_at", "unique_traders_count",
                 "unique_promoters_count"
             sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.

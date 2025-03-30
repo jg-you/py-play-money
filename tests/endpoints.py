@@ -153,7 +153,9 @@ def test_resolution(vcr_record, client):
         assert res is not None
         assert res.id == "cm6ppf4480002146uoh2izs1h"
         assert res.market_id == TEST_MARKET_ID
-        assert res.market.resolved_at == datetime(2025, 2, 3, 23, 50, 54, 104000, tzinfo=timezone.utc)
+        assert res.market.resolved_at == datetime(
+            2025, 2, 3, 23, 50, 54, 104000, tzinfo=timezone.utc
+        )
         assert res.resolution.name == "No"
         assert res.resolution.probability == 29
         assert res.resolved_by.username == "jgyou"

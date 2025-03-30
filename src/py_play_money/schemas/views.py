@@ -10,12 +10,7 @@ from typing_extensions import Self
 
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
-from py_play_money.schemas.finance import (
-    MarketBalance,
-    Transaction,
-    TransactionEntry,
-    UserBalance
-)
+from py_play_money.schemas.finance import MarketBalance, Transaction, TransactionEntry, UserBalance
 from py_play_money.schemas.market import (
     Market,
     MarketList,
@@ -229,6 +224,7 @@ class MarketListEntry(CamelCaseModel):
 
 class MarketListView(MarketList):
     """Augmented view of a market list."""
+
     owner: User
     markets: list[MarketListEntry]
 
