@@ -10,7 +10,12 @@ from typing_extensions import Self
 
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
-from py_play_money.schemas.finance import Transaction, TransactionEntry, UserBalance
+from py_play_money.schemas.finance import (
+    MarketBalance,
+    Transaction,
+    TransactionEntry,
+    UserBalance
+)
 from py_play_money.schemas.market import (
     Market,
     MarketList,
@@ -185,6 +190,12 @@ class MarketView(Market):
                 )
         return self
 
+class MarketBalanceView(CamelCaseModel):
+    """View of a final market balances."""
+
+    amm: list[MarketBalance]
+    user: list[MarketBalance]
+    user_positions: list[MarketOptionPositionView]
 
 # Note: The following three classes are needed to wrap the API
 #       response, even if this is inelegant.

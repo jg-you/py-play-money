@@ -74,7 +74,7 @@ def compare_api_model():
                     assert sub_key in norm_model_data['subtotals'], (
                         f"Field '{key}.{sub_key}' missing from model"
                     )
-                    assert abs(norm_model_data['subtotals'][sub_key] == sub_value), (
+                    assert abs(norm_model_data['subtotals'][sub_key] - sub_value) < 1e-10, (
                         f"Field '{key}.{sub_key}' mismatch:\n  API:   {sub_value}\n"
                         "Model: {norm_model_data['subtotals'][sub_key]}"
                     )

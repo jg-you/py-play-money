@@ -15,8 +15,6 @@ List of API quirks I worked around
   data.balances instead of data
 
 * lists/[ID]/balance
-  Does has a different version of the problem
-  data.users instead of data.
   Note that this endpoint returns nothing in most cases (active, closed), except for cancelled lists.
   see https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/balance
 

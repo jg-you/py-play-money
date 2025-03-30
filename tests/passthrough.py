@@ -216,7 +216,6 @@ def test_markets(vcr_record, compare_api_model, client):
             "End cursor doesn't match"
         )
 
-
 def test_market(api_tester):
     """Test retrieval of an individual market."""
     api_tester.test(
@@ -226,16 +225,19 @@ def test_market(api_tester):
         item_id=TEST_MARKET_ID,
     )
 
-def test_market_balance(api_tester):
+def test_market_balance(vcr_record, compare_api_model, client):
     """Test retrieval of the AMM balance for a specific market."""
-    api_tester.test(
-        cassette="market_balance_passthrough.yaml",
-        endpoint="markets",
-        client_method="market",
-        item_id=TEST_MARKET_ID,
-        nested_method="balance",
-        api_transform=lambda data: data['amm']
-    )
+    with vcr_record.use_cassette("market_balance_passthrough.yaml"):
+        # client
+        balance = client.market(TEST_MARKET_ID).balance()
+        resp = requests.get(f"{BASEURL}/markets/{TEST_MARKET_ID}/balance",timeout=10)
+        api_data = resp.json()['data']
+        for b_client, b_api in zip(balance.amm, api_data['amm']):
+            compare_api_model(b_api, b_client.model_dump(by_alias=True))
+        for b_client, b_api in zip(balance.user, api_data['user']):
+            compare_api_model(b_api, b_client.model_dump(by_alias=True))
+        for b_client, b_api in zip(balance.user_positions, api_data['userPositions']):
+            compare_api_model(b_api, b_client.model_dump(by_alias=True))
 
 def test_market_balances(api_tester):
     """Test retrieval of the final balances for a specific market."""
