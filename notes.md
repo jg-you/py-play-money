@@ -36,4 +36,7 @@ Constraint violations?
 * Transactions return the option.. which includes a probability
   But that probability is the final value, not at time of purchase, so the information is not super useful
 
-* Transactions could use some search options! sort directions etc. Since it is already paginated.
+* users/[id]/transactions could use some search options! sort directions etc. 
+  Since it is already paginated. And since /transactions has them
+
+* Transactions for daily comment bonuses on a *list* don't return said list.

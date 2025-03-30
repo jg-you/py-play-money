@@ -12,6 +12,7 @@ from py_play_money.schemas.finance import (
     Transaction,
     TransactionEntry,
     TransactionType,
+    TransactionTypes,
     UserBalance,
     market_balances_adapter,
 )

@@ -15,13 +15,14 @@ from py_play_money.schemas.base_types import (
     IsoDatetime,
 )
 
-AssetType = Literal["MARKET_OPTION", "CURRENCY"]
+AssetType = Literal["MARKET_OPTION",
+"CURRENCY"]
 
 TransactionType = Literal[
     "TRADE_BUY",
     "TRADE_SELL",
     "TRADE_WIN",
-    "TRADE_SELL",
+    "TRADE_LOSS",
     "CREATOR_TRADER_BONUS",
     "LIQUIDITY_INITIALIZE",
     "LIQUIDITY_DEPOSIT",
@@ -38,13 +39,45 @@ TransactionType = Literal[
     "REFERREE_BONUS",
 ]
 
+# Hacky: Lowercase version for type hinting
+TransactionTypes = Literal[
+    "trade_buy",
+    "trade_sell",
+    "trade_win",
+    "trade_loss",
+    "creator_trader_bonus",
+    "liquidity_initialize",
+    "liquidity_deposit",
+    "liquidity_withdrawal",
+    "liquidity_returned",
+    "liquidity_volume_bonus",
+    "daily_trade_bonus",
+    "daily_market_bonus",
+    "daily_comment_bonus",
+    "daily_liquidity_bonus",
+    "house_gift",
+    "house_signup_bonus",
+    "referrer_bonus",
+    "referree_bonus",
+]
+
+TransactionSortFieldType = Literal[
+    "id",
+    "type"
+    "initiator_id",
+    "created_at",
+    "updated_at",
+    "batch_id",
+    "market_id",
+]
+
 
 class Transaction(DateModel):
     """Transaction."""
 
     type: TransactionType
     id: CUID
-    initiator_id: CUID
+    initiator_id: CUID | None
     is_reverse: bool | None = None
     reverse_of_id: CUID | None = None
     batch_id: CUID | None = None

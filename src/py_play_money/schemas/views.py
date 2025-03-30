@@ -255,8 +255,8 @@ class TransactionView(Transaction):
     """View of a transaction with user information."""
 
     entries: list[TransactionEntry]
-    market: Market
-    initiator: User
+    market: Market | None
+    initiator: User | None
     options: list[MarketOption]
 
 

@@ -222,7 +222,7 @@ class UserWrapper(User):
         resp = self._client.execute_get(endpoint, **kwargs)
         return UserStatistics(**resp['data'])
 
-    def transactions(self, **kwargs) -> tuple[list[MarketOptionPositionView], PageInfo]:
+    def transactions(self, **kwargs) -> tuple[list[TransactionView], PageInfo]:
         """
         Page through transactions of the user.
 
@@ -563,5 +563,85 @@ class PMClient:
         response = self.execute_get("lists", params=payload, **kwargs)
         return (
             market_lists_adapter.validate_python(response['data']),
+            PageInfo(**response['pageInfo'])
+        )
+
+
+    def transactions(self,
+        cursor: str | None = None,
+        limit: int = 10,
+        market_id: str | None = None,
+        sort_field: MarketListSortFieldType | None = None,
+        sort_direction: Literal['asc', 'desc'] = 'asc',
+        transaction_type: TransactionTypes | None = None,
+        user_id: str | None = None,
+        **kwargs) -> tuple[list[TransactionView], PageInfo]:
+        """
+        Page through transactions on the site.
+
+        Args:
+            cursor (str, optional): Pagination cursor, i.e., the transaction after which to start.
+            limit (int, optional): Number of transactions to return per page. Defaults to 10.
+            market_id (str, optional): Only include transaction for this market.
+            sort_field (str, optional): Field to sort by.
+                Can be "id", "type", "initiator_id", "created_at", "updated_at", 
+                "batch_id", "market_id".
+            sort_direction (str, optional): Sort direction. Can be 'asc' or 'desc'.
+            status (str, optional): Status of transactions to include.
+                Can be 'active', 'closed', or 'all'. Defaults to 'all'
+            transaction_type (str, optional): Type of transaction to include.
+                Can be  "trade_buy", "trade_sell", "trade_win", "trade_sell", 
+                "creator_trader_bonus", "liquidity_initialize", "liquidity_deposit",
+                "liquidity_withdrawal", "liquidity_returned", "liquidity_volume_bonus",
+                "daily_trade_bonus", "daily_market_bonus", "daily_comment_bonus",
+                "daily_liquidity_bonus", "house_gift", "house_signup_bonus", "referrer_bonus",
+                "referree_bonus",
+            user_id (str, optional): Only include transaction for this user.
+
+            **kwargs: Additional keyword arguments to pass to requests.
+
+        Returns:
+            tuple: A tuple containing a list of transactions, and a paging information.
+
+        Example:
+        ```python
+        cursor = None
+        while True:
+            transactions, page_info = client.transactions(cursor=cursor)
+            print(f"Found {len(transactions)} transactions")
+            cursor = page_info.end_cursor
+            if page_info.has_next_page is False:
+                break
+        ```
+
+        """
+
+        # validate request
+        for cuid_field in [cursor, market_id, user_id]:
+            if cuid_field and not CUID.validate(cuid_field):
+                raise ValueError(f"`{cuid_field}` is an invalid CUID: {cuid_field}")
+
+        # prepare payload
+        if sort_field:
+            first, *others = sort_field.split('_')
+            sort_field = ''.join([first.lower(), *map(str.title, others)])
+        if transaction_type:
+            transaction_type = transaction_type.upper()
+        payload = {
+            "cursor": cursor,
+            "marketId": market_id,
+            "limit": limit,
+            "sortField": sort_field,
+            "sortDirection": sort_direction,
+            "transactionType": transaction_type,
+            "userId": user_id
+        }
+
+        # make request
+        endpoint = "transactions"
+        response = self.execute_get(endpoint, params=payload, **kwargs)
+
+        return (
+            transactions_adapter.validate_python(response['data']),
             PageInfo(**response['pageInfo'])
         )

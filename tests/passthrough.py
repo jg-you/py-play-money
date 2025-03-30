@@ -290,6 +290,41 @@ def test_market_related(api_tester):
     )
 
 
+# == transactions/ endpoint ==
+def test_transactions(vcr_record, compare_api_model, client):
+    """Test retrieval of pages of transactions."""
+    with vcr_record.use_cassette("transactions_passthrough.yaml"):
+        # client
+        transactions, page_info = client.transactions(
+            limit=100,
+            sort_direction='desc',
+        )
+        # direct API call
+        params = {
+            "limit": 100,
+            "sortDirection": 'desc',
+        }
+        resp = requests.get(
+            f"{BASEURL}/transactions",
+            params=params,
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        api_page_info = resp.json()['pageInfo']
+        assert len(transactions) == len(api_data), "Number of items doesn't match"
+        for i, item in enumerate(transactions):
+            compare_api_model(api_data[i], item.model_dump(by_alias=True))
+        assert page_info.total == api_page_info['total'], (
+            "Total number of transactions doesn't match"
+        )
+        assert page_info.has_next_page == api_page_info['hasNextPage'], (
+            "Has next page doesn't match"
+        )
+        assert page_info.end_cursor == api_page_info['endCursor'], (
+            "End cursor doesn't match"
+        )
+
+
 # == users/ endpoints ==
 def test_user(api_tester):
     """Test retrieval of an individual user."""
