@@ -191,14 +191,21 @@ class MarketBalanceView(CamelCaseModel):
 
     amm: list[MarketBalance]
     user: list[MarketBalance]
-    user_positions: list[MarketOptionPositionView]
+    user_positions: list[MarketOptionPosition]
 
+
+class MarketListBalanceView(CamelCaseModel):
+    """View of a market list balance."""
+
+    user: list[MarketBalance]
+    user_positions: list[MarketOptionPosition]
 
 class AuthenticatedMarketBalancesView(CamelCaseModel):
     """View of a final market balances for authenticated user."""
 
     balances: list[UserBalanceView]
     user: UserBalanceView
+
 
 class MarketBalancesView(CamelCaseModel):
     """View of a final market balances."""

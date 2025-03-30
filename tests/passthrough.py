@@ -155,8 +155,7 @@ def test_list_balance(api_tester):
         endpoint="lists",
         client_method="list",
         item_id=TEST_LIST_ID,
-        nested_method="balance",
-        api_transform=lambda data: data['user']
+        nested_method="balance"
     )
 
 def test_list_comments(api_tester):

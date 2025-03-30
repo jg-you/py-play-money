@@ -4,7 +4,7 @@ Custom types.
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, ClassVar
 
 from pydantic import BaseModel, GetCoreSchemaHandler, model_validator
@@ -89,6 +89,7 @@ class DateModel(CamelCaseModel):
     def validate_dates(self):
         """Validate that the creation date is not after the update date."""
         if self.updated_at is not None:
-            if self.created_at > self.updated_at:
+            # generous leeway for now
+            if self.created_at - self.updated_at > timedelta(seconds=5):
                 raise ValueError("Creation date cannot be after the update date.")
         return self

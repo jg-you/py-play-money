@@ -5,28 +5,27 @@ List of API quirks I worked around
   * markets/[ID]/balances :User is stored under account.userPrimary
   * markets/[ID]/positions: User is stored under account.user
 
-    I standardized by choosing userPrimary everywhere
-* markets/[ID]/balances
-  Returns the data with an additional layer of json
-  (data.balance, whereas the rest of the API returns data directly)
+  I standardized by choosing userPrimary everywhere
 
-* users/[ID]/balances
-  Same as above
-  data.balances instead of data
+Balances
+  * users/[ID]/balance
+    A bit weird that the balance is nested under data given there's nothing else in the response.
+    I can see the argument for, though given how balance(s) work for markets.
+  * markets/[ID]/balances
+    Inconsistent schema depending on whether the request is authenticated (user is not included as an empty dict)
+  * users/me/balance only returns a number, the rest of the balance endpoints contain more complete information.
 
-* lists/[ID]/balance
-  Note that this endpoint returns nothing in most cases (active, closed), except for cancelled lists.
-  see https://api.playmoney.dev/v1/lists/cm1npliun006q11x80i8lvcri/balance
+Constraint violations?
+  * User subtotals don't add up to the total
+  * Some balances have update dates that predate their creation. e.g. asset cm65c2om5000lxcoebnye5dqi on list cm5u8dctb0001onmw6aap1vxn
 
-* Subtotals:
-  In general, subtotals have a random assortment of items. I decided to include them all
-  and set unused one to zero.
-  I'm also noting that user subtotals don't add up to the total
+* In general, subtotals have a random assortment of items. 
+  I decided to include them all and set unused one to zero.
 
 * Some markets fields are always null?
   E.g.: resolvedAt, canceledAt,
 
-* the GET lists/ endpoints wraps the markets under a list in repeated information?
+* the GET lists/ endpoints wraps the markets under a list in repeated information.
   unsure what is added by this tripled of ids + created_at
 
 * I decided to replace "activity" by a transaction endpoints that just returns transaction.
@@ -36,5 +35,3 @@ List of API quirks I worked around
   
 * Transactions return the option.. which includes a probability
   But that probability is the final value, not at time of purchase, so the information is not super useful
-
-* users/me/balance is different from users/[MY_ID]/balance

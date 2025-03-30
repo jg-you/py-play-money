@@ -90,8 +90,8 @@ class UserBalance(DateModel):
 
     id: CUID
     account_id: CUID
-    asset_type: Literal["CURRENCY"]
-    asset_id: Literal["PRIMARY"]
+    asset_type: AssetType
+    asset_id: Literal["PRIMARY"] | CUID
     total: float
     subtotals: Subtotals
     market_id: CUID | None = None
@@ -114,8 +114,8 @@ class MarketBalance(DateModel):
 
     id: CUID
     account_id: CUID
-    asset_type: Literal["MARKET_OPTION"]
-    asset_id: CUID
+    asset_type: AssetType
+    asset_id: Literal["PRIMARY"] | CUID
     total: float
     subtotals: Subtotals
     market_id: CUID

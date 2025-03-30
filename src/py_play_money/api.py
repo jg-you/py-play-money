@@ -29,11 +29,11 @@ class MarketListWrapper(MarketList):
         super().__init__(**list_data.model_dump(by_alias=True))
         self._client = client
 
-    def balance(self, **kwargs) -> list[MarketBalance]:
+    def balance(self, **kwargs) -> MarketListBalanceView:
         """Fetch list balance."""
         endpoint = f"lists/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return market_balances_adapter.validate_python(resp['data']['user'])
+        return MarketListBalanceView(**resp['data'])
 
     def comments(self, **kwargs) -> list[CommentView]:
         """Fetch list comments."""
@@ -74,7 +74,7 @@ class MarketWrapper(Market):
         super().__init__(**market_data.model_dump(by_alias=True))
         self._client = client
 
-    def balance(self, **kwargs) -> MarketBalanceView:
+    def balance(self, **kwargs) -> MarketBalancesView:
         """Fetch market balance."""
         endpoint = f"markets/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
@@ -147,7 +147,7 @@ class UserWrapper(User):
         """Fetch user balance."""
         endpoint = f"users/{self.id}/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
-        return UserBalance(**resp['data']['balance'])
+        return UserBalance(**resp['data']['balance'])  # we skip the extra layer of json
 
     def graph(self, **kwargs) -> list[UserGraphTick]:
         """Fetch user graphs."""
