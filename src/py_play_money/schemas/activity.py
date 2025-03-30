@@ -3,9 +3,9 @@ Schemas for all social features.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import HttpUrl, Json
+from pydantic import Json, Field
 
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, DateModel, IsoDatetime
 
@@ -23,14 +23,11 @@ NotificationType = Literal [
     "MARKET_TRADE",
     "MARKET_LIQUIDITY_ADDED",
     "MARKET_COMMENT",
-
     "LIST_COMMENT",
     "LIST_MARKET_ADDED",
-
     "COMMENT_REPLY",
     "COMMENT_MENTION",
     "COMMENT_REACTION",
-
     "REFERRER_BONUS",
 ]
 
@@ -41,7 +38,7 @@ class Notification(DateModel):
     id: CUID
     recipient_id: CUID
     actor_id: CUID
-    content: Json | None
+    content: dict[str, Any] | Json | None = Field(default_factory=dict)  # handle empty content
     market_id: CUID | None
     market_option_id: CUID | None
     market_resolution_id: CUID | None
@@ -50,24 +47,24 @@ class Notification(DateModel):
     comment_id: CUID | None
     parent_comment_id: CUID | None
     comment_reaction_id: CUID | None
-    action_url: HttpUrl
+    action_url: str | None
     read_at: IsoDatetime | None = None
     created_at: IsoDatetime
     updated_at: IsoDatetime | None = None
 
 
-# class NotificationGroup(DateModel):
-#     """Notification group data."""
+class NotificationGroup(DateModel):
+    """Notification group data."""
 
-#     type: NotificationType
-#     id: CUID
-#     recipient_id: CUID
-#     count: int = Field(ge=0, default=0)
-#     last_notification_id: CUID
-#     group_window_end: IsoDatetime
-#     group_key: str
-#     created_at: IsoDatetime
-#     updated_at: IsoDatetime
+    type: NotificationType
+    id: CUID
+    recipient_id: CUID
+    count: int = Field(ge=0, default=0)
+    last_notification_id: CUID
+    group_window_end: IsoDatetime
+    group_key: str
+    created_at: IsoDatetime
+    updated_at: IsoDatetime
 
 
 class Activity(CamelCaseModel):

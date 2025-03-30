@@ -60,6 +60,12 @@ class MeWrapper(User):
         endpoint = "users/me/balance"
         resp = self._client.execute_get(endpoint, **kwargs)
         return resp['data']['balance']
+    
+    def notifications(self, **kwargs) -> NotificationsView:
+        """Fetch notifications for the authenticated user."""
+        endpoint = "users/me/notifications"
+        resp = self._client.execute_get(endpoint, **kwargs)
+        return NotificationsView(**resp['data'])
 
     def referrals(self, **kwargs) -> list[User]:
         """Fetch all referrals for the authenticated user."""

@@ -17,7 +17,6 @@ ContributionPolicyType = Literal[
     "FRIENDS_ONLY"
 ]
 
-
 MarketSortFieldType = Literal[
     "id",
     "comment_count",

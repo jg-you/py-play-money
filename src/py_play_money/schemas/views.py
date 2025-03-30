@@ -1,13 +1,14 @@
 """
 View schemas for API endpoints.
 
-Created by extending the base schemas.
+Created by extending base schemas.
 
 Author: JGY <jean.gabriel.young@gmail.com>
 """
 from pydantic import TypeAdapter, field_validator, model_validator
 from typing_extensions import Self
 
+from py_play_money.schemas.activity import Notification, NotificationGroup
 from py_play_money.schemas.base_types import CUID, CamelCaseModel, IsoDatetime
 from py_play_money.schemas.comments import Comment, CommentReaction
 from py_play_money.schemas.finance import MarketBalance, Transaction, TransactionEntry, UserBalance
@@ -19,7 +20,6 @@ from py_play_money.schemas.market import (
     MarketResolution,
 )
 from py_play_money.schemas.user import Account, User
-
 
 class CommentReactionView(CommentReaction):
     """View of a comment reaction with user information."""
@@ -44,6 +44,7 @@ class CommentView(Comment):
     author: User
     reactions: list[CommentReactionView] = []
 
+
 class AccountView(Account):
     """View of an account with user information."""
 
@@ -66,6 +67,7 @@ class AccountView(Account):
                 f"{self.id} != {self.user_primary.primary_account_id}"
             )
         return self
+
 
 class UserBalanceView(UserBalance):
     """View of a final market balances."""
@@ -146,6 +148,7 @@ class MarketResolutionView(MarketResolution):
             )
         return self
 
+
 class MarketView(Market):
     """Augmented view of a market."""
 
@@ -198,6 +201,7 @@ class MarketListBalanceView(CamelCaseModel):
 
     user: list[MarketBalance]
     user_positions: list[MarketOptionPosition]
+
 
 class AuthenticatedMarketBalancesView(CamelCaseModel):
     """View of a final market balances for authenticated user."""
@@ -257,6 +261,36 @@ class TransactionView(Transaction):
     market: Market | None
     initiator: User | None
     options: list[MarketOption]
+
+
+# Note: The following four classes are needed to wrap the API
+#       response, even if this is inelegant.
+class TransactionViewForNotification(Transaction):
+    """View of a transaction for notification."""
+
+    entries: list[TransactionEntry]
+
+class NotificationView(Notification):
+    """View of a notification with user information."""
+
+    actor: User | None = None
+    market: Market | None = None
+    comment: Comment | None = None
+    comment_reaction: CommentReaction | None = None
+    parent_comment: Comment | None = None
+    transaction: TransactionViewForNotification | None = None
+    market_option: MarketOption | None = None
+
+class NotificationGroupView(NotificationGroup):
+    """View of a notification group with details about the events."""
+
+    last_notification: NotificationView
+
+class NotificationsView(CamelCaseModel):
+    """View of a user's notifications."""
+
+    notifications: list[NotificationGroupView]
+    unread_count: int
 
 
 # Type adapters for serialization
