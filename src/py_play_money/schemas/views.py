@@ -44,7 +44,6 @@ class CommentView(Comment):
     author: User
     reactions: list[CommentReactionView] = []
 
-
 class AccountView(Account):
     """View of an account with user information."""
 

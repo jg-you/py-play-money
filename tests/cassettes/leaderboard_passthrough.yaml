@@ -1,0 +1,126 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/leaderboard?year=2025&month=1
+  response:
+    body:
+      string: "{\"data\":{\"topTraders\":[{\"userId\":\"cm187b8bu0000cw75xkzmm59o\",\"displayName\":\"CC\",\"username\":\"CC\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/1620506001490-nyPYHpK45qJRwl0Te6l5rsT5orzJTa.jpg\",\"total\":12219,\"rank\":1},{\"userId\":\"clykuewwe0000g4933zh8btxa\",\"displayName\":\"Odoacre\",\"username\":\"odoacre\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/0_3.avatar2-xNMeVv9NeA9J9d5oBvQdyUE54d30oK.png\",\"total\":6525,\"rank\":2},{\"userId\":\"cm4tkdlo100001135eqyos7k6\",\"displayName\":\"chiroyce\",\"username\":\"chiroyce\",\"avatarUrl\":null,\"total\":5533,\"rank\":3},{\"userId\":\"cm0y2s1p70000eskmx6ks9n04\",\"displayName\":\"Alex
+        B. Goode\",\"username\":\"alexbgoode\",\"avatarUrl\":null,\"total\":2785,\"rank\":4},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":1941,\"rank\":5},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":1853,\"rank\":6},{\"userId\":\"clyc6jn8o0000w4qr540q4mih\",\"displayName\":\"niko\",\"username\":\"niko\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/nikos_small-eUMhMnuQUdkPH6gjSr7Q8VyEfRq0nH.jpg\",\"total\":1206,\"rank\":7},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":990,\"rank\":8},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":703,\"rank\":9},{\"userId\":\"cm4ln2zdb0000t651vtay0r6z\",\"displayName\":\"adjacent\",\"username\":\"adjacent\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/Adjacent%20News%20Profile%20Image-dJd9oBSG9JJiS2vY4SG0UQzrygFjmJ.jpg\",\"total\":655,\"rank\":10}],\"topCreators\":[{\"userId\":\"clydnp6q7000srhzn3zrtd0le\",\"displayName\":\"strutheo2602\",\"username\":\"strutheo2602\",\"avatarUrl\":null,\"total\":4650,\"rank\":1},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":1100,\"rank\":2},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":850,\"rank\":3},{\"userId\":\"clydll5yi0007rhzn1jpd7kh9\",\"displayName\":\"Gabrielle\",\"username\":\"Gabrielle\",\"avatarUrl\":null,\"total\":300,\"rank\":4},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":250,\"rank\":5},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":100,\"rank\":6},{\"userId\":\"clzeprzoj000712jcu1j1wafr\",\"displayName\":\"BTE\",\"username\":\"BTE\",\"avatarUrl\":null,\"total\":100,\"rank\":6},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":100,\"rank\":6},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":50,\"rank\":9},{\"userId\":\"clydknj6e000lms4zkb2qi7wv\",\"displayName\":\"Joshua\",\"username\":\"Joshua\",\"avatarUrl\":null,\"total\":0,\"rank\":10}],\"topPromoters\":[{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":1224,\"rank\":1},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":1036,\"rank\":2},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":394,\"rank\":3},{\"userId\":\"clydll5yi0007rhzn1jpd7kh9\",\"displayName\":\"Gabrielle\",\"username\":\"Gabrielle\",\"avatarUrl\":null,\"total\":362,\"rank\":4},{\"userId\":\"clzeprzoj000712jcu1j1wafr\",\"displayName\":\"BTE\",\"username\":\"BTE\",\"avatarUrl\":null,\"total\":192,\"rank\":5},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":123,\"rank\":6},{\"userId\":\"clydnp6q7000srhzn3zrtd0le\",\"displayName\":\"strutheo2602\",\"username\":\"strutheo2602\",\"avatarUrl\":null,\"total\":41,\"rank\":7},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":28,\"rank\":8},{\"userId\":\"clynd4njv0000atzcekpgw8yx\",\"displayName\":\"Noit\",\"username\":\"Noit\",\"avatarUrl\":null,\"total\":5,\"rank\":9},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":5,\"rank\":10}],\"topQuesters\":[{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":21300,\"rank\":1},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":10550,\"rank\":2},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":6950,\"rank\":3},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":1350,\"rank\":4},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":1050,\"rank\":5},{\"userId\":\"clynd4njv0000atzcekpgw8yx\",\"displayName\":\"Noit\",\"username\":\"Noit\",\"avatarUrl\":null,\"total\":950,\"rank\":6},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":400,\"rank\":7},{\"userId\":\"cm6jhsdxc0000o1jh4a1ewzyi\",\"displayName\":\"rjm\",\"username\":\"rjm\",\"avatarUrl\":null,\"total\":350,\"rank\":8},{\"userId\":\"clydkjwr6000ems4ztn9gftkb\",\"displayName\":\"Bayesian\",\"username\":\"Bayesian\",\"avatarUrl\":null,\"total\":300,\"rank\":9},{\"userId\":\"cm47mdglk0000fgr9in2lssil\",\"displayName\":\"mimimitor3782\",\"username\":\"mimimitor3782\",\"avatarUrl\":null,\"total\":200,\"rank\":10}],\"topReferrers\":[{\"userId\":\"clydkjwr6000ems4ztn9gftkb\",\"displayName\":\"Bayesian\",\"username\":\"Bayesian\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyeu7hxx000710d014ve4rjr\",\"displayName\":\"sinclair\",\"username\":\"si\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clzeoat4t000012jcxoxghe56\",\"displayName\":\"gusp3849\",\"username\":\"gusp3849\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyetyrxg000010d0le8qyvkm\",\"displayName\":\"jahooma\",\"username\":\"jahooma\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyjc0x0n0000axjzacwnejq3\",\"displayName\":\"Jake\",\"username\":\"Jake\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyjocjwj0000ary4c6p1xhd3\",\"displayName\":\"osnatkatz4245\",\"username\":\"osnatkatz4245\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydlzq8j000erhznytueih89\",\"displayName\":\"DistinctlySkeptical\",\"username\":\"DistinctlySkeptical\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"cm05cxopg0000rrqedeawre6k\",\"displayName\":\"jinksy5010\",\"username\":\"jinksy5010\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydkickw0007ms4z7wjfhntv\",\"displayName\":\"tod4834\",\"username\":\"tod4834\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydknj6e000lms4zkb2qi7wv\",\"displayName\":\"Joshua\",\"username\":\"Joshua\",\"avatarUrl\":null,\"total\":0,\"rank\":1}],\"userRankings\":null}}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - max-age=600
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 22:00:49 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/leaderboard
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::l4phw-1743372049839-529cbfbd3fa2
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.3
+    method: GET
+    uri: https://api.playmoney.dev/v1/leaderboard?year=2025&month=1
+  response:
+    body:
+      string: "{\"data\":{\"topTraders\":[{\"userId\":\"cm187b8bu0000cw75xkzmm59o\",\"displayName\":\"CC\",\"username\":\"CC\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/1620506001490-nyPYHpK45qJRwl0Te6l5rsT5orzJTa.jpg\",\"total\":12219,\"rank\":1},{\"userId\":\"clykuewwe0000g4933zh8btxa\",\"displayName\":\"Odoacre\",\"username\":\"odoacre\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/0_3.avatar2-xNMeVv9NeA9J9d5oBvQdyUE54d30oK.png\",\"total\":6525,\"rank\":2},{\"userId\":\"cm4tkdlo100001135eqyos7k6\",\"displayName\":\"chiroyce\",\"username\":\"chiroyce\",\"avatarUrl\":null,\"total\":5533,\"rank\":3},{\"userId\":\"cm0y2s1p70000eskmx6ks9n04\",\"displayName\":\"Alex
+        B. Goode\",\"username\":\"alexbgoode\",\"avatarUrl\":null,\"total\":2785,\"rank\":4},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":1941,\"rank\":5},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":1853,\"rank\":6},{\"userId\":\"clyc6jn8o0000w4qr540q4mih\",\"displayName\":\"niko\",\"username\":\"niko\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/nikos_small-eUMhMnuQUdkPH6gjSr7Q8VyEfRq0nH.jpg\",\"total\":1206,\"rank\":7},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":990,\"rank\":8},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":703,\"rank\":9},{\"userId\":\"cm4ln2zdb0000t651vtay0r6z\",\"displayName\":\"adjacent\",\"username\":\"adjacent\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/Adjacent%20News%20Profile%20Image-dJd9oBSG9JJiS2vY4SG0UQzrygFjmJ.jpg\",\"total\":655,\"rank\":10}],\"topCreators\":[{\"userId\":\"clydnp6q7000srhzn3zrtd0le\",\"displayName\":\"strutheo2602\",\"username\":\"strutheo2602\",\"avatarUrl\":null,\"total\":4650,\"rank\":1},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":1100,\"rank\":2},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":850,\"rank\":3},{\"userId\":\"clydll5yi0007rhzn1jpd7kh9\",\"displayName\":\"Gabrielle\",\"username\":\"Gabrielle\",\"avatarUrl\":null,\"total\":300,\"rank\":4},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":250,\"rank\":5},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":100,\"rank\":6},{\"userId\":\"clzeprzoj000712jcu1j1wafr\",\"displayName\":\"BTE\",\"username\":\"BTE\",\"avatarUrl\":null,\"total\":100,\"rank\":6},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":100,\"rank\":6},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":50,\"rank\":9},{\"userId\":\"clydknj6e000lms4zkb2qi7wv\",\"displayName\":\"Joshua\",\"username\":\"Joshua\",\"avatarUrl\":null,\"total\":0,\"rank\":10}],\"topPromoters\":[{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":1224,\"rank\":1},{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":1036,\"rank\":2},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":394,\"rank\":3},{\"userId\":\"clydll5yi0007rhzn1jpd7kh9\",\"displayName\":\"Gabrielle\",\"username\":\"Gabrielle\",\"avatarUrl\":null,\"total\":362,\"rank\":4},{\"userId\":\"clzeprzoj000712jcu1j1wafr\",\"displayName\":\"BTE\",\"username\":\"BTE\",\"avatarUrl\":null,\"total\":192,\"rank\":5},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":123,\"rank\":6},{\"userId\":\"clydnp6q7000srhzn3zrtd0le\",\"displayName\":\"strutheo2602\",\"username\":\"strutheo2602\",\"avatarUrl\":null,\"total\":41,\"rank\":7},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":28,\"rank\":8},{\"userId\":\"clynd4njv0000atzcekpgw8yx\",\"displayName\":\"Noit\",\"username\":\"Noit\",\"avatarUrl\":null,\"total\":5,\"rank\":9},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":5,\"rank\":10}],\"topQuesters\":[{\"userId\":\"cm3ze0aqx0000kpj5ai4nv5tm\",\"displayName\":\"evergreen\",\"username\":\"evergreenemily\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/sylv-pYNxZMAqSeu42eKyzLaoUp8baQsdxb.png\",\"total\":21300,\"rank\":1},{\"userId\":\"clzrooq660000a2uznm33y25b\",\"displayName\":\"jgyou\",\"username\":\"jgyou\",\"avatarUrl\":null,\"total\":10550,\"rank\":2},{\"userId\":\"clydldvix0000rhznmgr36pt6\",\"displayName\":\"Pat
+        Scott\U0001FA74\",\"username\":\"p\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/20230925_235429-YGpAws1DhBaB2lpmcCjYwjTwWVIHR9.jpg\",\"total\":6950,\"rank\":3},{\"userId\":\"clyaz02c500008my2vxivkyaa\",\"displayName\":\"case\",\"username\":\"case\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/avatar-QWfsTq0SHCTa08Clp4GcVdOMJjgmhs.jpeg\",\"total\":1350,\"rank\":4},{\"userId\":\"cm1806j9500003rjviym3v9c8\",\"displayName\":\"astrosnat\",\"username\":\"astrosnat\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/DALL%C3%82%C2%B7E%202024-02-07%2018.55.32%20-%20Imagine%20a%20vast,%20cosmic%20scene%20where%20a%20giant,%20celestial%20cat,%20its%20fur%20shimmering%20with%20the%20colors%20of%20nebulas%20and%20star%20clusters,%20extends%20a%20massive%20tongue%20t-MdDszadj60v45rw1XNBWogSBgqyWDo.webp\",\"total\":1050,\"rank\":5},{\"userId\":\"clynd4njv0000atzcekpgw8yx\",\"displayName\":\"Noit\",\"username\":\"Noit\",\"avatarUrl\":null,\"total\":950,\"rank\":6},{\"userId\":\"clye2xk0m0000rc94t9mqzxzc\",\"displayName\":\"Bolton
+        Bailey\",\"username\":\"FogOfChess\",\"avatarUrl\":\"https://bijbnpk9x6qrvjzj.public.blob.vercel-storage.com/piratekrugman-CkfkqDV9ec8t2d9uut3hWWbCDZGbMW.webp\",\"total\":400,\"rank\":7},{\"userId\":\"cm6jhsdxc0000o1jh4a1ewzyi\",\"displayName\":\"rjm\",\"username\":\"rjm\",\"avatarUrl\":null,\"total\":350,\"rank\":8},{\"userId\":\"clydkjwr6000ems4ztn9gftkb\",\"displayName\":\"Bayesian\",\"username\":\"Bayesian\",\"avatarUrl\":null,\"total\":300,\"rank\":9},{\"userId\":\"cm47mdglk0000fgr9in2lssil\",\"displayName\":\"mimimitor3782\",\"username\":\"mimimitor3782\",\"avatarUrl\":null,\"total\":200,\"rank\":10}],\"topReferrers\":[{\"userId\":\"clydkjwr6000ems4ztn9gftkb\",\"displayName\":\"Bayesian\",\"username\":\"Bayesian\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyeu7hxx000710d014ve4rjr\",\"displayName\":\"sinclair\",\"username\":\"si\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clzeoat4t000012jcxoxghe56\",\"displayName\":\"gusp3849\",\"username\":\"gusp3849\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyetyrxg000010d0le8qyvkm\",\"displayName\":\"jahooma\",\"username\":\"jahooma\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyjc0x0n0000axjzacwnejq3\",\"displayName\":\"Jake\",\"username\":\"Jake\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clyjocjwj0000ary4c6p1xhd3\",\"displayName\":\"osnatkatz4245\",\"username\":\"osnatkatz4245\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydlzq8j000erhznytueih89\",\"displayName\":\"DistinctlySkeptical\",\"username\":\"DistinctlySkeptical\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"cm05cxopg0000rrqedeawre6k\",\"displayName\":\"jinksy5010\",\"username\":\"jinksy5010\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydkickw0007ms4z7wjfhntv\",\"displayName\":\"tod4834\",\"username\":\"tod4834\",\"avatarUrl\":null,\"total\":0,\"rank\":1},{\"userId\":\"clydknj6e000lms4zkb2qi7wv\",\"displayName\":\"Joshua\",\"username\":\"Joshua\",\"avatarUrl\":null,\"total\":0,\"rank\":1}],\"userRankings\":null}}"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - max-age=600
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 30 Mar 2025 22:00:49 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/leaderboard
+      X-Vercel-Cache:
+      - HIT
+      X-Vercel-Id:
+      - cle1::iad1::z2bwz-1743372050116-14f367f63035
+    status:
+      code: 200
+      message: OK
+version: 1

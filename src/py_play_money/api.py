@@ -502,6 +502,26 @@ class PMClient:
             PageInfo(**response['pageInfo'])
         )
 
+    def leaderboard(self,
+        year: int | None = None,
+        month: int | None = None,
+        **kwargs) -> Leaderboard:
+        """
+        Fetch the leaderboard.
+
+        Args:
+            year (int, optional): Year to filter by.
+            month (int, optional): Month to filter by.
+        """
+        if year < 2024:
+            raise ValueError("Year must be 2024 or later.")
+        payload = {
+            "year": year,
+            "month": month,
+        }
+        response = self.execute_get("leaderboard", params=payload, **kwargs)
+        return Leaderboard(**response['data'])
+
     def lists(self,
         cursor: str | None = None,
         limit: int = 10,
@@ -599,7 +619,6 @@ class PMClient:
         ```
 
         """
-
         # validate request
         for cuid_field in [cursor, market_id, user_id]:
             if cuid_field and not CUID.validate(cuid_field):

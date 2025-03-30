@@ -24,6 +24,7 @@ from py_play_money.schemas.graphs import (
     market_list_graph_ticks_adapter,
     user_graph_ticks_adapter,
 )
+from py_play_money.schemas.leaderboard import Leaderboard
 from py_play_money.schemas.market import (
     ContributionPolicyType,
     Market,
@@ -38,9 +39,9 @@ from py_play_money.schemas.user import (
     Account,
     AccountType,
     User,
-    UserStatistics,
     UserRoleType,
-    users_adapter
+    UserStatistics,
+    users_adapter,
 )
 from py_play_money.schemas.utils import PageInfo
 from py_play_money.schemas.views import (

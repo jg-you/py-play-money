@@ -104,6 +104,22 @@ def test_comment(api_tester):
     )
 
 
+# == leaderboard/ endpoint ==
+def test_leaderboard(vcr_record, compare_api_model, client):
+    """Test retrieval of the leaderboard."""
+    with vcr_record.use_cassette("leaderboard_passthrough.yaml"):
+        # client
+        leaderboard = client.leaderboard(year=2025, month=1)
+        # direct API call
+        resp = requests.get(
+            f"{BASEURL}/leaderboard",
+            params={"year": 2025, "month": 1},
+            timeout=10
+        )
+        api_data = resp.json()['data']
+        compare_api_model(api_data, leaderboard.model_dump(by_alias=True))
+
+
 # == lists/ endpoints ==
 def test_lists(vcr_record, compare_api_model, client):
     """Test retrieval of pages of lists."""
