@@ -292,6 +292,29 @@ class NotificationsView(CamelCaseModel):
     notifications: list[NotificationGroupView]
     unread_count: int
 
+# Note: The following four classes are needed to wrap the API
+#       response, even if this is inelegant.
+class RankedMarket(Market):
+    """Market with rank information."""
+
+    rank: float
+
+class RankedUser(User):
+    """User with rank information."""
+
+    rank: float
+
+class RankedMarketList(MarketList):
+    """Market list with rank information."""
+
+    rank: float
+
+class SearchResults(CamelCaseModel):
+    """View of search results."""
+
+    markets: list[RankedMarket]
+    users: list[RankedUser]
+    lists: list[RankedMarketList]
 
 # Type adapters for serialization
 comments_adapter = TypeAdapter(list[CommentView])

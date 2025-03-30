@@ -183,3 +183,14 @@ def test_authentication_error():
     client = PMClient(api_key=api_key)
     with pytest.raises(PermissionError, match="No API key provided."):
         client.me()
+
+# def test_search(vcr_record, client):
+#     """Test that search returns expected results."""
+#     with vcr_record.use_cassette('search.yaml'):
+#         results = client.search("case")
+#         found_case = False
+#         for u in results.users:
+#             if u.username == "case":
+#                 found_case = True
+#                 break
+#         assert found_case is True

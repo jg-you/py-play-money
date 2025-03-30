@@ -585,6 +585,21 @@ class PMClient:
             PageInfo(**response['pageInfo'])
         )
 
+    def search(self, query, **kwargs) -> SearchResults:
+        """
+        Search for markets, lists and users.
+
+        Args:
+            query (str): Search query. Matches on text fields.
+            **kwargs: Additional keyword arguments to pass to requests.
+
+        Returns:
+            SearchResults: The search results.
+
+        """
+        payload = {"query": query}
+        response = self.execute_get("search", params=payload, **kwargs)
+        return SearchResults(**response['data'])
 
     def transactions(self,
         cursor: str | None = None,

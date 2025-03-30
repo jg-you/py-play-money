@@ -341,6 +341,19 @@ def test_transactions(vcr_record, compare_api_model, client):
         )
 
 
+# # == search/ endpoint ==
+# def test_search(vcr_record, compare_api_model, client):
+#     """Test search."""
+#     with vcr_record.use_cassette("search_passthrough.yaml"):
+#         # client
+#         search = client.search(query="case")
+#         # direct API call
+#         params = {"query": "case"}
+#         resp = requests.get(f"{BASEURL}/search", params=params, timeout=10)
+#         api_data = resp.json()['data']
+#         compare_api_model(api_data, search.model_dump(by_alias=True))
+
+
 # == users/ endpoints ==
 def test_user(api_tester):
     """Test retrieval of an individual user."""

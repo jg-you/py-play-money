@@ -28,11 +28,13 @@ Constraint violations?
 * the GET lists/ endpoints wraps the markets under a list in repeated information.
   unsure what is added by this tripled of ids + created_at
 
-* I decided to replace "activity" by a transaction endpoints that just returns transaction.
+* I decided to replace "markets/[ID]activity" by a transaction endpoints that just returns transaction.
   * Comments are available in their own end points,
   * Creation and resolution are available in the market() endpoint directly
   * Which leaves only transaction as the missing piece
-  
+
+* Likewise for the sitewide activity, the information is duplicated elsewhere.
+
 * Transactions return the option.. which includes a probability
   But that probability is the final value, not at time of purchase, so the information is not super useful
 
@@ -40,3 +42,4 @@ Constraint violations?
   Since it is already paginated. And since /transactions has them
 
 * Transactions for daily comment bonuses on a *list* don't return said list.
+* 
