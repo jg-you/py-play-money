@@ -1,0 +1,269 @@
+interactions:
+- request:
+    body: '{"content": "Hello world.", "entityId": "cm5ifmwfo001g24d2r7fzu34u", "entityType":
+      "MARKET", "parentId": null}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '110'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - py-play-money/0.1.0
+    method: POST
+    uri: https://api.playmoney.dev/v1/comments
+  response:
+    body:
+      string: '{"data":{"id":"cm8whb44l0003s1kx41azkxam","content":"Hello world.","createdAt":"2025-03-31T02:57:38.470Z","updatedAt":"2025-03-31T02:57:38.470Z","edited":false,"authorId":"clzrooq660000a2uznm33y25b","parentId":null,"hidden":false,"entityType":"MARKET","entityId":"cm5ifmwfo001g24d2r7fzu34u","parent":null}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 31 Mar 2025 02:57:38 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::qgksz-1743389858398-a012e2c58fba
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"content": "Hello world?"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '27'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - py-play-money/0.1.0
+    method: PATCH
+    uri: https://api.playmoney.dev/v1/comments/cm8whb44l0003s1kx41azkxam
+  response:
+    body:
+      string: '{"data":{"id":"cm8whb44l0003s1kx41azkxam","content":"Hello world?","createdAt":"2025-03-31T02:57:38.470Z","updatedAt":"2025-03-31T02:57:38.906Z","edited":true,"authorId":"clzrooq660000a2uznm33y25b","parentId":null,"hidden":false,"entityType":"MARKET","entityId":"cm5ifmwfo001g24d2r7fzu34u"}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 31 Mar 2025 02:57:38 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::v25kj-1743389858826-8b0aed9e8b1b
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"emoji": ":+1:"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '17'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - py-play-money/0.1.0
+    method: POST
+    uri: https://api.playmoney.dev/v1/comments/cm8whb44l0003s1kx41azkxam/reaction
+  response:
+    body:
+      string: '{"data":{"id":"cm8whb4mq0009s1kxbxo97clp","emoji":":+1:","userId":"clzrooq660000a2uznm33y25b","commentId":"cm8whb44l0003s1kx41azkxam","comment":{"id":"cm8whb44l0003s1kx41azkxam","content":"Hello
+        world?","createdAt":"2025-03-31T02:57:38.470Z","updatedAt":"2025-03-31T02:57:38.906Z","edited":true,"authorId":"clzrooq660000a2uznm33y25b","parentId":null,"hidden":false,"entityType":"MARKET","entityId":"cm5ifmwfo001g24d2r7fzu34u"}}}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 31 Mar 2025 02:57:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments/[id]/reaction
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::jj7zs-1743389859047-f6ee8782662c
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - py-play-money/0.1.0
+    method: DELETE
+    uri: https://api.playmoney.dev/v1/comments/cm8whb44l0003s1kx41azkxam
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Date:
+      - Mon, 31 Mar 2025 02:57:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::x26zn-1743389859384-301008cebe3b
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - py-play-money/0.1.0
+    method: GET
+    uri: https://api.playmoney.dev/v1/comments/cm8whb44l0003s1kx41azkxam
+  response:
+    body:
+      string: '{"error":"Comment with id \"cm8whb44l0003s1kx41azkxam\" not found"}'
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - https://playmoney.dev
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 31 Mar 2025 02:57:39 GMT
+      Server:
+      - Vercel
+      Strict-Transport-Security:
+      - max-age=63072000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - RSC, Next-Router-State-Tree, Next-Router-Prefetch
+      X-Matched-Path:
+      - /api/v1/comments/[id]
+      X-Vercel-Cache:
+      - MISS
+      X-Vercel-Id:
+      - cle1::iad1::r6qz7-1743389859673-f789f57f35c3
+    status:
+      code: 404
+      message: Not Found
+version: 1
