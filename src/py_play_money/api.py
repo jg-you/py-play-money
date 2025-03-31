@@ -19,7 +19,7 @@ formatter = logging.Formatter(
 )
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
 
 
 class MarketListWrapper(MarketList):
@@ -257,8 +257,9 @@ class UserWrapper(User):
         )
 
 
+
 class CommentResource:
-    """Functions to fetch comment information from the API."""
+    """Functions to interact with comments via the API."""
 
     def __init__(self, client: 'PMClient'):
         self._client = client
@@ -273,6 +274,104 @@ class CommentResource:
         endpoint = f"comments/{comment_id}"
         resp = self._client.execute_get(endpoint, **kwargs)
         return CommentView(**resp['data'])
+
+    def create(
+        self,
+        content: str,
+        entity_id: str,
+        entity_type: Literal['market', 'list'] = "market",
+        parent_id: str | None = None,
+        **kwargs) -> Comment:
+        """
+        Create a comment on an entity.
+
+        Args:
+            content (str): Text content of the comment
+            entity_id (str): ID of the entity to comment on
+            entity_type (str): Type of entity, either 'market' or 'list'
+            parent_id (str): ID of the parent comment, if any
+            **kwargs: Additional keyword arguments to pass to requests
+
+        Returns:
+            Comment: The created comment
+        """
+        if not self._client.authenticated:
+            raise PermissionError("API key required to create comments.")
+
+        endpoint = "comments"
+        data = {
+            "content": content,
+            "entityId": entity_id,
+            "entityType": entity_type.upper(),
+            "parentId": parent_id
+        }
+        resp = self._client.execute_post(endpoint, data, **kwargs)
+        return Comment(**resp['data'])
+
+    def delete(self, comment_id: str, **kwargs) -> bool:
+        """
+        Delete a comment.
+
+        Args:
+            comment_id (str): ID of the comment to delete
+            **kwargs: Additional keyword arguments to pass to requests
+
+        Returns:
+            bool: True if the comment was successfully deleted
+        """
+        if not self._client.authenticated:
+            raise PermissionError("API key required to delete comments.")
+
+        endpoint = f"comments/{comment_id}"
+        resp = self._client.execute_delete(endpoint, **kwargs)
+        if resp == 204:
+            return True
+        return False
+
+    def update(self, comment_id: str, content: str, **kwargs) -> Comment:
+        """
+        Update a comment.
+
+        Args:
+            comment_id (str): ID of the comment to update
+            content (str): New text content for the comment
+            **kwargs: Additional keyword arguments to pass to requests
+
+        Returns:
+            Comment: The updated comment
+        """
+        if not self._client.authenticated:
+            raise PermissionError("API key required to update comments.")
+
+        endpoint = f"comments/{comment_id}"
+        data = {"content": content}
+        resp = self._client.execute_patch(endpoint, data, **kwargs)
+        return Comment(**resp['data'])
+
+    def react(self, comment_id: str, emoji_code: str = ':+1:', **kwargs) -> CommentReaction:
+        """
+        React to a comment. Will remove reaction if it already exists.
+        
+        Args:
+            comment_id (str): ID of the comment to react to
+            emoji_code (str): Reaction emoji. Must be an :emoji_code:
+            **kwargs: Additional keyword arguments to pass to requests
+            
+        Returns:
+            CommentReactionView: Details of the reaction
+        """
+        # validate input
+        if not self._client.authenticated:
+            raise PermissionError("API key required to react to comments.")
+        try:
+            EmojiModel.validate_emoji(emoji_code)
+        except ValueError as e:
+            raise ValueError(f"Invalid emoji: {emoji_code}") from e
+        # make request
+        endpoint = f"comments/{comment_id}/reaction"
+        data = {"emoji": emoji_code}
+        resp = self._client.execute_post(endpoint, data, **kwargs)
+        return CommentReaction(**resp['data'])
 
 
 class MarketListResource:
@@ -403,6 +502,27 @@ class PMClient:
         self.me = MeResource(self)
         self.user = UserResource(self)
 
+    def execute_delete(self, endpoint, **kwargs) -> dict:
+        """
+        Execute a DELETE request to the API.
+
+        Args:
+            endpoint (str): The API endpoint to call.
+            **kwargs: Additional keyword arguments to pass to requests.
+                      Timeout defaults to 10 seconds if not specified.
+        """
+        url = f"{self.base_url}/{endpoint}"
+        timeout = kwargs.pop("timeout", 10)
+        try:
+            logger.info("Requesting %s. Timeout: %s. Args: %s", url, timeout, kwargs)
+            response = requests.delete(url, headers=self.headers, timeout=timeout, **kwargs)
+            logger.debug("Response: %s, %s", response.status_code, response.text)
+            response.raise_for_status()
+            return response.status_code
+        except requests.HTTPError as e:
+            logger.error("HTTP error occurred: %s", e)
+            raise
+
     def execute_get(self, endpoint, **kwargs) -> dict:
         """
         Execute a GET request to the API.
@@ -421,6 +541,54 @@ class PMClient:
         try:
             logger.info("Requesting %s. Timeout: %s. Args: %s", url, timeout, kwargs)
             response = requests.get(url, headers=self.headers, timeout=timeout, **kwargs)
+            logger.debug("Response: %s, %s", response.status_code, response.text)
+            response.raise_for_status()
+            return response.json()
+        except requests.HTTPError as e:
+            logger.error("HTTP error occurred: %s", e)
+            raise
+
+    def execute_patch(self, endpoint, data, **kwargs) -> dict:
+        """
+        Execute a PATCH request to the API.
+
+        Args:
+            endpoint (str): The API endpoint to call.
+            data (dict): The data to patch.
+            **kwargs: Additional keyword arguments to pass to requests.
+                      Timeout defaults to 10 seconds if not specified.
+        """
+        url = f"{self.base_url}/{endpoint}"
+        timeout = kwargs.pop("timeout", 10)
+        try:
+            logger.info("Requesting %s. Timeout: %s. Args: %s", url, timeout, kwargs)
+            response = requests.patch(
+                url, headers=self.headers, json=data, timeout=timeout, **kwargs
+            )
+            logger.debug("Response: %s, %s", response.status_code, response.text)
+            response.raise_for_status()
+            return response.json()
+        except requests.HTTPError as e:
+            logger.error("HTTP error occurred: %s", e)
+            raise
+
+    def execute_post(self, endpoint, data, **kwargs) -> dict:
+        """
+        Execute a POST request to the API.
+
+        Args:
+            endpoint (str): The API endpoint to call.
+            data (dict): The data to post.
+            **kwargs: Additional keyword arguments to pass to requests.
+                      Timeout defaults to 10 seconds if not specified.
+        """
+        url = f"{self.base_url}/{endpoint}"
+        timeout = kwargs.pop("timeout", 10)
+        try:
+            logger.info("Requesting %s. Timeout: %s. Args: %s", url, timeout, kwargs)
+            response = requests.post(
+                url, headers=self.headers, json=data, timeout=timeout, **kwargs
+            )
             logger.debug("Response: %s, %s", response.status_code, response.text)
             response.raise_for_status()
             return response.json()

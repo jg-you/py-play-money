@@ -5,7 +5,12 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from py_play_money.schemas.activity import Activity, ActivityType, Notification, NotificationType
 from py_play_money.schemas.base_types import CUID, IsoDatetime
-from py_play_money.schemas.comments import Comment, CommentEntityType, CommentReaction
+from py_play_money.schemas.comments import (
+    Comment,
+    CommentEntityType,
+    CommentReaction,
+    EmojiModel
+)
 from py_play_money.schemas.finance import (
     AssetType,
     MarketBalance,

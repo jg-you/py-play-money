@@ -27,13 +27,10 @@ class Comment(DateModel):
     updated_at: IsoDatetime | None = None
 
 
-class CommentReaction(CamelCaseModel):
-    """Reaction to comments."""
+class EmojiModel(CamelCaseModel):
+    """Emoji model."""
 
-    id: CUID
     emoji: str
-    user_id: CUID
-    comment_id: CUID
 
     @field_validator('emoji', mode='after')
     @classmethod
@@ -46,3 +43,11 @@ class CommentReaction(CamelCaseModel):
         if not value.startswith(":") or not value.endswith(":"):
             raise ValueError("Emoji must be in the format ':emoji_code:'")
         return value
+
+
+class CommentReaction(EmojiModel):
+    """Reaction to comments."""
+
+    id: CUID
+    user_id: CUID
+    comment_id: CUID

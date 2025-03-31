@@ -5,6 +5,7 @@ Author: JGY <jean.gabriel.young@gmail.com>
 """
 from datetime import datetime
 from typing import Any
+from os import getenv
 
 import pytest
 import vcr
@@ -49,6 +50,11 @@ def normalize_data(obj: Any) -> Any:
 def client():
     """Fixture to create a PMClient instance."""
     return PMClient()
+
+@pytest.fixture
+def authenticated_client():
+    """Fixture to create an authenticated PMClient instance."""
+    return PMClient(api_key=getenv("PM_API_KEY"))
 
 @pytest.fixture(scope="session")
 def vcr_record():

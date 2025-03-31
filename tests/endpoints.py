@@ -194,3 +194,30 @@ def test_authentication_error():
 #                 found_case = True
 #                 break
 #         assert found_case is True
+
+def test_comments_modifications(vcr_record, authenticated_client):
+    """Test all POST/PATCH/DELETE actions on comments"""
+    with vcr_record.use_cassette('comments_modifications.yaml'):
+        client = authenticated_client
+        # Create a comment
+        comment = client.comment.create(
+            "Hello world.", entity_id=TEST_MARKET_ID, entity_type="market"
+        )
+        assert comment is not None
+        assert comment.content == "Hello world."
+        assert comment.entity_id == TEST_MARKET_ID
+        assert comment.entity_type == "MARKET"
+        # Update the comment
+        comment = client.comment.update(content="Hello world?", comment_id=comment.id)
+        assert comment is not None
+        assert comment.content == "Hello world?"
+        # React to the comment
+        reaction = client.comment.react(comment_id=comment.id, emoji_code=":+1:")
+        assert reaction is not None
+        assert reaction.emoji == ":+1:"
+        # Delete the comment
+        status = client.comment.delete(comment.id)
+        assert status is True
+        # Check that the comment is deleted
+        with pytest.raises(Exception):
+            client.comment(comment.id)
